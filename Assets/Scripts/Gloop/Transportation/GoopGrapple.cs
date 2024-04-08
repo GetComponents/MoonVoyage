@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class GoopGrapple : GloopMove
 {
-    [SerializeField]
-    float movementSpeed, airborneSpeed;
-    float airborneMul;
+    //[SerializeField]
+    //float movementSpeed, airborneSpeed;
+    //float airborneMul;
     bool tongueEnabled, extendingTongue;
     
     [Header("Tongue Stuff:")]
@@ -14,13 +14,11 @@ public class GoopGrapple : GloopMove
     SpringJoint2D tongue;
     private Transform firePoint => GloopMain.Instance.firePoint;
     [SerializeField]
-    Rigidbody2D rb;
-    [SerializeField]
     LineRenderer tongueRender;
     TonguePoint tongueAnchorPos;
     [SerializeField]
     TonguePoint TonguePoint;
-    ObjectProperty hitObj;
+    //ObjectProperty hitObj;
     [SerializeField]
     GameObject gloopShot;
     GameObject currentShot;
@@ -31,9 +29,9 @@ public class GoopGrapple : GloopMove
     float lookSensitivity;
     [SerializeField]
     float aimRadius;
-    [SerializeField]
-    float lowEnd, highEnd, lowEndAcc, highEndAcc;
-    Vector2 movementDir;
+    //[SerializeField]
+    //float lowEnd, highEnd, lowEndAcc, highEndAcc;
+    //Vector2 movementDir;
     [SerializeField]
     float retractSpeed;
     [SerializeField]
@@ -44,11 +42,11 @@ public class GoopGrapple : GloopMove
 
     public override void MyUpdate()
     {
-        if (InputLocked)
+        if (MyBase.InputLocked)
             return;
-        Movement();
+        MyBase.MyUpdate();
         //DirectionalInput();
-        if (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             RaycastToMousePos();
         }
@@ -60,58 +58,10 @@ public class GoopGrapple : GloopMove
         {
             UpdateTongue();
         }
-        if (Input.GetKeyUp(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyUp(KeyCode.Mouse0))
         {
             DisableTongue();
         }
-    }
-
-    private void Movement()
-    {
-        movementDir = Vector2.zero;
-        //Vector2 currentVelocity = rb.velocity;
-
-        if (Input.GetKey(KeyCode.A))
-        {
-            if (rb.velocity.x > lowEnd)
-            {
-                movementDir.x -= 1 * lowEndAcc;
-            }
-            else if (rb.velocity.x < -highEnd)
-            {
-                movementDir.x -= 1 * highEndAcc;
-            }
-            else
-            {
-                movementDir.x -= 1;
-            }
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            if (rb.velocity.x < -lowEnd)
-            {
-                movementDir.x += 1 * lowEndAcc;
-            }
-            else if (rb.velocity.x > highEnd)
-            {
-                movementDir.x += 1 * highEndAcc;
-            }
-            else
-            {
-                movementDir.x += 1;
-            }
-        }
-        rb.AddForce(movementDir * movementSpeed * Time.deltaTime * airborneMul, ForceMode2D.Force);
-
-        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A))
-        {
-            GloopAnim.SetBool("Walking", true);
-        }
-        else
-        {
-            GloopAnim.SetBool("Walking", false);
-        }
-        //Debug.Log("movement " + (movementDir * movementSpeed * Time.deltaTime));
     }
 
     private void RaycastToMousePos()
@@ -126,30 +76,10 @@ public class GoopGrapple : GloopMove
 
     private void UpdateTongue()
     {
-        GloopAnim.SetBool("Grappling", true);
+        MyBase.GloopAnim.SetBool("Grappling", true);
         tongue.distance -= retractSpeed * Time.deltaTime;
         tongueRender.SetPosition(0, TonguePoint.Position + Vector3.Normalize(TonguePoint.Position - tongue.transform.position) * tonguePointOffset);
         tongueRender.SetPosition(1, tongue.transform.position );
-    }
-
-    private void CheckForInterruption()
-    {
-        Vector3 distance = new Vector3(tongueAnchorPos.Position.x - firePoint.position.x, tongueAnchorPos.Position.y - firePoint.position.y);
-        RaycastHit2D hit = Physics2D.Raycast(firePoint.position, Vector3.Normalize(distance), distance.magnitude - 0.1f);
-        Debug.DrawRay(firePoint.position, Vector3.Normalize(distance) * (distance.magnitude - 0.1f), Color.green, 0.00f);
-        if (hit.collider != null)
-        {
-            ObjectProperty op;
-            if (hit.collider.TryGetComponent<ObjectProperty>(out op))
-            {
-                tongueAnchorPos = op.CreateTonguePoint(hit.point);
-                AttachPoint(tongueAnchorPos);
-            }
-            else
-            {
-                AttachPoint(hit.point);
-            }
-        }
     }
 
     public void EnableTongue()
@@ -190,7 +120,7 @@ public class GoopGrapple : GloopMove
 
     public void DisableTongue()
     {
-        GloopAnim.SetBool("Grappling", false);
+        MyBase.GloopAnim.SetBool("Grappling", false);
         tongueAnchorPos = null;
         tongueRender.enabled = false;
         //for (int i = 0; i < tongueSegments.Length; i++)
@@ -204,19 +134,19 @@ public class GoopGrapple : GloopMove
         //tongue.autoConfigureDistance = true;
         tongue.connectedBody = null;
         tongue.connectedAnchor = Vector2.zero;
-        if (hitObj != null && hitObj.Moves)
-        {
-            hitObj.KillLilDot();
-        }
-        hitObj = null;
+        //if (hitObj != null && hitObj.Moves)
+        //{
+        //    hitObj.KillLilDot();
+        //}
+        //hitObj = null;
     }
 
 
     public override void RemoveMode()
     {
         MySoundtrack.volume = 0;
-        GloopAnim.SetBool("Walking", false);
-        GloopAnim.SetBool("Grappling", false);
+        MyBase.GloopAnim.SetBool("Walking", false);
+        MyBase.GloopAnim.SetBool("Grappling", false);
         firePoint.GetComponent<SpriteRenderer>().enabled = false;
         Destroy(currentShot);
         DisableTongue();
@@ -229,31 +159,17 @@ public class GoopGrapple : GloopMove
         firePoint.GetComponent<SpriteRenderer>().enabled = true;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        //Debug.Log("Object tag " + collision.tag);
-        if (collision.tag == "Floor")
-        {
-            airborneMul = 1;
-            groundedAmount++;
-            GloopAnim.SetBool("Grounded", true);
-        }
+        MyBase.GroundEnter();
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.tag == "Floor")
-        {
-            airborneMul = airborneSpeed;
-            groundedAmount--;
-            if (groundedAmount == 0)
-            {
-                GloopAnim.SetBool("Grounded", false);
-            }
-        }
+        MyBase.GroundExit();
     }
-
 }
+
 public class TonguePoint
 {
     public TonguePoint(Vector2 position)

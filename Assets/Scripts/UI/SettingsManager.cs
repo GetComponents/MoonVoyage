@@ -5,12 +5,25 @@ using UnityEngine.UI;
 
 public class SettingsManager : MonoBehaviour
 {
+    public static SettingsManager Instance;
     [SerializeField]
     float baseMouseSpeed = 50;
     [SerializeField]
     private Slider MouseSpeedSlider;
     [SerializeField]
     private Slider masterSlider, effectsSlider, musicSlider;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     private void Start()
     {

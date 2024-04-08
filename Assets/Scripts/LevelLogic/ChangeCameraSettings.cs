@@ -28,7 +28,7 @@ public class ChangeCameraSettings : MonoBehaviour
 
     private void ChangeCameraSetting()
     {
-        cm = GloopMain.Instance.Cinemachine;
+        //cm = GloopMain.Instance.Cinemachine;
         StartCoroutine(LerpSettings(cm.m_Lens.OrthographicSize, cm.m_Lens.LensShift.y));
     }
 

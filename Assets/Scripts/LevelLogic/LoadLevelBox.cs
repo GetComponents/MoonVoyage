@@ -8,7 +8,7 @@ public class LoadLevelBox : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            GameManager.Instance.NextLevel();
+            OldLevelManager.Instance.NextLevel();
             GetComponent<BoxCollider2D>().enabled = false;
         }
     }

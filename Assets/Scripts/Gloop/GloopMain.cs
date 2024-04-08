@@ -1,8 +1,6 @@
-using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
 public class GloopMain : MonoBehaviour
 {
@@ -14,13 +12,13 @@ public class GloopMain : MonoBehaviour
     GoopWalk walkMode;
     [SerializeField]
     GoopGrapple grappleMode;
-    public Spawnpoint LastCheckpoint;
+    //public Spawnpoint LastCheckpoint;
     public float lookSensitivity;
     [SerializeField]
     float aimRadius;
     public Transform firePoint;
     Vector2 lookPoint;
-    public List<GameObject> LosableObjects;
+    //public List<GameObject> LosableObjects;
 
     [SerializeField]
     private AudioClip respawnSound;
@@ -34,7 +32,8 @@ public class GloopMain : MonoBehaviour
     [SerializeField]
     SpriteRenderer sr;
 
-    public CinemachineVirtualCamera Cinemachine;
+    public UnityEngine.Events.UnityEvent Respawn;
+    //public CinemachineVirtualCamera Cinemachine;
 
     public EMode CurrentMode
     {
@@ -88,6 +87,17 @@ public class GloopMain : MonoBehaviour
         MyMovement.AddMode();
         lookPoint.x = 1;
         lookPoint.y = 1;
+        GameManager.Instance.LockInput.AddListener(() =>
+        {
+            if (GameManager.Instance.CursorUnlockers > 0)
+            {
+                LockInput(true);
+            }
+            else
+            {
+                LockInput(false);
+            };
+        });
         //StartCoroutine(SpawnPlayer());
     }
 
@@ -127,29 +137,29 @@ public class GloopMain : MonoBehaviour
 
     public void RespawnPlayer()
     {
-        if (LastCheckpoint == null)
-            return;
-        foreach (GameObject gObject in LosableObjects)
-        {
-            if (gObject != null)
-            {
-                gObject.SetActive(true);
-            }
-        }
-        flyMode.groundedAmount = 0;
-        grappleMode.groundedAmount = 0;
-        walkMode.groundedAmount = 0;
-        foreach (GameObject gameObject in LosableObjects)
-        {
-            if (gameObject.TryGetComponent<ObjectProperty>(out ObjectProperty tmp) && tmp.Type == ObjectType.COLLECTABLE)
-            {
-                GameManager.Instance.RemoveStar();
-            }
-        }
+        Respawn?.Invoke();
+        /////////////CheckpointEvent/////////////////////////////////////////////////////////
+        //if (LastCheckpoint == null)
+        //    return;
+        //foreach (GameObject gObject in LosableObjects)
+        //{
+        //    if (gObject != null)
+        //    {
+        //        gObject.SetActive(true);
+        //    }
+        //}
+        MyMovement.MyBase.GroundedAmount = 0;
+        //foreach (GameObject gameObject in LosableObjects)
+        //{
+        //    if (gameObject.TryGetComponent<ObjectProperty>(out ObjectProperty tmp) && tmp.Type == ObjectType.COLLECTABLE)
+        //    {
+        //        GameManager.Instance.RemoveStar();
+        //    }
+        //}
         anim.SetBool("Respawn", true);
         SoundManager.Instance.PlayEffect(respawnSound);
-        LosableObjects = new List<GameObject>();
-        LastCheckpoint.RespawnPlayer();
+        //LosableObjects = new List<GameObject>();
+        //LastCheckpoint.RespawnPlayer();
         rb.velocity = Vector2.zero;
         StartCoroutine(TurnAnimOff());
     }
@@ -160,26 +170,26 @@ public class GloopMain : MonoBehaviour
         anim.SetBool("Respawn", false);
     }
 
-    public void AddStar(GameObject star)
-    {
-        LosableObjects.Add(star);
-        GameManager.Instance.AddStar();
-    }
+    //public void AddStar(GameObject star)
+    //{
+    //    LosableObjects.Add(star);
+    //    GameManager.Instance.AddStar();
+    //}
 
-    public void SaveProgress()
-    {
-        int collectedStars = 0;
-        foreach (GameObject gameObject in LosableObjects)
-        {
-            if (gameObject.TryGetComponent<ObjectProperty>(out ObjectProperty tmp) && tmp.Type == ObjectType.COLLECTABLE)
-            {
-                collectedStars++;
-            }
-        }
-        //Backpack.Instance.AddStar(collectedStars);
-        //TODO: Actually save progress
-        LosableObjects = new List<GameObject>();
-    }
+    //public void SaveProgress()
+    //{
+    //    int collectedStars = 0;
+    //    foreach (GameObject gameObject in LosableObjects)
+    //    {
+    //        if (gameObject.TryGetComponent<ObjectProperty>(out ObjectProperty tmp) && tmp.Type == ObjectType.COLLECTABLE)
+    //        {
+    //            collectedStars++;
+    //        }
+    //    }
+    //    //Backpack.Instance.AddStar(collectedStars);
+    //    //TODO: Actually save progress
+    //    LosableObjects = new List<GameObject>();
+    //}
 
     private void FlipCharacter()
     {
@@ -195,7 +205,7 @@ public class GloopMain : MonoBehaviour
 
     public void LockInput(bool lockInput)
     {
-        MyMovement.InputLocked = lockInput;
+        MyMovement.MyBase.InputLocked = lockInput;
     }
 }
 

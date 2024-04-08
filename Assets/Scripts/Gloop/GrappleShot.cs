@@ -23,7 +23,7 @@ public class GrappleShot : MonoBehaviour
             Destroy(gameObject);
             Lr.enabled = false;
         }
-        if ((!Input.GetKey(KeyCode.Mouse0)  && !Input.GetKey(KeyCode.Space)) || GloopMain.Instance.MyMovement != player)
+        if ((!Input.GetKey(KeyCode.Mouse0) && !Input.GetKey(KeyCode.Space)) || GloopMain.Instance.MyMovement != player)
         {
             Destroy(gameObject);
         }
@@ -31,23 +31,28 @@ public class GrappleShot : MonoBehaviour
         Lr.SetPosition(1, transform.position);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    if (collision.tag == "Floor")
+    //    {
+    //        ObjectProperty op;
+    //        if (collision.TryGetComponent<ObjectProperty>(out op))
+    //        {
+    //            //tongueAnchorPos = op.CreateTonguePoint(transform.position);
+    //            player.AttachPoint(op.CreateTonguePoint(transform.position));
+    //        }
+    //        else
+    //        {
+    //            player.AttachPoint(transform.position);
+    //        }
+    //        //player.EnableTongue();
+    //    }
+    //}
+
+    public void AttachToObject(TonguePoint point)
     {
-        if (collision.tag == "Floor")
-        {
-            ObjectProperty op;
-            if (collision.TryGetComponent<ObjectProperty>(out op))
-            {
-                //tongueAnchorPos = op.CreateTonguePoint(transform.position);
-                player.AttachPoint(op.CreateTonguePoint(transform.position));
-            }
-            else
-            {
-                player.AttachPoint(transform.position);
-            }
-            player.EnableTongue();
-            Destroy(gameObject);
-            //player.EnableTongue();
-        }
+        player.AttachPoint(point);
+        player.EnableTongue();
+        Destroy(gameObject);
     }
 }

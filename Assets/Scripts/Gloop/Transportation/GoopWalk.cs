@@ -4,18 +4,16 @@ using UnityEngine;
 
 public class GoopWalk : GloopMove
 {
-    [SerializeField]
-    float movementSpeed;
+    //[SerializeField]
+    //float movementSpeed;
     public int DashCharge;
     [SerializeField]
     float lookSensitivity;
     private Vector3 dashDir;
-    [SerializeField]
-    Rigidbody2D rb;
-    Vector2 movementDir;
-    [SerializeField]
-    float lowEnd, highEnd, lowEndAcc, highEndAcc, AirborneSpeed;
-    float airborneMul;
+    //Vector2 movementDir;
+    //[SerializeField]
+    //float lowEnd, highEnd, lowEndAcc, highEndAcc, AirborneSpeed;
+    //float airborneMul;
     [SerializeField]
     float dashStrength;
     //[SerializeField]
@@ -26,9 +24,9 @@ public class GoopWalk : GloopMove
     float dashEndTimer;
     bool canDash = true, isDashing;
 
-    [SerializeField]
-    float JumpGracePeriod;
-    float gracePeriod;
+    //[SerializeField]
+    //float JumpGracePeriod;
+    //float gracePeriod;
     [SerializeField]
     AnimMethods rotateSprite;
     [SerializeField]
@@ -39,7 +37,7 @@ public class GoopWalk : GloopMove
 
     public override void AddMode()
     {
-        if (groundedAmount == 0)
+        if (MyBase.GroundedAmount == 0)
         {
             Vector4 tmp = ModeColor * oneChargeColor;
             tmp.w = 1;
@@ -55,26 +53,25 @@ public class GoopWalk : GloopMove
     }
     public override void MyUpdate()
     {
-        //DirectionalInput();
-        //Debug.Log("Updating");
-        if (!InputLocked)
+        if (!MyBase.InputLocked)
         {
-            GroundMovement();
-            if (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKeyDown(KeyCode.Space))
+            MyBase.MyUpdate();
+            //GroundMovement();
+            if (Input.GetKeyDown(KeyCode.Mouse0))
             {
                 Dash();
             }
             if (isDashing)
             {
                 rotateSprite.RotateCharacter();
-                GloopAnim.SetBool("Dashing", true);
-                rb.velocity = Vector3.Normalize(dashDir) * dashStrength;
+                MyBase.GloopAnim.SetBool("Dashing", true);
+                MyBase.rb.velocity = Vector3.Normalize(dashDir) * dashStrength;
             }
-            if (rb.velocity.y <= 0)
+            if (MyBase.rb.velocity.y <= 0)
             {
                 rotateSprite.rotate = false;
             }
-            gracePeriod -= Time.deltaTime;
+            //racePeriod -= Time.deltaTime;
         }
     }
 
@@ -82,7 +79,7 @@ public class GoopWalk : GloopMove
     {
         if (DashCharge > 0 && canDash)
         {
-            if (groundedAmount == 0 && gracePeriod < 0)
+            if (MyBase.GroundedAmount == 0)
             {
                 DashCharge--;
                 if (DashCharge == 0)
@@ -95,9 +92,9 @@ public class GoopWalk : GloopMove
             PlayRandomDashSound();
             canDash = false;
             isDashing = true;
-            //rb.velocity = Vector3.zero;
+            MyBase.rb.velocity = Vector3.zero;
             dashDir = GloopMain.Instance.firePoint.localPosition;
-            rb.AddForce(Vector3.Normalize(dashDir) * dashStrength);
+            MyBase.rb.AddForce(Vector3.Normalize(dashDir) * dashStrength);
             StartCoroutine(DashEnd());
         }
 
@@ -135,69 +132,7 @@ public class GoopWalk : GloopMove
         yield return new WaitForSeconds(dashEndTimer);
         canDash = true;
         isDashing = false;
-        GloopAnim.SetBool("Dashing", false);
-    }
-
-    //private void DirectionalInput()
-    //{
-    //    //Cursor.lockState = CursorLockMode.Locked;
-    //    lookPoint.x += Input.GetAxis("Mouse X") * lookSensitivity * Time.deltaTime;
-
-    //    lookPoint.y += Input.GetAxis("Mouse Y") * lookSensitivity * Time.deltaTime;
-
-    //    lookPoint.x = CheckBoundries(lookPoint.x, -1, 1);
-    //    lookPoint.y = CheckBoundries(lookPoint.y, -1, 1);
-    //    //Debug.Log(lookPoint);
-    //    aimPoint.transform.localPosition = Vector3.Normalize(lookPoint);
-
-    //}
-
-    private void GroundMovement()
-    {
-        movementDir = Vector2.zero;
-        //Vector2 currentVelocity = rb.velocity;
-
-        if (Input.GetKey(KeyCode.A))
-        {
-            if (rb.velocity.x > lowEnd)
-            {
-                movementDir.x -= 1 * lowEndAcc;
-            }
-            else if (rb.velocity.x < -highEnd)
-            {
-                movementDir.x -= 1 * highEndAcc;
-            }
-            else
-            {
-                movementDir.x -= 1;
-            }
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            if (rb.velocity.x < -lowEnd)
-            {
-                movementDir.x += 1 * lowEndAcc;
-            }
-            else if (rb.velocity.x > highEnd)
-            {
-                movementDir.x += 1 * highEndAcc;
-            }
-            else
-            {
-                movementDir.x += 1;
-            }
-        }
-        rb.AddForce(movementDir * movementSpeed * airborneMul * Time.deltaTime, ForceMode2D.Force);
-
-
-        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A))
-        {
-            GloopAnim.SetBool("Walking", true);
-        }
-        else
-        {
-            GloopAnim.SetBool("Walking", false);
-        }
+        MyBase.GloopAnim.SetBool("Dashing", false);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -205,13 +140,11 @@ public class GoopWalk : GloopMove
         //Debug.Log("Object tag " + collision.tag);
         if (collision.tag == "Floor")
         {
-            groundedAmount++;
-            airborneMul = 1;
+            MyBase.GroundEnter();
             DashCharge = 1;
             if (GloopMain.Instance.MyMovement == this)
             {
                 ModeSprite.color = ModeColor;
-                GloopAnim.SetBool("Grounded", true);
             }
         }
     }
@@ -220,19 +153,12 @@ public class GoopWalk : GloopMove
     {
         if (collision.tag == "Floor")
         {
-            //Debug.Log("Grounded amount: " + groundedAmount);
-            groundedAmount--;
-            if (groundedAmount == 0)
+            MyBase.GroundExit();
+            if (MyBase.GroundedAmount == 0 && GloopMain.Instance.MyMovement == this)
             {
-                GloopAnim.SetBool("Grounded", false);
-                airborneMul = AirborneSpeed;
-                gracePeriod = JumpGracePeriod;
-                if (GloopMain.Instance.MyMovement == this)
-                {
-                    Vector4 tmp = ModeColor * oneChargeColor;
-                    tmp.w = 1;
-                    ModeSprite.color = tmp;
-                }
+                Vector4 tmp = ModeColor * oneChargeColor;
+                tmp.w = 1;
+                ModeSprite.color = tmp;
             }
         }
     }
@@ -240,8 +166,8 @@ public class GoopWalk : GloopMove
     public override void RemoveMode()
     {
         MySoundtrack.volume = 0;
-        GloopAnim.SetBool("Dashing", false);
-        GloopAnim.SetBool("Walking", false);
+        MyBase.GloopAnim.SetBool("Dashing", false);
+        MyBase.GloopAnim.SetBool("Walking", false);
         canDash = true;
         isDashing = false;
         GloopMain.Instance.firePoint.GetComponent<SpriteRenderer>().enabled = false;

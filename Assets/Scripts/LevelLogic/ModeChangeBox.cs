@@ -17,7 +17,7 @@ public class ModeChangeBox : MonoBehaviour
         {
             if (OneTimeUse)
             {
-                GloopMain.Instance.LosableObjects.Add(gameObject);
+                Backpack.Instance.LosableObjects.Add(gameObject);
                 gameObject.SetActive(false);
             }
             TransformPlayer();

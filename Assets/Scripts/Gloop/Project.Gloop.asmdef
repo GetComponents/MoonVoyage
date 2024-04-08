@@ -1,0 +1,16 @@
+{
+    "name": "Project.Gloop",
+    "rootNamespace": "",
+    "references": [
+        "GUID:14cbea2de3f7f80459fec895bfae43af"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

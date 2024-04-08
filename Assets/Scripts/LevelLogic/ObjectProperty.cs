@@ -26,8 +26,8 @@ public class ObjectProperty : MonoBehaviour
     Animator bounceAnim;
     [SerializeField]
     AudioClip interactionSXF;
-    [SerializeField]
-    float soundVolume = 1;
+    //[SerializeField]
+    //float soundVolume = 1;
 
     [SerializeField]
     GameObject interactionParticle;
@@ -63,7 +63,7 @@ public class ObjectProperty : MonoBehaviour
                 GloopMain.Instance.RespawnPlayer();
                 break;
             case ObjectType.COLLECTABLE:
-                GloopMain.Instance.AddStar(gameObject);
+                Backpack.Instance.AddStar(gameObject);
                 gameObject.SetActive(false);
                 //TODO: Collect object
                 break;
@@ -103,6 +103,27 @@ public class ObjectProperty : MonoBehaviour
     public void KillLilDot()
     {
         CurrentDot.SetActive(false);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            EnterCollisionWithObject(GloopMain.Instance.MyMovement.MyBase.rb);
+        }
+        if (collision.gameObject.tag == "Hookshot")
+        {
+            GrappleShot gs = collision.gameObject.GetComponent<GrappleShot>();
+            gs.AttachToObject(CreateTonguePoint(transform.position));
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            EnterCollisionWithObject(GloopMain.Instance.MyMovement.MyBase.rb);
+        }
     }
 }
 
