@@ -271,6 +271,38 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &2482329375602567278
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2311171165601710564}
+  m_Layer: 0
+  m_Name: AimAnchor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2311171165601710564
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2482329375602567278}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 6158756601319170240}
+  m_Father: {fileID: 6158756602862380758}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2949706697936547997
 GameObject:
   m_ObjectHideFlags: 0
@@ -932,14 +964,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6158756601319170241}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.89, y: 1.11, z: -1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.8900003, y: 1.1100001, z: -1}
+  m_LocalScale: {x: 1, y: 1.0000001, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6352218343350949830}
-  m_Father: {fileID: 6158756602862380758}
-  m_RootOrder: 2
+  m_Father: {fileID: 2311171165601710564}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6158756601319170247
 SpriteRenderer:
@@ -1382,16 +1414,17 @@ MonoBehaviour:
   flyMode: {fileID: 2712053772096834393}
   walkMode: {fileID: 6158756602862380586}
   grappleMode: {fileID: 6158756602862380584}
-  LastCheckpoint: {fileID: 0}
   lookSensitivity: 10
   aimRadius: 1
+  AimAnchor: {fileID: 2311171165601710564}
   firePoint: {fileID: 6158756601319170240}
-  LosableObjects: []
   respawnSound: {fileID: 0}
   rb: {fileID: 6158756602862380756}
-  anim: {fileID: 0}
+  anim: {fileID: 6352218343700265132}
   sr: {fileID: 6158756601454346753}
-  Cinemachine: {fileID: 0}
+  Respawn:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &6158756602518483556
 GameObject:
   m_ObjectHideFlags: 0
@@ -1497,6 +1530,7 @@ GameObject:
   - component: {fileID: 2712053772096834393}
   - component: {fileID: 6158756602862380583}
   - component: {fileID: 6330805015873481320}
+  - component: {fileID: 1937519262769945004}
   m_Layer: 0
   m_Name: Body
   m_TagString: Player
@@ -1518,7 +1552,7 @@ Transform:
   m_Children:
   - {fileID: 6158756601439498246}
   - {fileID: 6158756600982660612}
-  - {fileID: 6158756601319170240}
+  - {fileID: 2311171165601710564}
   - {fileID: 6158756601454346754}
   m_Father: {fileID: 6158756602517300880}
   m_RootOrder: 0
@@ -1629,13 +1663,16 @@ MonoBehaviour:
   MovementDir: {x: 0, y: 0}
   movementSpeed: 500
   airborneSpeed: 0.5
+  airborneMul: 0
   lowEnd: 0.5
   highEnd: 6
   lowEndAcc: 5
   highEndAcc: 0.15
-  jumpStrength: 300
-  jumpGracePeriod: 0.2
+  JumpStrength: 350
+  JumpGracePeriod: 0.2
+  GracePeriod: 0
   GloopAnim: {fileID: 6352218343700265132}
+  m_groundedAmount: 0
 --- !u!114 &6158756602862380586
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1722,9 +1759,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 6158756602862380756}
-  OnCollision:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &2712053772096834393
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1793,11 +1827,29 @@ MonoBehaviour:
   SoundtrackVolume: 0.4
   gravityScale: 0.8
   maxFlightTime: 5
+  AirborneSpeed: 0
   FlySound: {fileID: 6352218345201403958}
   counterGravity: 0.1
   minGravity: -0.2
   sideSpeedMul: 1
   jumpStrength: 400
+--- !u!114 &1937519262769945004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6158756602862380759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fe035c59bb14894fa9ff7c272e3f5e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MyBase: {fileID: 8877338917723372082}
+  ModeColor: {r: 0.35564256, g: 0.8490566, b: 0.6714277, a: 1}
+  ModeSprite: {fileID: 6158756601454346753}
+  MySoundtrack: {fileID: 6352218345201403958}
+  SoundtrackVolume: 0
 --- !u!1 &6352218343350949825
 GameObject:
   m_ObjectHideFlags: 0

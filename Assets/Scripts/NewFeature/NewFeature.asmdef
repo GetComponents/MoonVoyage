@@ -1,0 +1,19 @@
+{
+    "name": "NewFeature",
+    "rootNamespace": "",
+    "references": [
+        "GUID:3a5530f7cc55c374ba241f7f30cd4b46",
+        "GUID:14cbea2de3f7f80459fec895bfae43af",
+        "GUID:0228c8103ef031542a9e6453f61d90d3",
+        "GUID:44c763d181dd6624b9021bdce25505ca"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

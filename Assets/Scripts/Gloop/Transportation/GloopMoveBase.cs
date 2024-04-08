@@ -7,14 +7,14 @@ public class GloopMoveBase : MonoBehaviour
     public Rigidbody2D rb;
     public bool InputLocked;
     public Vector2 MovementDir;
-    [SerializeField]
-    float movementSpeed, airborneSpeed;
-    private float airborneMul;
+    public float movementSpeed, airborneSpeed;
+    public float airborneMul;
     [SerializeField]
     private float lowEnd, highEnd, lowEndAcc, highEndAcc;
     [SerializeField]
-    private float jumpStrength, jumpGracePeriod;
-    private float gracePeriod;
+    public float JumpStrength, JumpGracePeriod;
+    [HideInInspector]
+    public float GracePeriod;
     public Animator GloopAnim;
 
     public int GroundedAmount
@@ -32,6 +32,7 @@ public class GloopMoveBase : MonoBehaviour
             }
         }
     }
+    [SerializeField]
     int m_groundedAmount;
 
     private void GroundMovement()
@@ -92,11 +93,11 @@ public class GloopMoveBase : MonoBehaviour
 
     private void Jump()
     {
-        gracePeriod -= Time.deltaTime;
-        if (Input.GetKeyDown(KeyCode.Space) && (GroundedAmount > 0 || gracePeriod > 0))
+        GracePeriod -= Time.deltaTime;
+        if (Input.GetKeyDown(KeyCode.Space) && (GroundedAmount > 0 || GracePeriod > 0))
         {
-            gracePeriod = 0;
-            rb.AddForce(new Vector2(0, jumpStrength));
+            GracePeriod = 0;
+            rb.AddForce(new Vector2(0, JumpStrength * rb.gravityScale));
         }
     }
 
@@ -114,7 +115,7 @@ public class GloopMoveBase : MonoBehaviour
         {
             GloopAnim.SetBool("Grounded", false);
             airborneMul = airborneSpeed;
-            gracePeriod = jumpGracePeriod;
+            GracePeriod = JumpGracePeriod;
         }
     }
 }

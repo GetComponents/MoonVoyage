@@ -16,6 +16,7 @@ public class GloopMain : MonoBehaviour
     public float lookSensitivity;
     [SerializeField]
     float aimRadius;
+    public Transform AimAnchor;
     public Transform firePoint;
     Vector2 lookPoint;
     //public List<GameObject> LosableObjects;
@@ -193,7 +194,7 @@ public class GloopMain : MonoBehaviour
 
     private void FlipCharacter()
     {
-        if (rb.velocity.x >= 0)
+        if (rb.velocity.x * MyMovement.MyBase.rb.gravityScale >= 0)
         {
             sr.flipX = true;
         }

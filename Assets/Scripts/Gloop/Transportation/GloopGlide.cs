@@ -6,20 +6,12 @@ public class GloopGlide : GloopMove
 {
     [SerializeField]
     float gravityScale;
-    //[SerializeField]
-    //float flySpeed;
-    //[SerializeField]
-    //float velocityDecrease;
-    //public Vector2 FlightDir;
-    //[SerializeField]
-    //float lowEnd, highEnd, lowEndAcc, highEndAcc;
     [SerializeField]
     float maxFlightTime;
     float currentFlightTime;
-    //Vector2 movementDir;
-    //[SerializeField]
-    //float groundedMultiplier;
-    //float groundedMul;
+    [SerializeField]
+    private float AirborneSpeed;
+    private float defaultAirborneSpeed;
     [SerializeField]
     AudioSource FlySound;
 
@@ -34,6 +26,12 @@ public class GloopGlide : GloopMove
 
     public override void AddMode()
     {
+        defaultAirborneSpeed = MyBase.airborneSpeed;
+        MyBase.airborneSpeed = AirborneSpeed;
+        if (MyBase.GroundedAmount <= 0)
+        {
+            MyBase.airborneMul = MyBase.airborneSpeed;
+        }
         MySoundtrack.volume = SoundtrackVolume;
         ModeSprite.color = ModeColor;
         currentFlightTime = maxFlightTime;
@@ -87,6 +85,15 @@ public class GloopGlide : GloopMove
 
     public override void RemoveMode()
     {
+        MyBase.airborneSpeed = defaultAirborneSpeed;
+        if (MyBase.GroundedAmount > 0)
+        {
+            MyBase.airborneMul = 1;
+        }
+        else
+        {
+            MyBase.airborneMul = MyBase.airborneSpeed;
+        }
         MySoundtrack.volume = 0;
         FlySound.Stop();
         MyBase.GloopAnim.SetBool("Flying", false);

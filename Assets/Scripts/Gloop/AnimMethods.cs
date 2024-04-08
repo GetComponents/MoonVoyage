@@ -32,7 +32,7 @@ public class AnimMethods : MonoBehaviour
     private IEnumerator ReturnToDefault()
     {
         yield return new WaitForSeconds(timeToReturnRot);
-        transform.eulerAngles = Vector3.zero;
+        transform.eulerAngles = new Vector3(0,0, 90 - (90 * m_rigidbody2D.gravityScale));
         rotate = false;
     }
 

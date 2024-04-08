@@ -26,6 +26,8 @@ public class ObjectProperty : MonoBehaviour
     Animator bounceAnim;
     [SerializeField]
     AudioClip interactionSXF;
+    [SerializeField]
+    private bool reactToGravity;
     //[SerializeField]
     //float soundVolume = 1;
 
@@ -39,6 +41,10 @@ public class ObjectProperty : MonoBehaviour
             CurrentDot = Instantiate(lilDot, transform);
             CurrentDot.transform.localScale = new Vector3(1f / transform.localScale.x, 1f / transform.localScale.y);
             CurrentDot.SetActive(false);
+        }
+        if (reactToGravity)
+        {
+            GameManager.Instance.GravitySwitch?.AddListener(Flip);
         }
     }
 
@@ -98,6 +104,20 @@ public class ObjectProperty : MonoBehaviour
             return new TonguePoint(CurrentDot.GetComponent<Rigidbody2D>(), CurrentDot.transform);
         }
         return new TonguePoint(position);
+    }
+
+    private void Flip()
+    {
+        if (TryGetComponent<Rigidbody2D>(out Rigidbody2D rb))
+        {
+
+        GetComponent<Rigidbody2D>().gravityScale *= -1;
+        transform.eulerAngles += new Vector3(0, 0, 180);
+        }
+        else
+        {
+            Debug.LogWarning($"Object {gameObject.name} wants to flip, but has no rigidbody attached!");
+        }
     }
 
     public void KillLilDot()
