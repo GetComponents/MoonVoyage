@@ -27,13 +27,16 @@ public class PowerSelector : MonoBehaviour
             case 0:
                 break;
             case 1:
-                mode = EMode.WALK;
+                mode = EMode.DASH;
                 break;
             case 2:
-                mode = EMode.FLY;
+                mode = EMode.GLIDE;
                 break;
             case 3:
                 mode = EMode.GRAPPLE;
+                break;
+            case 4:
+                mode = EMode.GRAVITY;
                 break;
             default:
                 break;

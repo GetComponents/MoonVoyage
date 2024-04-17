@@ -4,36 +4,91 @@ using UnityEngine;
 
 public class AnimMethods : MonoBehaviour
 {
+    //[SerializeField]
+    public Rigidbody2D m_rigidbody2D;
     [SerializeField]
-    Rigidbody2D m_rigidbody2D;
+    Transform Cursor;
 
     [SerializeField]
     float timeToReturnRot;
-    public bool rotate;
+    public bool Rotate
+    {
+        get => m_rotate;
+        set
+        {
+            m_rotate = value;
+            if (m_rotate == false)
+            {
+                RotateToGravity();
+            }
+        }
+    }
+    private bool m_rotate;
+    public bool UnrotateCursor
+    {
+        get => m_unrotateCursor;
+        set
+        {
+            m_unrotateCursor = value;
+            if (m_unrotateCursor == false)
+            {
+                Cursor.localEulerAngles = Vector3.zero;
+            }
+        }
+    }
+    private bool m_unrotateCursor;
+    public float Gravity;
+    public bool disableOtherRotations;
+
+    private void Start()
+    {
+        Gravity = m_rigidbody2D.gravityScale;
+    }
 
     private void Update()
     {
-        if (rotate)
+        if (UnrotateCursor)
         {
-            Vector2 v = m_rigidbody2D.velocity;
-            transform.rotation = Quaternion.AngleAxis((Mathf.Atan2(v.y, v.x) * Mathf.Rad2Deg) - 90, Vector3.forward);
+            Cursor.eulerAngles = Vector3.zero;
+        }
+        if (Rotate)
+        {
+            RotateToVelocity();
             //transform.rotation = Quaternion.AngleAxis(Mathf.Atan2(v.y, v.x) * Mathf.Rad2Deg, Vector3.forward);
-
         }
     }
 
-
-    public void RotateCharacter()
+    public void RotatePlayerToRotation(Quaternion rotation)
     {
-        rotate = true;
-        StartCoroutine(ReturnToDefault());
+        transform.rotation = rotation;
     }
 
-    private IEnumerator ReturnToDefault()
+    public void RotatePlayerToRotation(Vector3 rotation)
     {
-        yield return new WaitForSeconds(timeToReturnRot);
-        transform.eulerAngles = new Vector3(0,0, 90 - (90 * m_rigidbody2D.gravityScale));
-        rotate = false;
+        transform.eulerAngles = rotation;
+    }
+
+    public void ChangeGravity()
+    {
+        Gravity *= -1;
+        RotateToGravity();
+    }
+
+    public void RotateToGravity()
+    {
+        if (!disableOtherRotations)
+        {
+            transform.eulerAngles = new Vector3(0, 0, 90 - (90 * Gravity));
+        }
+    }
+
+    public void RotateToVelocity()
+    {
+        if (!disableOtherRotations)
+        {
+            Vector2 v = m_rigidbody2D.velocity;
+            transform.rotation = Quaternion.AngleAxis((Mathf.Atan2(v.y, v.x) * Mathf.Rad2Deg) - 90, Vector3.forward);
+        }
     }
 
     //public void UnrotateCharacter()

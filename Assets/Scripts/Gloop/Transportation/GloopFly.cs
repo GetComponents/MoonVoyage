@@ -16,12 +16,10 @@ public class GloopFly : GloopMove
     [SerializeField]
     float maxFlightTime;
     float currentFlightTime;
-    Vector2 movementDir;
     [SerializeField]
     AudioSource FlySound;
 
 
-    bool sideinput;
 
 
     public override void AddMode()
@@ -63,16 +61,16 @@ public class GloopFly : GloopMove
         }
         else
         {
-            if (sideinput == true && (MyBase.rb.velocity.y <= -1))
-            {
-                //rb.velocity = new Vector2(rb.velocity.x + rb.velocity.y, 1);
-                //rb.velocity.x += rb.velocity.y - 1;
-                MyBase.rb.gravityScale = movementGrav;
-            }
-            else
-            {
-                MyBase.rb.gravityScale = gravityScale;
-            }
+            //if (sideinput == true && (MyBase.rb.velocity.y <= -1))
+            //{
+            //    //rb.velocity = new Vector2(rb.velocity.x + rb.velocity.y, 1);
+            //    //rb.velocity.x += rb.velocity.y - 1;
+            //    MyBase.rb.gravityScale = movementGrav;
+            //}
+            //else
+            //{
+            MyBase.rb.gravityScale = gravityScale;
+            //}
             FlySound.Stop();
             MyBase.GloopAnim.SetBool("Flying", false);
         }
@@ -90,6 +88,7 @@ public class GloopFly : GloopMove
         MyBase.GloopAnim.SetBool("Flying", false);
         MyBase.GloopAnim.SetBool("Walking", false);
         MyBase.rb.gravityScale = 1;
+        this.enabled = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -108,6 +107,16 @@ public class GloopFly : GloopMove
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.tag == "Floor")
-            MyBase.GroundExit();
+            ExitGround();
+    }
+
+    public override void EnterGround()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void ExitGround()
+    {
+        MyBase.GroundExit();
     }
 }

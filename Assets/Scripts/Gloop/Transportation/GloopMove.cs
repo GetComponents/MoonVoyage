@@ -12,7 +12,9 @@ public abstract class GloopMove : MonoBehaviour
     public float SoundtrackVolume;
 
     public abstract void MyUpdate();
-    
+
+    public abstract void EnterGround(); 
+    public abstract void ExitGround(); 
 
     public abstract void RemoveMode();
 

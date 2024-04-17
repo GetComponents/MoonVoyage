@@ -105,17 +105,28 @@ public class GloopGlide : GloopMove
     {
         if (collision.tag == "Floor")
         {
-            MyBase.GroundEnter();
-            currentFlightTime = maxFlightTime;
-            if (GloopMain.Instance.MyMovement == this)
-            {
-                ModeSprite.color = ModeColor;
-            }
+            EnterGround();
+        }
+    }
+
+    public override void EnterGround()
+    {
+        MyBase.GroundEnter();
+        currentFlightTime = maxFlightTime;
+        if (GloopMain.Instance.MyMovement == this)
+        {
+            ModeSprite.color = ModeColor;
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        MyBase.GroundExit();
+        if (collision.tag == "Floor")
+            ExitGround();
+    }
+
+    public override void ExitGround()
+    {
+            MyBase.GroundExit();       
     }
 }

@@ -7,11 +7,14 @@ public class GloopMain : MonoBehaviour
     public static GloopMain Instance;
     public GloopMove MyMovement;
     [SerializeField]
-    GloopFly flyMode;
+    GloopGlide glideMode;
     [SerializeField]
-    GoopWalk walkMode;
+    GloopDash dashMode;
     [SerializeField]
     GoopGrapple grappleMode;
+    [SerializeField]
+    GloopGravity gravityMode;
+    public AnimMethods Rotation;
     //public Spawnpoint LastCheckpoint;
     public float lookSensitivity;
     [SerializeField]
@@ -19,7 +22,6 @@ public class GloopMain : MonoBehaviour
     public Transform AimAnchor;
     public Transform firePoint;
     Vector2 lookPoint;
-    //public List<GameObject> LosableObjects;
 
     [SerializeField]
     private AudioClip respawnSound;
@@ -49,14 +51,21 @@ public class GloopMain : MonoBehaviour
                     break;
                 case EMode.DEFAULT:
                     break;
-                case EMode.FLY:
-                    MyMovement = flyMode;
+                case EMode.GLIDE:
+                    glideMode.enabled = true;
+                    MyMovement = glideMode;
                     break;
-                case EMode.WALK:
-                    MyMovement = walkMode;
+                case EMode.DASH:
+                    dashMode.enabled = true;
+                    MyMovement = dashMode;
                     break;
                 case EMode.GRAPPLE:
+                    grappleMode.enabled = true;
                     MyMovement = grappleMode;
+                    break;
+                case EMode.GRAVITY:
+                    gravityMode.enabled = true;
+                    MyMovement = gravityMode;
                     break;
                 default:
                     break;
@@ -99,6 +108,10 @@ public class GloopMain : MonoBehaviour
                 LockInput(false);
             };
         });
+        dashMode.enabled = false;
+        glideMode.enabled = false;
+        grappleMode.enabled = false;
+        gravityMode.enabled = false;
         //StartCoroutine(SpawnPlayer());
     }
 
@@ -125,20 +138,21 @@ public class GloopMain : MonoBehaviour
         lookPoint.x = Mathf.Clamp(lookPoint.x, -1, 1);
         lookPoint.y = Mathf.Clamp(lookPoint.y, -1, 1);
         //Debug.Log(lookPoint);
-        if (MyMovement == flyMode)
-        {
-            firePoint.localPosition = Vector3.zero;
-        }
-        else
-        {
+        //if (MyMovement == glideMode)
+        //{
+        //    firePoint.localPosition = Vector3.zero;
+        //}
+        //else
+        //{
             firePoint.localPosition = Vector3.Normalize(lookPoint) * aimRadius;
-        }
+        //}
     }
 
 
     public void RespawnPlayer()
     {
         Respawn?.Invoke();
+        Backpack.Instance.RespawnPlayer();
         /////////////CheckpointEvent/////////////////////////////////////////////////////////
         //if (LastCheckpoint == null)
         //    return;
@@ -214,7 +228,8 @@ public enum EMode
 {
     NONE,
     DEFAULT,
-    FLY,
-    WALK,
-    GRAPPLE
+    GLIDE,
+    DASH,
+    GRAPPLE,
+    GRAVITY
 }

@@ -8,7 +8,7 @@ public class GoopGrapple : GloopMove
     //float movementSpeed, airborneSpeed;
     //float airborneMul;
     bool tongueEnabled, extendingTongue;
-    
+
     [Header("Tongue Stuff:")]
     [SerializeField]
     SpringJoint2D tongue;
@@ -36,9 +36,15 @@ public class GoopGrapple : GloopMove
     float retractSpeed;
     [SerializeField]
     float tonguePointOffset;
+    bool stickingToSurface;
 
     [SerializeField]
     AudioClip shotSound;
+
+    private void Start()
+    {
+        MyBase.StickToSurfaceEvent.AddListener(DisableTongue);
+    }
 
     public override void MyUpdate()
     {
@@ -49,6 +55,10 @@ public class GoopGrapple : GloopMove
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
             RaycastToMousePos();
+        }
+        if (stickingToSurface)
+        {
+            return;
         }
         if (extendingTongue)
         {
@@ -79,7 +89,7 @@ public class GoopGrapple : GloopMove
         MyBase.GloopAnim.SetBool("Grappling", true);
         tongue.distance -= retractSpeed * Time.deltaTime;
         tongueRender.SetPosition(0, TonguePoint.Position + Vector3.Normalize(TonguePoint.Position - tongue.transform.position) * tonguePointOffset);
-        tongueRender.SetPosition(1, tongue.transform.position );
+        tongueRender.SetPosition(1, tongue.transform.position);
     }
 
     public void EnableTongue()
@@ -150,6 +160,7 @@ public class GoopGrapple : GloopMove
         firePoint.GetComponent<SpriteRenderer>().enabled = false;
         Destroy(currentShot);
         DisableTongue();
+        this.enabled = false;
     }
 
     public override void AddMode()
@@ -161,10 +172,26 @@ public class GoopGrapple : GloopMove
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if (collision.transform.tag == "Floor")
+        {
+            EnterGround();
+        }
+    }
+
+    public override void EnterGround()
+    {
         MyBase.GroundEnter();
     }
 
     private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.transform.tag == "Floor")
+        {
+            ExitGround();
+        }
+    }
+
+    public override void ExitGround()
     {
         MyBase.GroundExit();
     }

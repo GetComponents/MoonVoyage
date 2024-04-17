@@ -33,7 +33,7 @@ RectTransform:
   m_Children:
   - {fileID: 5871413976091661080}
   m_Father: {fileID: 4970677694385830621}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -743,8 +743,8 @@ RectTransform:
   m_Children:
   - {fileID: 1776232696130305426}
   - {fileID: 1300517826908038335}
-  - {fileID: 6590013818354098143}
   - {fileID: 578710455899751314}
+  - {fileID: 6590013818354098143}
   m_Father: {fileID: 6158756602517300880}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1277,8 +1277,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_rigidbody2D: {fileID: 6158756602862380756}
+  Cursor: {fileID: 2311171165601710564}
   timeToReturnRot: 0.61
-  rotate: 0
+  Gravity: 0
+  disableOtherRotations: 0
 --- !u!1 &6158756601607262825
 GameObject:
   m_ObjectHideFlags: 0
@@ -1410,15 +1412,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c820a38cd3d2d0f4a9de83bff381634f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MyMovement: {fileID: 6330805015873481320}
-  flyMode: {fileID: 2712053772096834393}
-  walkMode: {fileID: 6158756602862380586}
+  MyMovement: {fileID: 6901580904391390555}
+  glideMode: {fileID: 6330805015873481320}
+  dashMode: {fileID: 6901580904391390555}
   grappleMode: {fileID: 6158756602862380584}
+  gravityMode: {fileID: 1937519262769945004}
+  Rotation: {fileID: 6352218343700265137}
   lookSensitivity: 10
   aimRadius: 1
   AimAnchor: {fileID: 2311171165601710564}
   firePoint: {fileID: 6158756601319170240}
-  respawnSound: {fileID: 0}
+  respawnSound: {fileID: 8300000, guid: a5082d39788868f4aa194445855fab58, type: 3}
   rb: {fileID: 6158756602862380756}
   anim: {fileID: 6352218343700265132}
   sr: {fileID: 6158756601454346753}
@@ -1523,11 +1527,10 @@ GameObject:
   - component: {fileID: 6158756602862380756}
   - component: {fileID: 6158756602862380757}
   - component: {fileID: 8877338917723372082}
-  - component: {fileID: 6158756602862380586}
+  - component: {fileID: 6901580904391390555}
   - component: {fileID: 6158756602862380585}
   - component: {fileID: 6158756602862380584}
   - component: {fileID: 1552830704883530512}
-  - component: {fileID: 2712053772096834393}
   - component: {fileID: 6158756602862380583}
   - component: {fileID: 6330805015873481320}
   - component: {fileID: 1937519262769945004}
@@ -1672,8 +1675,14 @@ MonoBehaviour:
   JumpGracePeriod: 0.2
   GracePeriod: 0
   GloopAnim: {fileID: 6352218343700265132}
+  StickToSurfaceEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  UnstickToSurfaceEvent:
+    m_PersistentCalls:
+      m_Calls: []
   m_groundedAmount: 0
---- !u!114 &6158756602862380586
+--- !u!114 &6901580904391390555
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1682,24 +1691,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 6158756602862380759}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af89be6e467396740bbffc45fbc0c9ed, type: 3}
+  m_Script: {fileID: 11500000, guid: d5fedba58972c4d4d9aa5ca7934186d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   MyBase: {fileID: 8877338917723372082}
-  ModeColor: {r: 0.03137255, g: 0.8392157, b: 0, a: 1}
+  ModeColor: {r: 0.2902539, g: 0.6509434, b: 0.27265927, a: 1}
   ModeSprite: {fileID: 6158756601454346753}
   MySoundtrack: {fileID: 6352218345201403958}
   SoundtrackVolume: 0.4
   DashCharge: 0
-  lookSensitivity: 30
   dashStrength: 6
-  dashEndTimer: 0.2
+  dashEndTimer: 0.1
   rotateSprite: {fileID: 6352218343700265137}
-  oneChargeColor: 0.7
-  noChargeColor: 0.35
-  DashSound1: {fileID: 8300000, guid: a2bdc491936e10044bdc06b5d11ab325, type: 3}
-  DashSound2: {fileID: 8300000, guid: 699b8bf13fc81c642ac5995c33e2dd33, type: 3}
-  DashSound3: {fileID: 8300000, guid: 3df454f5967f0d044bc14134cdf4d8d0, type: 3}
+  oneChargeColor: 0.5
+  noChargeColor: 0.2
+  DashSound1: {fileID: 8300000, guid: 74719d51b9545344c8c7ecdd3b915e95, type: 3}
+  DashSound2: {fileID: 8300000, guid: 5349e200cfa92314eae95546f1ac961f, type: 3}
+  DashSound3: {fileID: 8300000, guid: 0010aad87fc8f1a4186b8b14f3069567, type: 3}
 --- !u!231 &6158756602862380585
 SpringJoint2D:
   m_ObjectHideFlags: 0
@@ -1759,29 +1767,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 6158756602862380756}
---- !u!114 &2712053772096834393
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6158756602862380759}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eeca37b78a50eb742b9a9d8997421b06, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MyBase: {fileID: 8877338917723372082}
-  ModeColor: {r: 1, g: 0.9098039, b: 0.15294118, a: 1}
-  ModeSprite: {fileID: 6158756601454346753}
-  MySoundtrack: {fileID: 6352218345201403959}
-  SoundtrackVolume: 0.4
-  gravityScale: 0.5
-  upwardsForce: -0.5
-  movementGrav: 0
-  velocityDecrease: 0.5
-  maxFlightTime: 3
-  FlySound: {fileID: 6352218345201403957}
 --- !u!61 &6158756602862380583
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1850,6 +1835,7 @@ MonoBehaviour:
   ModeSprite: {fileID: 6158756601454346753}
   MySoundtrack: {fileID: 6352218345201403958}
   SoundtrackVolume: 0
+  spriteRotator: {fileID: 6352218343700265137}
 --- !u!1 &6352218343350949825
 GameObject:
   m_ObjectHideFlags: 0
@@ -7123,7 +7109,7 @@ RectTransform:
   m_Children:
   - {fileID: 889907632969448618}
   m_Father: {fileID: 4970677694385830621}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -7219,7 +7205,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 3
+          m_IntArgument: 4
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -7424,7 +7410,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Stick
+  m_text: Gravity
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

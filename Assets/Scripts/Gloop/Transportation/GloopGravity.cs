@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class GloopGravity : GloopMove
 {
-
+    [SerializeField]
+    AnimMethods spriteRotator;
 
     public override void AddMode()
     {
@@ -28,8 +29,9 @@ public class GloopGravity : GloopMove
         {
             GameManager.Instance.GravitySwitch?.Invoke();
             MyBase.rb.gravityScale *= -1;
-            transform.eulerAngles += new Vector3(0, 0, 180);
-            GloopMain.Instance.AimAnchor.eulerAngles -= new Vector3(0, 0, 180);
+            spriteRotator.ChangeGravity();
+            //transform.eulerAngles += new Vector3(0, 0, 180);
+            //GloopMain.Instance.AimAnchor.eulerAngles -= new Vector3(0, 0, 180);
             //MyBase.GloopAnim.SetBool("Flying", true);
 
             //Vector4 tmp = ModeColor * (Mathf.Lerp(0.3f, 1, Mathf.Clamp(currentFlightTime, 0f, maxFlightTime) / maxFlightTime));
@@ -40,6 +42,7 @@ public class GloopGravity : GloopMove
 
     public override void RemoveMode()
     {
+        this.enabled = false;
         //MySoundtrack.volume = 0;
         //FlySound.Stop();
         //MyBase.GloopAnim.SetBool("Flying", false);
@@ -51,15 +54,28 @@ public class GloopGravity : GloopMove
     {
         if (collision.tag == "Floor")
         {
-            MyBase.GroundEnter();
-            if (GloopMain.Instance.MyMovement == this)
-            {
-                ModeSprite.color = ModeColor;
-            }
+            EnterGround();
+        }
+    }
+
+    public override void EnterGround()
+    {
+        MyBase.GroundEnter();
+        if (GloopMain.Instance.MyMovement == this)
+        {
+            ModeSprite.color = ModeColor;
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.tag == "Floor")
+        {
+            ExitGround();
+        }
+    }
+
+    public override void ExitGround()
     {
         MyBase.GroundExit();
     }

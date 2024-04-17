@@ -9,8 +9,8 @@ public class LevelScript : MonoBehaviour
 
     void Start()
     {
-        Backpack.Instance.LastCheckpoint = firstCheckpoint;
-        GloopMain.Instance.RespawnPlayer();
+        //Backpack.Instance.LastCheckpoint = firstCheckpoint;
+        //GloopMain.Instance.RespawnPlayer();
         //StartCoroutine(WaitForOneFrame());
     }
 

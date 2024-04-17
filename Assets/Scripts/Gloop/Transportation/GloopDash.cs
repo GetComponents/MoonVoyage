@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GoopWalk : GloopMove
+public class GloopDash : GloopMove
 {
     //[SerializeField]
     //float movementSpeed;
     public int DashCharge;
-    [SerializeField]
-    float lookSensitivity;
+    //[SerializeField]
+    //float lookSensitivity;
     private Vector3 dashDir;
     //Vector2 movementDir;
     //[SerializeField]
@@ -30,32 +30,32 @@ public class GoopWalk : GloopMove
     [SerializeField]
     AnimMethods rotateSprite;
     [SerializeField]
-    float oneChargeColor, noChargeColor;
+    float noChargeColor;
     int lastDashSound;
     [SerializeField]
     AudioClip DashSound1, DashSound2, DashSound3;
 
     public override void AddMode()
     {
-        if (MyBase.GroundedAmount == 0)
-        {
-            Vector4 tmp = ModeColor * oneChargeColor;
-            tmp.w = 1;
-            ModeSprite.color = tmp;
-        }
-        else
-        {
-            ModeSprite.color = ModeColor;
-        }
+        //if (MyBase.GroundedAmount == 0)
+        //{
+        //    Vector4 tmp = ModeColor * oneChargeColor;
+        //    tmp.w = 1;
+        //    ModeSprite.color = tmp;
+        //}
+        //else
+        //{
+        ModeSprite.color = ModeColor;
+        //}
         MySoundtrack.volume = SoundtrackVolume;
         GloopMain.Instance.firePoint.GetComponent<SpriteRenderer>().enabled = true;
         DashCharge++;
     }
     public override void MyUpdate()
     {
+        MyBase.MyUpdate();
         if (!MyBase.InputLocked)
         {
-            MyBase.MyUpdate();
             //GroundMovement();
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
@@ -63,13 +63,14 @@ public class GoopWalk : GloopMove
             }
             if (isDashing)
             {
-                rotateSprite.RotateCharacter();
-                MyBase.GloopAnim.SetBool("Dashing", true);
+
                 MyBase.rb.velocity = Vector3.Normalize(dashDir) * dashStrength;
             }
-            if (MyBase.rb.velocity.y <= 0)
+            if (rotateSprite.Rotate == true && isDashing == false && MyBase.rb.velocity.y * rotateSprite.Gravity <= 0)
             {
-                rotateSprite.rotate = false;
+                //rotateSprite.transform.eulerAngles = new Vector3(0, 0, 90 - (90 * rotateSprite.m_rigidbody2D.gravityScale));
+                rotateSprite.Rotate = false;
+                MyBase.GloopAnim.SetBool("Dashing", false);
             }
             //racePeriod -= Time.deltaTime;
         }
@@ -89,6 +90,8 @@ public class GoopWalk : GloopMove
                     ModeSprite.color = tmp;
                 }
             }
+            rotateSprite.Rotate = true;
+            MyBase.GloopAnim.SetBool("Dashing", true);
             PlayRandomDashSound();
             canDash = false;
             isDashing = true;
@@ -97,7 +100,6 @@ public class GoopWalk : GloopMove
             MyBase.rb.AddForce(Vector3.Normalize(dashDir) * dashStrength);
             StartCoroutine(DashEnd());
         }
-
     }
 
     private void PlayRandomDashSound()
@@ -132,7 +134,6 @@ public class GoopWalk : GloopMove
         yield return new WaitForSeconds(dashEndTimer);
         canDash = true;
         isDashing = false;
-        MyBase.GloopAnim.SetBool("Dashing", false);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -140,12 +141,17 @@ public class GoopWalk : GloopMove
         //Debug.Log("Object tag " + collision.tag);
         if (collision.tag == "Floor")
         {
-            MyBase.GroundEnter();
-            DashCharge = 1;
-            if (GloopMain.Instance.MyMovement == this)
-            {
-                ModeSprite.color = ModeColor;
-            }
+            EnterGround();
+        }
+    }
+
+    public override void EnterGround()
+    {
+        MyBase.GroundEnter();
+        DashCharge = 1;
+        if (GloopMain.Instance.MyMovement == this)
+        {
+            ModeSprite.color = ModeColor;
         }
     }
 
@@ -153,14 +159,13 @@ public class GoopWalk : GloopMove
     {
         if (collision.tag == "Floor")
         {
-            MyBase.GroundExit();
-            if (MyBase.GroundedAmount == 0 && GloopMain.Instance.MyMovement == this)
-            {
-                Vector4 tmp = ModeColor * oneChargeColor;
-                tmp.w = 1;
-                ModeSprite.color = tmp;
-            }
+            ExitGround();
         }
+    }
+
+    public override void ExitGround()
+    {
+        MyBase.GroundExit();
     }
 
     public override void RemoveMode()
@@ -171,5 +176,8 @@ public class GoopWalk : GloopMove
         canDash = true;
         isDashing = false;
         GloopMain.Instance.firePoint.GetComponent<SpriteRenderer>().enabled = false;
+        rotateSprite.transform.eulerAngles = new Vector3(0, 0, 90 - (90 * rotateSprite.m_rigidbody2D.gravityScale));
+        this.enabled = false;
     }
+
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GloopMoveBase : MonoBehaviour
 {
@@ -16,6 +17,11 @@ public class GloopMoveBase : MonoBehaviour
     [HideInInspector]
     public float GracePeriod;
     public Animator GloopAnim;
+    bool stickingToSurface;
+    public UnityEvent StickToSurfaceEvent, UnstickToSurfaceEvent;
+    public bool jumped;
+    public bool HoldingVelocity;
+    public Vector2 VelocityToHold;
 
     public int GroundedAmount
     {
@@ -85,24 +91,62 @@ public class GloopMoveBase : MonoBehaviour
 
     public void MyUpdate()
     {
+        if (HoldingVelocity)
+            HoldVelocity();
         if (InputLocked)
             return;
-        Jump();
+        CheckJump();
         GroundMovement();
     }
 
-    private void Jump()
+    private void CheckJump()
     {
         GracePeriod -= Time.deltaTime;
-        if (Input.GetKeyDown(KeyCode.Space) && (GroundedAmount > 0 || GracePeriod > 0))
+        if (jumped && GroundedAmount == 0)
         {
-            GracePeriod = 0;
-            rb.AddForce(new Vector2(0, JumpStrength * rb.gravityScale));
+            //if (rb.velocity.y * GloopMain.Instance.Rotation.Gravity >= -0.1f)
+            //    GloopMain.Instance.Rotation.RotatePlayerToRotation(new Vector3(0, 0, 180));
+            //else
+            //{
+            //    jumped = false;
+            //    //GloopMain.Instance.Rotation.RotateToGravity();
+            //}
+        }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (stickingToSurface)
+            {
+                Unstick();
+                return;
+            }
+            if ((GroundedAmount > 0 || GracePeriod > 0))
+            {
+                Jump();
+            }
         }
     }
 
+    public void Jump()
+    {
+        jumped = true;
+        GracePeriod = 0;
+        rb.AddForce(new Vector2(0, JumpStrength * rb.gravityScale));
+    }
+
+    //private void OnCollisionEnter2D(Collision2D collision)
+    //{
+    //    if (HoldingVelocity)
+    //    {
+    //        //rb.gravityScale = GloopMain.Instance.Rotation.Gravity;
+    //        VelocityToHold = Vector2.zero;
+    //        HoldingVelocity = false;
+    //        InputLocked = false;
+    //    }
+    //}
+
     public void GroundEnter()
     {
+        GloopMain.Instance.Rotation.RotateToGravity();
         GroundedAmount++;
         airborneMul = 1;
         GloopAnim.SetBool("Grounded", true);
@@ -117,5 +161,43 @@ public class GloopMoveBase : MonoBehaviour
             airborneMul = airborneSpeed;
             GracePeriod = JumpGracePeriod;
         }
+    }
+
+    public void HoldVelocity()
+    {
+        rb.velocity = VelocityToHold;
+        //rb.AddForce(VelocityToHold);
+        //Debug.Log("rb velocity: " + rb.velocity);
+    }
+
+    public void StickToSurface(Transform surface)
+    {
+        StickToSurfaceEvent?.Invoke();
+        rb.constraints |= RigidbodyConstraints2D.FreezePositionX;
+        rb.constraints |= RigidbodyConstraints2D.FreezePositionY;
+        ParentToPlatform(surface);
+        stickingToSurface = true;
+    }
+
+    public void ParentToPlatform(Transform surface)
+    {
+        transform.SetParent(surface);
+    }
+
+    public void Unstick()
+    {
+        stickingToSurface = false;
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        rb.constraints &= ~RigidbodyConstraints2D.FreezePositionX;
+        rb.constraints &= ~RigidbodyConstraints2D.FreezePositionY;
+        UnparentFromPlatform();
+        UnstickToSurfaceEvent?.Invoke();
+    }
+
+    public void UnparentFromPlatform()
+    {
+        transform.SetParent(GloopMain.Instance.transform);
+        transform.eulerAngles = Vector3.zero;
+        transform.localScale = Vector3.one;
     }
 }

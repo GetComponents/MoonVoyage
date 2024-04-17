@@ -36,7 +36,8 @@ public class Spawnpoint : MonoBehaviour
         SoundManager.Instance.PlayEffect(interactionSFX);
         gameObject.SetActive(false);
         Instantiate(particles, transform.position, Quaternion.identity);
-        Backpack.Instance.LastCheckpoint = this;
+        Backpack.Instance.Respawn.RemoveAllListeners();
+        Backpack.Instance.Respawn.AddListener(RespawnPlayer);
         Backpack.Instance.SaveProgress();
         myCollider.enabled = false;
         sr.color = Color.black;

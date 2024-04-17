@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Backpack : MonoBehaviour
 {
     public static Backpack Instance;
     public int Coins;
-    public Spawnpoint LastCheckpoint;
     public List<GameObject> LosableObjects = new List<GameObject>();
+    public UnityEvent Respawn;
     
 
     private void Awake()
@@ -23,11 +24,6 @@ public class Backpack : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        GloopMain.Instance.Respawn.AddListener(RespawnPlayer);
-    }
-
     public void AddStar(GameObject star)
     {
         LosableObjects.Add(star);
@@ -41,8 +37,6 @@ public class Backpack : MonoBehaviour
 
     public void RespawnPlayer()
     {
-        if (LastCheckpoint == null)
-            return;
         foreach (GameObject gObject in LosableObjects)
         {
             if (gObject != null)
@@ -52,13 +46,13 @@ public class Backpack : MonoBehaviour
         }
         foreach (GameObject gameObject in LosableObjects)
         {
-            if (gameObject.TryGetComponent<ObjectProperty>(out ObjectProperty tmp) && tmp.Type == ObjectType.COLLECTABLE)
+            if (gameObject.tag == "Collectable")
             {
                 GameManager.Instance.RemoveStar();
             }
         }
         LosableObjects = new List<GameObject>();
-        LastCheckpoint.RespawnPlayer();
+        Respawn?.Invoke();
     }
 
     public void SaveProgress()
@@ -66,7 +60,7 @@ public class Backpack : MonoBehaviour
         int collectedStars = 0;
         foreach (GameObject gameObject in LosableObjects)
         {
-            if (gameObject.TryGetComponent<ObjectProperty>(out ObjectProperty tmp) && tmp.Type == ObjectType.COLLECTABLE)
+            if (gameObject.tag == "Collectable")
             {
                 collectedStars++;
             }
