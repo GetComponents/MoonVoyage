@@ -30,7 +30,7 @@ public class ObjectProperty : MonoBehaviour
     //[SerializeField]
     //float soundVolume = 1;
     [SerializeField]
-    bool isSticky;
+    bool isSticky, destroyOnInteract;
     [SerializeField]
     bool floorOnInteract;
     [SerializeField]
@@ -106,6 +106,10 @@ public class ObjectProperty : MonoBehaviour
             GloopMain.Instance.Rotation.UnrotateCursor = true;
             GloopMain.Instance.MyMovement.MyBase.ParentToPlatform(transform);
         }
+        if (floorOnInteract)
+        {
+            GloopMain.Instance.MyMovement.EnterGround();
+        }
         if (!ignoreCatapultCollision && GloopMain.Instance.MyMovement.MyBase.HoldingVelocity == true)
         {
             GloopMain.Instance.MyMovement.MyBase.HoldingVelocity = false;
@@ -120,6 +124,18 @@ public class ObjectProperty : MonoBehaviour
             //SoundManager.Instance.PlayEffect(interactionSXF, soundVolume);
             SoundManager.Instance.PlayEffect(interactionSXF);
             //AudioSource.PlayClipAtPoint(interactionSXF, transform.position);
+        }
+        if (destroyOnInteract)
+        {
+            if (floorOnInteract)
+            {
+                GloopMain.Instance.MyMovement.ExitGround();
+            }
+            if (Moves)
+            {
+                GloopMain.Instance.MyMovement.MyBase.UnparentFromPlatform();
+            }
+            Destroy(gameObject);
         }
     }
 
@@ -206,10 +222,6 @@ public class ObjectProperty : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             EnterCollisionWithObject(GloopMain.Instance.MyMovement.MyBase.rb);
-            if (floorOnInteract)
-            {
-                GloopMain.Instance.MyMovement.EnterGround();
-            }
         }
     }
 

@@ -615,7 +615,9 @@ MonoBehaviour:
   interactionSXF: {fileID: 0}
   reactToGravity: 0
   isSticky: 0
+  destroyOnInteract: 0
   floorOnInteract: 0
+  ignoreCatapultCollision: 0
   interactionParticle: {fileID: 0}
 --- !u!114 &8475616712638451071
 MonoBehaviour:
@@ -629,9 +631,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cd048b2ca985e24ba13ad1f1cd4f314, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 20
-  movementSpeed: 0
+  RotationSpeed: 20
+  MovementSpeed: 0
   Path: []
+  ProjectileDirection: {x: 0, y: 0}
   movement: 0
   StopTimer: 0
   dot: {fileID: 0}
@@ -932,7 +935,9 @@ MonoBehaviour:
   interactionSXF: {fileID: 0}
   reactToGravity: 0
   isSticky: 0
+  destroyOnInteract: 0
   floorOnInteract: 0
+  ignoreCatapultCollision: 0
   interactionParticle: {fileID: 0}
 --- !u!1001 &3214285503331605466
 PrefabInstance:
@@ -1025,7 +1030,9 @@ MonoBehaviour:
   interactionSXF: {fileID: 0}
   reactToGravity: 0
   isSticky: 0
+  destroyOnInteract: 0
   floorOnInteract: 0
+  ignoreCatapultCollision: 0
   interactionParticle: {fileID: 0}
 --- !u!4 &2713492036137917012 stripped
 Transform:
@@ -1123,7 +1130,9 @@ MonoBehaviour:
   interactionSXF: {fileID: 0}
   reactToGravity: 0
   isSticky: 0
+  destroyOnInteract: 0
   floorOnInteract: 0
+  ignoreCatapultCollision: 0
   interactionParticle: {fileID: 0}
 --- !u!4 &4122598669830417641 stripped
 Transform:
@@ -1221,7 +1230,9 @@ MonoBehaviour:
   interactionSXF: {fileID: 0}
   reactToGravity: 0
   isSticky: 0
+  destroyOnInteract: 0
   floorOnInteract: 0
+  ignoreCatapultCollision: 0
   interactionParticle: {fileID: 0}
 --- !u!4 &8983658150158094632 stripped
 Transform:

@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class ObjectMover : MonoBehaviour
 {
-    [SerializeField]
-    float rotationSpeed, movementSpeed;
-
+    
+    public float RotationSpeed, MovementSpeed;
+    private Rigidbody2D rb;
     [SerializeField]
     List<Transform> Path;
     Vector2 previousDestination, nextDestination;
     int pathIndex;
     float destinationCompletion;
-
+    public Vector2 ProjectileDirection;
     [SerializeField]
     EMovementType movement;
     [SerializeField]
@@ -25,18 +25,23 @@ public class ObjectMover : MonoBehaviour
     {
         if (TryGetComponent<ObjectProperty>(out ObjectProperty op))
         {
-            op.RotationSpeed = rotationSpeed;
-            if (rotationSpeed != 0)
+            op.RotationSpeed = RotationSpeed;
+            if (RotationSpeed != 0)
             {
                 op.Rotates = true;
             }
-            op.MoveSpeed = movementSpeed;
-            if (movementSpeed != 0)
+            op.MoveSpeed = MovementSpeed;
+            if (MovementSpeed != 0)
             {
                 op.Moves = true;
             }
         }
-        if (movementSpeed > 0)
+        if (movement == EMovementType.PROJECTILE)
+        {
+            rb = GetComponent<Rigidbody2D>();
+            return;
+        }
+        if (MovementSpeed > 0)
         {
             NextPoint();
         }
@@ -50,15 +55,15 @@ public class ObjectMover : MonoBehaviour
 
     private void Rotate()
     {
-        if (rotationSpeed != 0)
+        if (RotationSpeed != 0)
         {
-            transform.eulerAngles += new Vector3(0, 0, rotationSpeed * Time.deltaTime);
+            transform.eulerAngles += new Vector3(0, 0, RotationSpeed * Time.deltaTime);
         }
     }
 
     private void Move()
     {
-        if (movementSpeed == 0)
+        if (MovementSpeed == 0)
             return;
 
         if (movement == EMovementType.STOPAndGO && currentTimer > 0)
@@ -66,7 +71,8 @@ public class ObjectMover : MonoBehaviour
             currentTimer -= Time.deltaTime;
             return;
         }
-        destinationCompletion += Time.deltaTime * movementSpeed;
+        if (movement != EMovementType.PROJECTILE)
+            destinationCompletion += Time.deltaTime * MovementSpeed;
         if (destinationCompletion >= 1)
         {
             NextPoint();
@@ -86,6 +92,9 @@ public class ObjectMover : MonoBehaviour
             case EMovementType.STOPAndGO:
                 currentCompletion = destinationCompletion;
                 break;
+            case EMovementType.PROJECTILE:
+                rb.velocity = ProjectileDirection * MovementSpeed;
+                return;
             default:
                 break;
 
@@ -112,5 +121,6 @@ public enum EMovementType
     NONE,
     LINEAR,
     SINE,
-    STOPAndGO
+    STOPAndGO,
+    PROJECTILE
 }
