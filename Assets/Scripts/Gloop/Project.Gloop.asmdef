@@ -2,7 +2,8 @@
     "name": "Project.Gloop",
     "rootNamespace": "",
     "references": [
-        "GUID:14cbea2de3f7f80459fec895bfae43af"
+        "GUID:14cbea2de3f7f80459fec895bfae43af",
+        "GUID:75469ad4d38634e559750d17036d5f7c"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

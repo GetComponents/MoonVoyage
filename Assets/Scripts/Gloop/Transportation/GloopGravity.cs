@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class GloopGravity : GloopMove
 {
@@ -27,9 +28,7 @@ public class GloopGravity : GloopMove
     {
         if ((Input.GetKeyDown(KeyCode.Mouse0)) /*&& (MyBase.GroundedAmount > 0 || MyBase.JumpGracePeriod > 0)*/)
         {
-            GameManager.Instance.GravitySwitch?.Invoke();
-            MyBase.rb.gravityScale *= -1;
-            spriteRotator.ChangeGravity();
+
             //transform.eulerAngles += new Vector3(0, 0, 180);
             //GloopMain.Instance.AimAnchor.eulerAngles -= new Vector3(0, 0, 180);
             //MyBase.GloopAnim.SetBool("Flying", true);
@@ -78,5 +77,17 @@ public class GloopGravity : GloopMove
     public override void ExitGround()
     {
         MyBase.GroundExit();
+    }
+
+    public override void TriggerAbility(InputAction.CallbackContext context)
+    {
+        if (MyBase.InputLocked)
+            return;
+        if (context.started)
+        {
+            GameManager.Instance.GravitySwitch?.Invoke();
+            MyBase.rb.gravityScale *= -1;
+            spriteRotator.ChangeGravity();
+        }
     }
 }

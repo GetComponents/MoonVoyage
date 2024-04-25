@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class GoopGrapple : GloopMove
 {
@@ -54,7 +55,7 @@ public class GoopGrapple : GloopMove
         //DirectionalInput();
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            RaycastToMousePos();
+
         }
         if (stickingToSurface)
         {
@@ -70,7 +71,7 @@ public class GoopGrapple : GloopMove
         }
         if (Input.GetKeyUp(KeyCode.Mouse0))
         {
-            DisableTongue();
+
         }
     }
 
@@ -194,6 +195,19 @@ public class GoopGrapple : GloopMove
     public override void ExitGround()
     {
         MyBase.GroundExit();
+    }
+
+    public override void TriggerAbility(InputAction.CallbackContext context)
+    {
+        if (MyBase.InputLocked)
+            return;
+
+        if (context.started)
+            RaycastToMousePos();
+        if (context.canceled)
+            DisableTongue();
+
+
     }
 }
 

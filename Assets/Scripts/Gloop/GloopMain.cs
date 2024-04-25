@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class GloopMain : MonoBehaviour
 {
@@ -125,27 +126,44 @@ public class GloopMain : MonoBehaviour
     {
         MyMovement.MyUpdate();
         FlipCharacter();
-        DirectionalInput();
+        //DirectionalInput();
     }
 
-    private void DirectionalInput()
+    public void TriggerAbilty(InputAction.CallbackContext context)
+    {
+        MyMovement.TriggerAbility(context);
+    }
+
+    public void MoveMouse(InputAction.CallbackContext context)
     {
         //Cursor.lockState = CursorLockMode.Locked;
-        lookPoint.x += Input.GetAxis("Mouse X") * lookSensitivity * Time.deltaTime;
+        Vector2 vec = context.ReadValue<Vector2>();
+        if (vec == Vector2.zero)
+            return;
+        lookPoint.x += vec.x * lookSensitivity * Time.deltaTime;
 
-        lookPoint.y += Input.GetAxis("Mouse Y") * lookSensitivity * Time.deltaTime;
+        lookPoint.y += vec.y * lookSensitivity * Time.deltaTime;
+
+
+        //lookPoint.x += Input.GetAxis("Mouse X") * lookSensitivity * Time.deltaTime;
+
+        //lookPoint.y += Input.GetAxis("Mouse Y") * lookSensitivity * Time.deltaTime;
 
         lookPoint.x = Mathf.Clamp(lookPoint.x, -1, 1);
         lookPoint.y = Mathf.Clamp(lookPoint.y, -1, 1);
-        //Debug.Log(lookPoint);
-        //if (MyMovement == glideMode)
-        //{
-        //    firePoint.localPosition = Vector3.zero;
-        //}
-        //else
-        //{
-            firePoint.localPosition = Vector3.Normalize(lookPoint) * aimRadius;
-        //}
+        firePoint.localPosition = Vector3.Normalize(lookPoint) * aimRadius;
+    }
+
+
+    public void MoveController(InputAction.CallbackContext context)
+    {
+        Vector2 vec = context.ReadValue<Vector2>();
+        if (vec == Vector2.zero)
+            return;
+        //Debug.Log(vec);
+        vec.x = Mathf.Clamp(vec.x, -1, 1);
+        vec.y = Mathf.Clamp(vec.y, -1, 1);
+        firePoint.localPosition = Vector3.Normalize(vec) * aimRadius;
     }
 
 

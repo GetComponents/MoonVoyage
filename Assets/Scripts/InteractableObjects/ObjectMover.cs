@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class ObjectMover : MonoBehaviour
 {
-    
+
     public float RotationSpeed, MovementSpeed;
     private Rigidbody2D rb;
     [SerializeField]
     List<Transform> Path;
     Vector2 previousDestination, nextDestination;
+    [SerializeField]
+    float minRotation, maxRotation;
+    [SerializeField]
+    bool goFullCircle;
     int pathIndex;
     float destinationCompletion;
     public Vector2 ProjectileDirection;
@@ -55,10 +59,63 @@ public class ObjectMover : MonoBehaviour
 
     private void Rotate()
     {
-        if (RotationSpeed != 0)
+        if (RotationSpeed == 0)
+        {
+            return;
+        }
+        if (movement == EMovementType.NONE)
         {
             transform.eulerAngles += new Vector3(0, 0, RotationSpeed * Time.deltaTime);
+            return;
         }
+
+
+
+        if (movement == EMovementType.STOPAndGO && currentTimer > 0)
+        {
+            currentTimer -= Time.deltaTime;
+            return;
+        }
+        destinationCompletion += Time.deltaTime * RotationSpeed;
+        if (destinationCompletion >= 1)
+        {
+            ChangeRotation();
+        }
+        float currentCompletion = 0;
+        switch (movement)
+        {
+            case EMovementType.NONE:
+                Debug.LogWarning("No Movementtype defined in Object" + gameObject.name);
+                break;
+            case EMovementType.LINEAR:
+                currentCompletion = destinationCompletion;
+                break;
+            case EMovementType.SINE:
+                currentCompletion = (Mathf.Sin((destinationCompletion * Mathf.PI) - 0.5f) / 2) + 0.5f;
+                break;
+            case EMovementType.STOPAndGO:
+                currentCompletion = destinationCompletion;
+                break;
+            case EMovementType.PROJECTILE:
+                rb.velocity = ProjectileDirection * MovementSpeed;
+                return;
+            default:
+                break;
+
+        }
+        //transform.eulerAngles = Vector3.Lerp(previousDestination, nextDestination, currentCompletion);
+        Vector3 tmp = Vector3.zero;
+        tmp.z = Mathf.LerpAngle(minRotation, maxRotation, currentCompletion);
+        transform.eulerAngles = tmp;
+    }
+
+    private void ChangeRotation()
+    {
+        float tmp = minRotation;
+        minRotation = maxRotation;
+        maxRotation = tmp;
+        destinationCompletion = 0;
+        currentTimer = StopTimer;
     }
 
     private void Move()

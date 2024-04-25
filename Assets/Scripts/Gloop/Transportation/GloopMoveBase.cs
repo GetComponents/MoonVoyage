@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 public class GloopMoveBase : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class GloopMoveBase : MonoBehaviour
     public bool jumped;
     public bool HoldingVelocity;
     public Vector2 VelocityToHold;
+    public Vector2 CurrentMovement;
 
     public int GroundedAmount
     {
@@ -41,12 +43,27 @@ public class GloopMoveBase : MonoBehaviour
     [SerializeField]
     int m_groundedAmount;
 
-    private void GroundMovement()
+    public void NewMove(InputAction.CallbackContext context)
+    {
+        //if (context.phase)
+        CurrentMovement = context.ReadValue<Vector2>();
+        if (CurrentMovement.x != 0)
+        {
+            GloopAnim.SetBool("Walking", true);
+        }
+        else
+        {
+            GloopAnim.SetBool("Walking", false);
+        }
+        //GroundMovement(context.ReadValue<Vector2>());
+    }
+
+    private void GroundMovement(Vector2 movement)
     {
         MovementDir = Vector2.zero;
         //Vector2 currentVelocity = rb.velocity;
 
-        if (Input.GetKey(KeyCode.A))
+        if (movement.x < 0)
         {
             if (rb.velocity.x > lowEnd)
             {
@@ -61,7 +78,7 @@ public class GloopMoveBase : MonoBehaviour
                 MovementDir.x -= 1;
             }
         }
-        if (Input.GetKey(KeyCode.D))
+        if (movement.x > 0)
         {
             if (rb.velocity.x < -lowEnd)
             {
@@ -79,14 +96,14 @@ public class GloopMoveBase : MonoBehaviour
         rb.AddForce(MovementDir * movementSpeed * airborneMul * Time.deltaTime, ForceMode2D.Force);
 
 
-        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.A))
-        {
-            GloopAnim.SetBool("Walking", true);
-        }
-        else
-        {
-            GloopAnim.SetBool("Walking", false);
-        }
+        //if (movement.x != 0)
+        //{
+        //    GloopAnim.SetBool("Walking", true);
+        //}
+        //else
+        //{
+        //    GloopAnim.SetBool("Walking", false);
+        //}
     }
 
     public void MyUpdate()
@@ -95,24 +112,22 @@ public class GloopMoveBase : MonoBehaviour
             HoldVelocity();
         if (InputLocked)
             return;
-        CheckJump();
-        GroundMovement();
+        //CheckJump();
+        GracePeriod -= Time.deltaTime;
+        if (CurrentMovement != Vector2.zero)
+        {
+            GroundMovement(CurrentMovement);
+            //GroundMovement();
+        }
     }
 
     private void CheckJump()
     {
-        GracePeriod -= Time.deltaTime;
-        if (jumped && GroundedAmount == 0)
-        {
-            //if (rb.velocity.y * GloopMain.Instance.Rotation.Gravity >= -0.1f)
-            //    GloopMain.Instance.Rotation.RotatePlayerToRotation(new Vector3(0, 0, 180));
-            //else
-            //{
-            //    jumped = false;
-            //    //GloopMain.Instance.Rotation.RotateToGravity();
-            //}
-        }
-        if (Input.GetKeyDown(KeyCode.Space))
+    }
+
+    public void JumpInput(InputAction.CallbackContext context)
+    {
+        if (context.started)
         {
             if (stickingToSurface)
             {

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class GloopFly : GloopMove
 {
@@ -118,5 +119,10 @@ public class GloopFly : GloopMove
     public override void ExitGround()
     {
         MyBase.GroundExit();
+    }
+
+    public override void TriggerAbility(InputAction.CallbackContext context)
+    {
+        throw new System.NotImplementedException();
     }
 }

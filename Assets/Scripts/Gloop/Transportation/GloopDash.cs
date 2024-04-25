@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class GloopDash : GloopMove
 {
@@ -56,11 +57,6 @@ public class GloopDash : GloopMove
         MyBase.MyUpdate();
         if (!MyBase.InputLocked)
         {
-            //GroundMovement();
-            if (Input.GetKeyDown(KeyCode.Mouse0))
-            {
-                Dash();
-            }
             if (isDashing)
             {
 
@@ -180,4 +176,11 @@ public class GloopDash : GloopMove
         this.enabled = false;
     }
 
+    public override void TriggerAbility(InputAction.CallbackContext context)
+    {
+        if (MyBase.InputLocked)
+            return;
+        if (context.started)
+            Dash();
+    }
 }

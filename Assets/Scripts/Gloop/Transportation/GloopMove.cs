@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public abstract class GloopMove : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public abstract class GloopMove : MonoBehaviour
     //[SerializeField]
     public AudioSource MySoundtrack;
     public float SoundtrackVolume;
+
+    public abstract void TriggerAbility(InputAction.CallbackContext context);
 
     public abstract void MyUpdate();
 

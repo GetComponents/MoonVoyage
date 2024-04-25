@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class MainGameUI : MonoBehaviour
 {
@@ -52,6 +53,16 @@ public class MainGameUI : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+        }
+        int minutes = (int)gm.Timer / 60;
+        int seconds = (int)gm.Timer % 60;
+        timerUI.text = ((minutes < 10) ? ("0") : ("")) + minutes.ToString() + ":" + ((seconds < 10) ? ("0") : ("")) + seconds.ToString();
+    }
+
+    public void PressEscaoe(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
             if (!openMenu)
             {
                 OpenMenu();
@@ -61,10 +72,8 @@ public class MainGameUI : MonoBehaviour
                 CloseMenu();
             }
         }
-        int minutes = (int)gm.Timer / 60;
-        int seconds = (int)gm.Timer % 60;
-        timerUI.text = ((minutes < 10) ? ("0") : ("")) + minutes.ToString() + ":" + ((seconds < 10) ? ("0") : ("")) + seconds.ToString();
     }
+
 
     public IEnumerator WipeScreen()
     {
