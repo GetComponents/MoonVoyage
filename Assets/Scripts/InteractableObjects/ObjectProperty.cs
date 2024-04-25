@@ -41,7 +41,7 @@ public class ObjectProperty : MonoBehaviour
 
     private void Start()
     {
-        if ((Moves || Rotates) && CurrentDot != null)
+        if ((Moves || Rotates) && lilDot != null)
         {
             CurrentDot = Instantiate(lilDot, transform);
             CurrentDot.transform.localScale = new Vector3(1f / transform.localScale.x, 1f / transform.localScale.y);
@@ -97,6 +97,16 @@ public class ObjectProperty : MonoBehaviour
                 {
                     GloopMain.Instance.Rotation.UnrotateCursor = true;
                 }
+                break;
+            case ObjectType.BOUNCEPLANT:
+                obj.velocity *= LockDir;
+                obj.AddForce(launchStrength * transform.up);
+                if (bounceAnim != null)
+                {
+                    bounceAnim.SetBool("Bounce", true);
+                }
+                PiranhiaPlant tmp = GetComponent<PiranhiaPlant>();
+                tmp.Hide();
                 break;
             default:
                 break;
@@ -248,5 +258,6 @@ public enum ObjectType
     STICKY,
     HURT,
     COLLECTABLE,
-    CATAPULT
+    CATAPULT,
+    BOUNCEPLANT
 }
