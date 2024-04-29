@@ -171,30 +171,30 @@ public class GoopGrapple : GloopMove
         firePoint.GetComponent<SpriteRenderer>().enabled = true;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.transform.tag == "Floor")
-        {
-            EnterGround();
-        }
-    }
+    //private void OnCollisionEnter2D(Collision2D collision)
+    //{
+    //    if (collision.transform.tag == "Floor")
+    //    {
+    //        EnterGround();
+    //    }
+    //}
 
     public override void EnterGround()
     {
-        MyBase.GroundEnter();
+        //MyBase.GroundEnter();
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.transform.tag == "Floor")
-        {
-            ExitGround();
-        }
-    }
+    //private void OnCollisionExit2D(Collision2D collision)
+    //{
+    //    if (collision.transform.tag == "Floor")
+    //    {
+    //        ExitGround();
+    //    }
+    //}
 
     public override void ExitGround()
     {
-        MyBase.GroundExit();
+        //MyBase.GroundExit();
     }
 
     public override void TriggerAbility(InputAction.CallbackContext context)

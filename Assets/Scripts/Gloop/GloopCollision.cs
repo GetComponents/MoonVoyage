@@ -6,25 +6,22 @@ using UnityEngine.Events;
 public class GloopCollision : MonoBehaviour
 {
     [SerializeField]
-    Rigidbody2D rb;
-    //public UnityEvent OnCollision;
-    //private void OnCollisionEnter2D(Collision2D collision)
-    //{
-    //    //Debug.Log("I collided");
-    //    if (collision.transform.TryGetComponent(out ObjectProperty op))
-    //    {
-    //        OnCollision.Invoke();
-    //        op.EnterCollisionWithObject(rb);
-    //    }
-    //}
+    GloopMoveBase gloopMove;
 
-    //private void OnTriggerEnter2D(Collider2D collision)
-    //{
-    //    //Debug.Log("I collided");
-    //    if (collision.transform.TryGetComponent(out ObjectProperty op))
-    //    {
-    //        OnCollision.Invoke();
-    //        op.EnterCollisionWithObject(rb);
-    //    }
-    //}
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log($"I, {gameObject.name} collided with {collision.gameObject.name}");
+        if (collision.tag == "Floor")
+        {
+            gloopMove.GroundEnter();
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.tag == "Floor")
+        {
+            gloopMove.GroundExit();
+        }
+    }
 }

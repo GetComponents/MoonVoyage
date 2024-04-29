@@ -118,7 +118,7 @@ public class ObjectProperty : MonoBehaviour
         }
         if (floorOnInteract)
         {
-            GloopMain.Instance.MyMovement.EnterGround();
+            GloopMain.Instance.MyMovement.MyBase.GroundEnter();
         }
         if (!ignoreCatapultCollision && GloopMain.Instance.MyMovement.MyBase.HoldingVelocity == true)
         {

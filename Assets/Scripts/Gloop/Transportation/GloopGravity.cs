@@ -49,34 +49,34 @@ public class GloopGravity : GloopMove
         //MyBase.rb.gravityScale = 1;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.tag == "Floor")
-        {
-            EnterGround();
-        }
-    }
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    if (collision.tag == "Floor")
+    //    {
+    //        EnterGround();
+    //    }
+    //}
 
     public override void EnterGround()
     {
-        MyBase.GroundEnter();
+        //MyBase.GroundEnter();
         if (GloopMain.Instance.MyMovement == this)
         {
             ModeSprite.color = ModeColor;
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.tag == "Floor")
-        {
-            ExitGround();
-        }
-    }
+    //private void OnTriggerExit2D(Collider2D collision)
+    //{
+    //    if (collision.tag == "Floor")
+    //    {
+    //        ExitGround();
+    //    }
+    //}
 
     public override void ExitGround()
     {
-        MyBase.GroundExit();
+        //MyBase.GroundExit();
     }
 
     public override void TriggerAbility(InputAction.CallbackContext context)

@@ -15,6 +15,8 @@ public class GloopMain : MonoBehaviour
     GoopGrapple grappleMode;
     [SerializeField]
     GloopGravity gravityMode;
+    [SerializeField]
+    GloopNone gloopDefault;
     public AnimMethods Rotation;
     //public Spawnpoint LastCheckpoint;
     public float lookSensitivity;
@@ -23,6 +25,7 @@ public class GloopMain : MonoBehaviour
     public Transform AimAnchor;
     public Transform firePoint;
     Vector2 lookPoint;
+    private Vector2 lastInput;
 
     [SerializeField]
     private AudioClip respawnSound;
@@ -51,6 +54,8 @@ public class GloopMain : MonoBehaviour
                 case EMode.NONE:
                     break;
                 case EMode.DEFAULT:
+                    gloopDefault.enabled = true;
+                    MyMovement = gloopDefault;
                     break;
                 case EMode.GLIDE:
                     glideMode.enabled = true;
@@ -113,6 +118,7 @@ public class GloopMain : MonoBehaviour
         glideMode.enabled = false;
         grappleMode.enabled = false;
         gravityMode.enabled = false;
+        gloopDefault.enabled = false;
         //StartCoroutine(SpawnPlayer());
     }
 
@@ -126,6 +132,7 @@ public class GloopMain : MonoBehaviour
     {
         MyMovement.MyUpdate();
         FlipCharacter();
+        MoveCursor();
         //DirectionalInput();
     }
 
@@ -134,24 +141,52 @@ public class GloopMain : MonoBehaviour
         MyMovement.TriggerAbility(context);
     }
 
-    public void MoveMouse(InputAction.CallbackContext context)
+    private void MoveCursor()
     {
-        //Cursor.lockState = CursorLockMode.Locked;
-        Vector2 vec = context.ReadValue<Vector2>();
-        if (vec == Vector2.zero)
+        if (lastInput == Vector2.zero)
             return;
-        lookPoint.x += vec.x * lookSensitivity * Time.deltaTime;
+        lookPoint.x = Mathf.Clamp(lookPoint.x, -1f, 1f);
+        lookPoint.y = Mathf.Clamp(lookPoint.y, -1f, 1f);
+        //lookPoint.Normalize();
+        //lookPoint = Vector2.zero;
+        lookPoint.x += (lastInput.x - lookPoint.x) * lookSensitivity * Time.deltaTime;
 
-        lookPoint.y += vec.y * lookSensitivity * Time.deltaTime;
+        lookPoint.y += (lastInput.y - lookPoint.y) * lookSensitivity * Time.deltaTime;
+        if (lookPoint == Vector2.zero)
+        {
+            return;
+        }
+        //Debug.Log(lookPoint.ToString("0.0000"));
 
 
         //lookPoint.x += Input.GetAxis("Mouse X") * lookSensitivity * Time.deltaTime;
 
         //lookPoint.y += Input.GetAxis("Mouse Y") * lookSensitivity * Time.deltaTime;
+        Debug.Log(lastInput);
+        firePoint.localPosition = lookPoint.normalized * aimRadius;
+    }
 
-        lookPoint.x = Mathf.Clamp(lookPoint.x, -1, 1);
-        lookPoint.y = Mathf.Clamp(lookPoint.y, -1, 1);
-        firePoint.localPosition = Vector3.Normalize(lookPoint) * aimRadius;
+    public void MoveMouse(InputAction.CallbackContext context)
+    {
+        ////return;
+        ////Cursor.lockState = CursorLockMode.Locked;
+        //Vector2 vec = context.ReadValue<Vector2>();
+        //if (vec == Vector2.zero)
+        //    return;
+        //lastInput = vec.normalized;
+
+        ////lookPoint.x += vec.x * lookSensitivity * Time.deltaTime;
+
+        ////lookPoint.y += vec.y * lookSensitivity * Time.deltaTime;
+
+
+        //////lookPoint.x += Input.GetAxis("Mouse X") * lookSensitivity * Time.deltaTime;
+
+        //////lookPoint.y += Input.GetAxis("Mouse Y") * lookSensitivity * Time.deltaTime;
+
+        ////lookPoint.x = Mathf.Clamp(lookPoint.x, -1, 1);
+        ////lookPoint.y = Mathf.Clamp(lookPoint.y, -1, 1);
+        ////firePoint.localPosition = Vector3.Normalize(lookPoint) * aimRadius;
     }
 
 
@@ -160,10 +195,16 @@ public class GloopMain : MonoBehaviour
         Vector2 vec = context.ReadValue<Vector2>();
         if (vec == Vector2.zero)
             return;
-        //Debug.Log(vec);
-        vec.x = Mathf.Clamp(vec.x, -1, 1);
-        vec.y = Mathf.Clamp(vec.y, -1, 1);
-        firePoint.localPosition = Vector3.Normalize(vec) * aimRadius;
+        lastInput = vec.normalized;
+        ////Debug.Log(vec);
+        //lookPoint.x += vec.x * lookSensitivity * Time.deltaTime;
+        //lookPoint.y += vec.y * lookSensitivity * Time.deltaTime;
+        //lookPoint.x = Mathf.Clamp(lookPoint.x, -1, 1);
+        //lookPoint.y = Mathf.Clamp(lookPoint.y, -1, 1);
+        ////vec.x = Mathf.Clamp(vec.x, -1, 1);
+        ////vec.y = Mathf.Clamp(vec.y, -1, 1);
+        //firePoint.localPosition = Vector3.Normalize(lookPoint) * aimRadius;
+        //Debug.Log("Left: " + lookPoint);
     }
 
 

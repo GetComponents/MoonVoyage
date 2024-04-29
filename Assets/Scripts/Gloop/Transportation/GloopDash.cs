@@ -132,18 +132,18 @@ public class GloopDash : GloopMove
         isDashing = false;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        //Debug.Log("Object tag " + collision.tag);
-        if (collision.tag == "Floor")
-        {
-            EnterGround();
-        }
-    }
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    //Debug.Log("Object tag " + collision.tag);
+    //    if (collision.tag == "Floor")
+    //    {
+    //        EnterGround();
+    //    }
+    //}
 
     public override void EnterGround()
     {
-        MyBase.GroundEnter();
+        //MyBase.GroundEnter();
         DashCharge = 1;
         if (GloopMain.Instance.MyMovement == this)
         {
@@ -151,17 +151,17 @@ public class GloopDash : GloopMove
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.tag == "Floor")
-        {
-            ExitGround();
-        }
-    }
+    //private void OnTriggerExit2D(Collider2D collision)
+    //{
+    //    if (collision.tag == "Floor")
+    //    {
+    //        ExitGround();
+    //    }
+    //}
 
     public override void ExitGround()
     {
-        MyBase.GroundExit();
+        //MyBase.GroundExit();
     }
 
     public override void RemoveMode()

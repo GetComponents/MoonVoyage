@@ -12,7 +12,7 @@ public class GloopMoveBase : MonoBehaviour
     public float movementSpeed, airborneSpeed;
     public float airborneMul;
     [SerializeField]
-    private float lowEnd, highEnd, lowEndAcc, highEndAcc;
+    private float lowEnd, highEnd, lowEndAcc, midEndAcc, highEndAcc;
     [SerializeField]
     public float JumpStrength, JumpGracePeriod;
     [HideInInspector]
@@ -75,7 +75,7 @@ public class GloopMoveBase : MonoBehaviour
             }
             else
             {
-                MovementDir.x -= 1;
+                MovementDir.x -= 1 * midEndAcc;
             }
         }
         if (movement.x > 0)
@@ -90,7 +90,7 @@ public class GloopMoveBase : MonoBehaviour
             }
             else
             {
-                MovementDir.x += 1;
+                MovementDir.x += 1 * midEndAcc;
             }
         }
         rb.AddForce(MovementDir * movementSpeed * airborneMul * Time.deltaTime, ForceMode2D.Force);
@@ -143,8 +143,12 @@ public class GloopMoveBase : MonoBehaviour
 
     public void Jump()
     {
+        Debug.Log(GroundedAmount + " " + GracePeriod);
         jumped = true;
         GracePeriod = 0;
+        Vector2 tmp = rb.velocity;
+        tmp.y = 0;
+        rb.velocity = tmp;
         rb.AddForce(new Vector2(0, JumpStrength * rb.gravityScale));
     }
 
@@ -161,20 +165,27 @@ public class GloopMoveBase : MonoBehaviour
 
     public void GroundEnter()
     {
+        jumped = false;
         GloopMain.Instance.Rotation.RotateToGravity();
         GroundedAmount++;
         airborneMul = 1;
         GloopAnim.SetBool("Grounded", true);
+        GloopMain.Instance.MyMovement.EnterGround();
     }
 
     public void GroundExit()
     {
         GroundedAmount--;
+        GloopMain.Instance.MyMovement.ExitGround();
         if (GroundedAmount == 0)
         {
             GloopAnim.SetBool("Grounded", false);
             airborneMul = airborneSpeed;
-            GracePeriod = JumpGracePeriod;
+            if (jumped == false)
+            {
+                GracePeriod = JumpGracePeriod;
+            }
+            //GracePeriod = JumpGracePeriod;
         }
     }
 

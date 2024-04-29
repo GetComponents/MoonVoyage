@@ -728,7 +728,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4970677694385830621
 RectTransform:
   m_ObjectHideFlags: 0
@@ -838,6 +838,7 @@ GameObject:
   - component: {fileID: 6158756600982660612}
   - component: {fileID: 6158756600982660634}
   - component: {fileID: 6158756600982660635}
+  - component: {fileID: 8924831954376780100}
   m_Layer: 0
   m_Name: Foot
   m_TagString: Untagged
@@ -853,8 +854,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6158756600982660613}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.0078, y: -0.417, z: 0}
-  m_LocalScale: {x: 0.73499763, y: 0.2, z: 1}
+  m_LocalPosition: {x: 0, y: -0.4095, z: 0}
+  m_LocalScale: {x: 0.9, y: 0.105763964, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6158756602862380758}
@@ -936,8 +937,21 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.9, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &8924831954376780100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6158756600982660613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52c933a03399a91478297a4fb19a5b09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gloopMove: {fileID: 8877338917723372082}
 --- !u!1 &6158756601319170241
 GameObject:
   m_ObjectHideFlags: 0
@@ -1417,6 +1431,7 @@ MonoBehaviour:
   dashMode: {fileID: 6901580904391390555}
   grappleMode: {fileID: 6158756602862380584}
   gravityMode: {fileID: 1937519262769945004}
+  gloopDefault: {fileID: 2567256666680715861}
   Rotation: {fileID: 6352218343700265137}
   lookSensitivity: 10
   aimRadius: 1
@@ -1530,10 +1545,10 @@ GameObject:
   - component: {fileID: 6901580904391390555}
   - component: {fileID: 6158756602862380585}
   - component: {fileID: 6158756602862380584}
-  - component: {fileID: 1552830704883530512}
   - component: {fileID: 6158756602862380583}
   - component: {fileID: 6330805015873481320}
   - component: {fileID: 1937519262769945004}
+  - component: {fileID: 2567256666680715861}
   m_Layer: 0
   m_Name: Body
   m_TagString: Player
@@ -1681,6 +1696,10 @@ MonoBehaviour:
   UnstickToSurfaceEvent:
     m_PersistentCalls:
       m_Calls: []
+  jumped: 0
+  HoldingVelocity: 0
+  VelocityToHold: {x: 0, y: 0}
+  CurrentMovement: {x: 0, y: 0}
   m_groundedAmount: 0
 --- !u!114 &6901580904391390555
 MonoBehaviour:
@@ -1703,7 +1722,6 @@ MonoBehaviour:
   dashStrength: 6
   dashEndTimer: 0.1
   rotateSprite: {fileID: 6352218343700265137}
-  oneChargeColor: 0.5
   noChargeColor: 0.2
   DashSound1: {fileID: 8300000, guid: 74719d51b9545344c8c7ecdd3b915e95, type: 3}
   DashSound2: {fileID: 8300000, guid: 5349e200cfa92314eae95546f1ac961f, type: 3}
@@ -1754,19 +1772,6 @@ MonoBehaviour:
   retractSpeed: 6
   tonguePointOffset: 0
   shotSound: {fileID: 8300000, guid: e6e581cc2bcdaa648b942adba6b84194, type: 3}
---- !u!114 &1552830704883530512
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6158756602862380759}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52c933a03399a91478297a4fb19a5b09, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rb: {fileID: 6158756602862380756}
 --- !u!61 &6158756602862380583
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1834,6 +1839,24 @@ MonoBehaviour:
   ModeColor: {r: 0.35564256, g: 0.8490566, b: 0.6714277, a: 1}
   ModeSprite: {fileID: 6158756601454346753}
   MySoundtrack: {fileID: 6352218345201403958}
+  SoundtrackVolume: 0
+  spriteRotator: {fileID: 6352218343700265137}
+--- !u!114 &2567256666680715861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6158756602862380759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f93107110ae0ba340a792538a4a937dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MyBase: {fileID: 8877338917723372082}
+  ModeColor: {r: 1, g: 1, b: 1, a: 0.33333334}
+  ModeSprite: {fileID: 6158756601454346753}
+  MySoundtrack: {fileID: 0}
   SoundtrackVolume: 0
   spriteRotator: {fileID: 6352218343700265137}
 --- !u!1 &6352218343350949825

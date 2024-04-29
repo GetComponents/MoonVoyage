@@ -96,7 +96,7 @@ public class GloopFly : GloopMove
     {
         if (collision.tag == "Floor")
         {
-            MyBase.GroundEnter();
+            //MyBase.GroundEnter();
             currentFlightTime = maxFlightTime;
             if (GloopMain.Instance.MyMovement == this)
             {
@@ -118,7 +118,7 @@ public class GloopFly : GloopMove
 
     public override void ExitGround()
     {
-        MyBase.GroundExit();
+        //MyBase.GroundExit();
     }
 
     public override void TriggerAbility(InputAction.CallbackContext context)
