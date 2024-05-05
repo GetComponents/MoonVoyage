@@ -841,7 +841,7 @@ GameObject:
   - component: {fileID: 8924831954376780100}
   m_Layer: 0
   m_Name: Foot
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1685,9 +1685,12 @@ MonoBehaviour:
   lowEnd: 0.5
   highEnd: 6
   lowEndAcc: 5
+  midEndAcc: 0
   highEndAcc: 0.15
   JumpStrength: 350
+  extraJumpStrength: 0
   JumpGracePeriod: 0.2
+  maxJumpDuration: 0
   GracePeriod: 0
   GloopAnim: {fileID: 6352218343700265132}
   StickToSurfaceEvent:
@@ -1700,6 +1703,7 @@ MonoBehaviour:
   HoldingVelocity: 0
   VelocityToHold: {x: 0, y: 0}
   CurrentMovement: {x: 0, y: 0}
+  friction: 0
   m_groundedAmount: 0
 --- !u!114 &6901580904391390555
 MonoBehaviour:

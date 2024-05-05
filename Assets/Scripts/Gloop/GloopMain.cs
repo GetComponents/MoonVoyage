@@ -162,7 +162,6 @@ public class GloopMain : MonoBehaviour
         //lookPoint.x += Input.GetAxis("Mouse X") * lookSensitivity * Time.deltaTime;
 
         //lookPoint.y += Input.GetAxis("Mouse Y") * lookSensitivity * Time.deltaTime;
-        Debug.Log(lastInput);
         firePoint.localPosition = lookPoint.normalized * aimRadius;
     }
 

@@ -139,7 +139,7 @@ public class ObjectProperty : MonoBehaviour
         {
             if (floorOnInteract)
             {
-                GloopMain.Instance.MyMovement.ExitGround();
+                GloopMain.Instance.MyMovement.MyBase.GroundExit();
             }
             if (Moves)
             {
@@ -241,7 +241,7 @@ public class ObjectProperty : MonoBehaviour
         {
             if (floorOnInteract)
             {
-                GloopMain.Instance.MyMovement.ExitGround();
+                GloopMain.Instance.MyMovement.MyBase.GroundExit();
             }
             if (collision.transform.parent = transform)
             {

@@ -10,7 +10,7 @@ public class GloopCollision : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log($"I, {gameObject.name} collided with {collision.gameObject.name}");
+        //Debug.Log($"I, {gameObject.name} collided with {collision.gameObject.name}");
         if (collision.tag == "Floor")
         {
             gloopMove.GroundEnter();

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Floor
   - Hookshot
+  - PlayerFoot
   layers:
   - Default
   - TransparentFX

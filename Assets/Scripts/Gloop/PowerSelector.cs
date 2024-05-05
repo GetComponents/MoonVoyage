@@ -1,19 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PowerSelector : MonoBehaviour
 {
     [SerializeField]
     Canvas canvas;
 
-    private void Update()
+    public void OpenSelector(InputAction.CallbackContext context)
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (context.started)
         {
             EnableCanvas(true);
         }
-        if (Input.GetKeyUp(KeyCode.LeftShift))
+        else if (context.canceled)
         {
             EnableCanvas(false);
         }

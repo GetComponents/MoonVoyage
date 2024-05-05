@@ -14,7 +14,10 @@ public class GloopMoveBase : MonoBehaviour
     [SerializeField]
     private float lowEnd, highEnd, lowEndAcc, midEndAcc, highEndAcc;
     [SerializeField]
-    public float JumpStrength, JumpGracePeriod;
+    public float JumpStrength, extraJumpStrength, JumpGracePeriod;
+    [SerializeField]
+    float maxJumpDuration;
+    float jumpTimer;
     [HideInInspector]
     public float GracePeriod;
     public Animator GloopAnim;
@@ -24,6 +27,8 @@ public class GloopMoveBase : MonoBehaviour
     public bool HoldingVelocity;
     public Vector2 VelocityToHold;
     public Vector2 CurrentMovement;
+    [SerializeField]
+    float friction;
 
     public int GroundedAmount
     {
@@ -94,8 +99,6 @@ public class GloopMoveBase : MonoBehaviour
             }
         }
         rb.AddForce(MovementDir * movementSpeed * airborneMul * Time.deltaTime, ForceMode2D.Force);
-
-
         //if (movement.x != 0)
         //{
         //    GloopAnim.SetBool("Walking", true);
@@ -112,19 +115,40 @@ public class GloopMoveBase : MonoBehaviour
             HoldVelocity();
         if (InputLocked)
             return;
-        //CheckJump();
+        ExtraJumpHeight();
         GracePeriod -= Time.deltaTime;
         if (CurrentMovement != Vector2.zero)
         {
             GroundMovement(CurrentMovement);
             //GroundMovement();
         }
+        //if (GroundedAmount != 0 && Mathf.Abs(rb.velocity.x) > 0.001f && Mathf.Abs(rb.velocity.x) > highEnd)
+        //{
+        //}
+        if (GroundedAmount != 0 && ((CurrentMovement != Vector2.zero && Mathf.Abs(rb.velocity.x) > highEnd) || (CurrentMovement == Vector2.zero && Mathf.Abs(rb.velocity.x) > 0.001f)))
+        {
+            Friction();
+        }
     }
 
-    private void CheckJump()
+    private void ExtraJumpHeight()
     {
+        if (jumped)
+        {
+            jumpTimer -= Time.deltaTime;
+            rb.AddForce(new Vector2(0, extraJumpStrength * (jumpTimer / maxJumpDuration) * rb.gravityScale * Time.deltaTime), ForceMode2D.Force);
+            if (jumpTimer <= 0)
+            {
+                jumped = false;
+            }
+        }
     }
 
+    private void Friction()
+    {
+        rb.AddForce(new Vector2(rb.velocity.x * -friction * Time.deltaTime, 0));
+        //Debug.Log(rb.velocity * -friction);
+    }
     public void JumpInput(InputAction.CallbackContext context)
     {
         if (context.started)
@@ -139,17 +163,22 @@ public class GloopMoveBase : MonoBehaviour
                 Jump();
             }
         }
+        else if (context.canceled)
+        {
+            jumped = false;
+            jumpTimer = maxJumpDuration;
+        }
     }
 
     public void Jump()
     {
-        Debug.Log(GroundedAmount + " " + GracePeriod);
+        //Debug.Log(GroundedAmount + " " + GracePeriod);
         jumped = true;
         GracePeriod = 0;
         Vector2 tmp = rb.velocity;
         tmp.y = 0;
         rb.velocity = tmp;
-        rb.AddForce(new Vector2(0, JumpStrength * rb.gravityScale));
+        rb.AddForce(new Vector2(0, JumpStrength * rb.gravityScale), ForceMode2D.Impulse);
     }
 
     //private void OnCollisionEnter2D(Collision2D collision)
