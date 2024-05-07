@@ -208,7 +208,7 @@
                     "path": "<SwitchProControllerHID>/leftStick",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Joystick",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -241,7 +241,7 @@
                     "path": "<SwitchProControllerHID>/rightStick",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Joystick",
                     "action": "Look",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -314,17 +314,6 @@
                 },
                 {
                     "name": "",
-                    "id": "569076d1-d52c-47fd-a1f1-3bb3de9823f3",
-                    "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "3b255a83-5ad4-4216-8bec-ea3b0167acd2",
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
@@ -337,10 +326,21 @@
                 {
                     "name": "",
                     "id": "1e7f35e4-76f9-49e4-bcb5-d2efdd0f1a02",
-                    "path": "<Gamepad>/buttonEast",
+                    "path": "<SwitchProControllerHID>/buttonNorth",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Gamepad",
+                    "groups": "Gamepad;Keyboard&Mouse;Touch;Joystick;XR",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e8fc40a5-2978-4331-a5eb-f6230b8f5641",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
                     "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -424,17 +424,6 @@
                 },
                 {
                     "name": "",
-                    "id": "c67a947c-773b-42dc-a861-16b0f7a60cb5",
-                    "path": "<Keyboard>/leftShift",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "OpenPowerSelection",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "98355b35-afd2-4cc6-98b0-7379624e6d2c",
                     "path": "<Gamepad>/leftShoulder",
                     "interactions": "",
@@ -451,6 +440,17 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
+                    "action": "OpenPowerSelection",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0cadb61d-a02b-461d-908d-828a84407896",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
                     "action": "OpenPowerSelection",
                     "isComposite": false,
                     "isPartOfComposite": false

@@ -73,7 +73,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2827044774335331245, guid: b6bc5bc1b58bc30438be00849f0548cb, type: 3}
       propertyPath: m_Name
-      value: PlatformOneway
+      value: PlatformOneway Variant
       objectReference: {fileID: 0}
     - target: {fileID: 7432774596252822150, guid: b6bc5bc1b58bc30438be00849f0548cb, type: 3}
       propertyPath: m_UsedByEffector
@@ -134,3 +134,22 @@ MonoBehaviour:
   floorOnInteract: 0
   ignoreCatapultCollision: 1
   interactionParticle: {fileID: 0}
+--- !u!114 &6644251323742005331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3093601188183840306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dee13aed44d51d24cb153a5482f6ca13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  secondsForReactivation: 0.5
+  col: {fileID: 7706651549929260825}
+--- !u!61 &7706651549929260825 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 7432774596252822150, guid: b6bc5bc1b58bc30438be00849f0548cb, type: 3}
+  m_PrefabInstance: {fileID: 996707143074524575}
+  m_PrefabAsset: {fileID: 0}

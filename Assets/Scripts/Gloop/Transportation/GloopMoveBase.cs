@@ -29,6 +29,10 @@ public class GloopMoveBase : MonoBehaviour
     public Vector2 CurrentMovement;
     [SerializeField]
     float friction;
+    [HideInInspector]
+    public int OnJumpthroughPlatform;
+    [HideInInspector]
+    public UnityEvent JumpthroughEvent, ExternalAddforce = new UnityEvent();
 
     public int GroundedAmount
     {
@@ -66,39 +70,22 @@ public class GloopMoveBase : MonoBehaviour
     private void GroundMovement(Vector2 movement)
     {
         MovementDir = Vector2.zero;
-        //Vector2 currentVelocity = rb.velocity;
+        if (Mathf.Abs(rb.velocity.x) < lowEnd * Mathf.Abs(movement.x) || movement.x * rb.velocity.x < 0)
+        {
+            MovementDir.x += movement.x * lowEndAcc;
+        }
+        else if (Mathf.Abs(rb.velocity.x) > highEnd * Mathf.Abs(movement.x))
+        {
+            MovementDir.x += movement.x * highEndAcc;
+        }
+        else
+        {
+            MovementDir.x += movement.x * midEndAcc;
+        }
 
-        if (movement.x < 0)
-        {
-            if (rb.velocity.x > lowEnd)
-            {
-                MovementDir.x -= 1 * lowEndAcc;
-            }
-            else if (rb.velocity.x < -highEnd)
-            {
-                MovementDir.x -= 1 * highEndAcc;
-            }
-            else
-            {
-                MovementDir.x -= 1 * midEndAcc;
-            }
-        }
-        if (movement.x > 0)
-        {
-            if (rb.velocity.x < -lowEnd)
-            {
-                MovementDir.x += 1 * lowEndAcc;
-            }
-            else if (rb.velocity.x > highEnd)
-            {
-                MovementDir.x += 1 * highEndAcc;
-            }
-            else
-            {
-                MovementDir.x += 1 * midEndAcc;
-            }
-        }
+
         rb.AddForce(MovementDir * movementSpeed * airborneMul * Time.deltaTime, ForceMode2D.Force);
+        MovementDir.y += movement.y;
         //if (movement.x != 0)
         //{
         //    GloopAnim.SetBool("Walking", true);
@@ -119,7 +106,14 @@ public class GloopMoveBase : MonoBehaviour
         GracePeriod -= Time.deltaTime;
         if (CurrentMovement != Vector2.zero)
         {
+            //if (GameManager.Instance.InputType == 0)
+            //{
             GroundMovement(CurrentMovement);
+            //}
+            //else
+            //{
+
+            //}
             //GroundMovement();
         }
         //if (GroundedAmount != 0 && Mathf.Abs(rb.velocity.x) > 0.001f && Mathf.Abs(rb.velocity.x) > highEnd)
@@ -158,6 +152,11 @@ public class GloopMoveBase : MonoBehaviour
                 Unstick();
                 return;
             }
+            if (OnJumpthroughPlatform > 0 && MovementDir.y < -0.6f)
+            {
+                JumpthroughEvent.Invoke();
+                return;
+            }
             if ((GroundedAmount > 0 || GracePeriod > 0))
             {
                 Jump();
@@ -179,6 +178,12 @@ public class GloopMoveBase : MonoBehaviour
         tmp.y = 0;
         rb.velocity = tmp;
         rb.AddForce(new Vector2(0, JumpStrength * rb.gravityScale), ForceMode2D.Impulse);
+    }
+
+    public void AddForce(Vector2 direction)
+    {
+        rb.AddForce(direction);
+        ExternalAddforce.Invoke();
     }
 
     //private void OnCollisionEnter2D(Collision2D collision)

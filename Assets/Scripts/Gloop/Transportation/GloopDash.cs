@@ -36,6 +36,11 @@ public class GloopDash : GloopMove
     [SerializeField]
     AudioClip DashSound1, DashSound2, DashSound3;
 
+    private void Start()
+    {
+        MyBase.ExternalAddforce.AddListener(() => { isDashing = false; });
+    }
+
     public override void AddMode()
     {
         //if (MyBase.GroundedAmount == 0)

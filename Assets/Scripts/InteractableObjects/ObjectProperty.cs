@@ -61,7 +61,7 @@ public class ObjectProperty : MonoBehaviour
                 break;
             case ObjectType.BOUNCE:
                 obj.velocity *= LockDir;
-                obj.AddForce(launchStrength * transform.up);
+                GloopMain.Instance.MyMovement.MyBase.AddForce(launchStrength * transform.up);
                 if (bounceAnim != null)
                 {
                     bounceAnim.SetBool("Bounce", true);
@@ -216,6 +216,16 @@ public class ObjectProperty : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        EnterCollision(collision);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        EnterCollision(collision.collider);
+    }
+
+    private void EnterCollision(Collider2D collision)
+    {
         if (collision.gameObject.tag == "Player")
         {
             EnterCollisionWithObject(GloopMain.Instance.MyMovement.MyBase.rb);
@@ -227,15 +237,17 @@ public class ObjectProperty : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Player")
-        {
-            EnterCollisionWithObject(GloopMain.Instance.MyMovement.MyBase.rb);
-        }
+        ExitCollision(collision.collider);
     }
 
-    private void OnCollisionExit2D(Collision2D collision)
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        ExitCollision(collision);
+    }
+
+    private void ExitCollision(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
@@ -243,7 +255,7 @@ public class ObjectProperty : MonoBehaviour
             {
                 GloopMain.Instance.MyMovement.MyBase.GroundExit();
             }
-            if (collision.transform.parent = transform)
+            if (collision.transform.parent == transform)
             {
                 GloopMain.Instance.MyMovement.MyBase.UnparentFromPlatform();
             }

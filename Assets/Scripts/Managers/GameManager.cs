@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public float MouseSensitivity;
     [SerializeField]
     float baseMouseSpeed;
+    public int InputType;
 
     public int StarAmount;
     public float Timer;
