@@ -13,6 +13,7 @@ public class GloopMoveBase : MonoBehaviour
     public float airborneMul;
     [SerializeField]
     private float lowEnd, highEnd, lowEndAcc, midEndAcc, highEndAcc;
+    public float MinMovement;
     [SerializeField]
     public float JumpStrength, extraJumpStrength, JumpGracePeriod;
     [SerializeField]
@@ -56,36 +57,44 @@ public class GloopMoveBase : MonoBehaviour
     {
         //if (context.phase)
         CurrentMovement = context.ReadValue<Vector2>();
-        if (CurrentMovement.x != 0)
-        {
-            GloopAnim.SetBool("Walking", true);
-        }
-        else
-        {
-            GloopAnim.SetBool("Walking", false);
-        }
+        MovementDir.y = CurrentMovement.y;
+
+        //if (CurrentMovement.x != 0)
+        //{
+        //}
+        //else
+        //{
+        //}
         //GroundMovement(context.ReadValue<Vector2>());
     }
 
     private void GroundMovement(Vector2 movement)
     {
-        MovementDir = Vector2.zero;
-        if (Mathf.Abs(rb.velocity.x) < lowEnd * Mathf.Abs(movement.x) || movement.x * rb.velocity.x < 0)
+        if (movement.x <= MinMovement && movement.x >= -MinMovement)
         {
-            MovementDir.x += movement.x * lowEndAcc;
-        }
-        else if (Mathf.Abs(rb.velocity.x) > highEnd * Mathf.Abs(movement.x))
-        {
-            MovementDir.x += movement.x * highEndAcc;
+            MovementDir.x = 0;
+            GloopAnim.SetBool("Walking", false);
         }
         else
         {
-            MovementDir.x += movement.x * midEndAcc;
+            GloopAnim.SetBool("Walking", true);
+            MovementDir = Vector2.zero;
+            if (Mathf.Abs(rb.velocity.x) < lowEnd * Mathf.Abs(movement.x) || movement.x * rb.velocity.x < 0)
+            {
+                MovementDir.x += movement.x * lowEndAcc;
+            }
+            else if (Mathf.Abs(rb.velocity.x) > highEnd * Mathf.Abs(movement.x))
+            {
+                MovementDir.x += movement.x * highEndAcc;
+            }
+            else
+            {
+                MovementDir.x += movement.x * midEndAcc;
+            }
+            rb.AddForce(MovementDir * movementSpeed * airborneMul * Time.deltaTime, ForceMode2D.Force);
         }
 
 
-        rb.AddForce(MovementDir * movementSpeed * airborneMul * Time.deltaTime, ForceMode2D.Force);
-        MovementDir.y += movement.y;
         //if (movement.x != 0)
         //{
         //    GloopAnim.SetBool("Walking", true);
@@ -104,8 +113,8 @@ public class GloopMoveBase : MonoBehaviour
             return;
         ExtraJumpHeight();
         GracePeriod -= Time.deltaTime;
-        if (CurrentMovement != Vector2.zero)
-        {
+        //if (CurrentMovement != Vector2.zero)
+        //{
             //if (GameManager.Instance.InputType == 0)
             //{
             GroundMovement(CurrentMovement);
@@ -115,11 +124,11 @@ public class GloopMoveBase : MonoBehaviour
 
             //}
             //GroundMovement();
-        }
+        //}
         //if (GroundedAmount != 0 && Mathf.Abs(rb.velocity.x) > 0.001f && Mathf.Abs(rb.velocity.x) > highEnd)
         //{
         //}
-        if (GroundedAmount != 0 && ((CurrentMovement != Vector2.zero && Mathf.Abs(rb.velocity.x) > highEnd) || (CurrentMovement == Vector2.zero && Mathf.Abs(rb.velocity.x) > 0.001f)))
+        if (GroundedAmount != 0 && ((MovementDir.x != 0 && Mathf.Abs(rb.velocity.x) > highEnd) || (MovementDir.x == 0 && Mathf.Abs(rb.velocity.x) > 0.0001f)))
         {
             Friction();
         }

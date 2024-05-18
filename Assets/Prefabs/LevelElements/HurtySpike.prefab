@@ -4987,9 +4987,13 @@ MonoBehaviour:
   LockDir: {x: 1, y: 1}
   lilDot: {fileID: 0}
   CurrentDot: {fileID: 0}
-  MaxPos: {x: 0, y: 0, z: 0}
-  MinPos: {x: 0, y: 0, z: 0}
   MoveSpeed: 0
-  RotationSpeed: {x: 0, y: 0, z: 0}
+  RotationSpeed: 0
   bounceAnim: {fileID: 0}
-  interactionSound: {fileID: 0}
+  interactionSXF: {fileID: 0}
+  reactToGravity: 0
+  isSticky: 0
+  destroyOnInteract: 0
+  floorOnInteract: 0
+  ignoreCatapultCollision: 0
+  interactionParticle: {fileID: 0}

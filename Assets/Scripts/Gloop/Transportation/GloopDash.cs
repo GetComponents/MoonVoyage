@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class GloopDash : GloopMove
@@ -10,20 +11,22 @@ public class GloopDash : GloopMove
     public int DashCharge;
     //[SerializeField]
     //float lookSensitivity;
-    private Vector3 dashDir;
+    public Vector3 DashDir;
     //Vector2 movementDir;
     //[SerializeField]
     //float lowEnd, highEnd, lowEndAcc, highEndAcc, AirborneSpeed;
     //float airborneMul;
     [SerializeField]
-    float dashStrength;
+    float dashStrength, dashEndVelocity;
     //[SerializeField]
     //Transform CursorSignifier;
     //[SerializeField]
     //Transform aimPoint;
     [SerializeField]
     float dashEndTimer;
-    bool canDash = true, isDashing;
+    bool canDash = true;
+    [HideInInspector]
+    public bool IsDashing;
 
     //[SerializeField]
     //float JumpGracePeriod;
@@ -35,10 +38,14 @@ public class GloopDash : GloopMove
     int lastDashSound;
     [SerializeField]
     AudioClip DashSound1, DashSound2, DashSound3;
+    [HideInInspector]
+    public UnityEvent DashEvent;
+
+    public Coroutine DashEndCor;
 
     private void Start()
     {
-        MyBase.ExternalAddforce.AddListener(() => { isDashing = false; });
+        MyBase.ExternalAddforce.AddListener(InterruptDash);
     }
 
     public override void AddMode()
@@ -62,12 +69,11 @@ public class GloopDash : GloopMove
         MyBase.MyUpdate();
         if (!MyBase.InputLocked)
         {
-            if (isDashing)
+            if (IsDashing)
             {
-
-                MyBase.rb.velocity = Vector3.Normalize(dashDir) * dashStrength;
+                MyBase.rb.velocity = Vector3.Normalize(DashDir) * dashStrength;
             }
-            if (rotateSprite.Rotate == true && isDashing == false && MyBase.rb.velocity.y * rotateSprite.Gravity <= 0)
+            if (rotateSprite.Rotate == true && IsDashing == false && MyBase.rb.velocity.y * rotateSprite.Gravity <= 0)
             {
                 //rotateSprite.transform.eulerAngles = new Vector3(0, 0, 90 - (90 * rotateSprite.m_rigidbody2D.gravityScale));
                 rotateSprite.Rotate = false;
@@ -95,11 +101,12 @@ public class GloopDash : GloopMove
             MyBase.GloopAnim.SetBool("Dashing", true);
             PlayRandomDashSound();
             canDash = false;
-            isDashing = true;
+            IsDashing = true;
             MyBase.rb.velocity = Vector3.zero;
-            dashDir = GloopMain.Instance.firePoint.localPosition;
-            MyBase.rb.AddForce(Vector3.Normalize(dashDir) * dashStrength);
-            StartCoroutine(DashEnd());
+            DashDir = GloopMain.Instance.firePoint.localPosition;
+            MyBase.rb.AddForce(Vector3.Normalize(DashDir) * dashStrength);
+            DashEvent?.Invoke();
+            DashEndCor = StartCoroutine(DashEnd());
         }
     }
 
@@ -134,7 +141,20 @@ public class GloopDash : GloopMove
     {
         yield return new WaitForSeconds(dashEndTimer);
         canDash = true;
-        isDashing = false;
+        IsDashing = false;
+        MyBase.rb.velocity = Vector3.Normalize(DashDir) * dashEndVelocity;
+        DashEndCor = null;
+    }
+
+    private void InterruptDash()
+    {
+        if (DashEndCor != null)
+        {
+            StopCoroutine(DashEndCor);
+            DashEndCor = null;
+            canDash = true;
+            IsDashing = false;
+        }
     }
 
     //private void OnTriggerEnter2D(Collider2D collision)
@@ -153,6 +173,7 @@ public class GloopDash : GloopMove
         if (GloopMain.Instance.MyMovement == this)
         {
             ModeSprite.color = ModeColor;
+            InterruptDash();
         }
     }
 
@@ -175,7 +196,7 @@ public class GloopDash : GloopMove
         MyBase.GloopAnim.SetBool("Dashing", false);
         MyBase.GloopAnim.SetBool("Walking", false);
         canDash = true;
-        isDashing = false;
+        IsDashing = false;
         GloopMain.Instance.firePoint.GetComponent<SpriteRenderer>().enabled = false;
         rotateSprite.transform.eulerAngles = new Vector3(0, 0, 90 - (90 * rotateSprite.m_rigidbody2D.gravityScale));
         this.enabled = false;

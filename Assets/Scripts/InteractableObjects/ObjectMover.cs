@@ -144,7 +144,7 @@ public class ObjectMover : MonoBehaviour
                 currentCompletion = destinationCompletion;
                 break;
             case EMovementType.SINE:
-                currentCompletion = (Mathf.Sin((destinationCompletion * Mathf.PI) - 0.5f) / 2) + 0.5f;
+                currentCompletion = (Mathf.Sin((destinationCompletion * Mathf.PI) - 1.5f) / 2) + 0.5f;
                 break;
             case EMovementType.STOPAndGO:
                 currentCompletion = destinationCompletion;
