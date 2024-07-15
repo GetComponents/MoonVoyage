@@ -8,6 +8,13 @@ public class GloopCollision : MonoBehaviour
     [SerializeField]
     GloopMoveBase gloopMove;
 
+    bool gravitySwitched;
+
+    private void Start()
+    {
+        GameManager.Instance.GravitySwitch.AddListener(ChangePosition);
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //Debug.Log($"I, {gameObject.name} collided with {collision.gameObject.name}");
@@ -23,5 +30,14 @@ public class GloopCollision : MonoBehaviour
         {
             gloopMove.GroundExit();
         }
+    }
+
+    public void ChangePosition()
+    {
+        transform.localPosition = new Vector3(transform.localPosition.x, -transform.localPosition.y, transform.localPosition.z);
+        //gravitySwitched = !gravitySwitched;
+        //if (gravitySwitched)
+        //{
+        //}
     }
 }

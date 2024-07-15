@@ -1474,6 +1474,63 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &766260241
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 766260243}
+  - component: {fileID: 766260242}
+  m_Layer: 0
+  m_Name: WwiseGlobal
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &766260242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 766260241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceefcf08fee8a3d4185f5ecca585f7bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InitializationSettings: {fileID: 11400000, guid: e8f0b457ac3356a4c995c0981e37a39b, type: 2}
+  basePath: 
+  language: 
+  defaultPoolSize: 0
+  lowerPoolSize: 0
+  streamingPoolSize: 0
+  memoryCutoffThreshold: 0
+  monitorPoolSize: 0
+  monitorQueuePoolSize: 0
+  callbackManagerBufferSize: 0
+  spatialAudioPoolSize: 0
+  maxSoundPropagationDepth: 0
+  engineLogging: 0
+--- !u!4 &766260243
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 766260241}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &766262911
 GameObject:
   m_ObjectHideFlags: 0
@@ -2008,27 +2065,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1129171080 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1792778641606651136, guid: 9ce6a5d7b3d8e984985c34e5ffdca908, type: 3}
-  m_PrefabInstance: {fileID: 1792778642692171144}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1129171081 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1792778641606651137, guid: 9ce6a5d7b3d8e984985c34e5ffdca908, type: 3}
   m_PrefabInstance: {fileID: 1792778642692171144}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1129171085 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1792778641606651141, guid: 9ce6a5d7b3d8e984985c34e5ffdca908, type: 3}
-  m_PrefabInstance: {fileID: 1792778642692171144}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1129171080}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cafb58f03e5dce744a1069216140eee6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1138964761
 GameObject:
   m_ObjectHideFlags: 0
@@ -2342,7 +2383,8 @@ PrefabInstance:
       propertyPath: m_Parameters.colorGradient.key1.r
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1103205281268970835, guid: 16cfea95274c047458db3b690e2a3549, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 16cfea95274c047458db3b690e2a3549, type: 3}
 --- !u!120 &1151830182 stripped
 LineRenderer:
@@ -2367,6 +2409,42 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startSoundtrack: 0
+--- !u!114 &1151830185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1151830183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 551e485294c5e5840bda909130df2eb4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDefaultListener: 1
+  listenerId: 0
+--- !u!114 &1151830186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1151830183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5428bcf786a87c24daf23319905ef79e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_listeners:
+    initialListenerList: []
+    useDefaultListeners: 1
+  isEnvironmentAware: 0
+  isStaticObject: 0
+  m_positionOffsetData:
+    KeepMe: 0
+    positionOffset: {x: 0, y: 0, z: 0}
+  m_posOffsetData: {fileID: 0}
+  listenerMask: 1
 --- !u!1 &1207376554
 GameObject:
   m_ObjectHideFlags: 0
@@ -3302,28 +3380,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MouseSensitivity: 0
-  gameMenu: {fileID: 1142893538}
-  settingsMenu: {fileID: 1129171080}
   baseMouseSpeed: 50
-  Bushes:
-  - {fileID: 780859460}
-  Levels:
-  - {fileID: 3058097095754319566, guid: 710b142cf677be141bad998c9f7d99f0, type: 3}
-  - {fileID: 4824520564157972057, guid: 657df400c6b307742b7cfa66affbdc52, type: 3}
-  - {fileID: 356172311088812370, guid: babd1b0dffb3397479a98761c5543c54, type: 3}
-  - {fileID: 7107126764484164993, guid: ee7975eafd0e74349bf23251d859f976, type: 3}
-  - {fileID: 3750634230873727236, guid: b333ee953e0908545ae3e07833343e7c, type: 3}
-  - {fileID: 8849768607351480997, guid: 8f0a70dcb275dab41ada52fdef6a28a4, type: 3}
-  levelIndex: 0
-  ScreenWiper: {fileID: 1870346303}
-  screenWipeSpeed: 1
-  screenWipeSeconds: 1
-  testingLevels: 0
-  loadLevelViaIndex: 0
-  starText: {fileID: 2130147022}
+  InputType: 0
   StarAmount: 0
-  timerUI: {fileID: 1866771866}
-  settings: {fileID: 1129171085}
+  Timer: 0
+  PauseGame:
+    m_PersistentCalls:
+      m_Calls: []
+  UnpauseGame:
+    m_PersistentCalls:
+      m_Calls: []
+  ChangeStarAmount:
+    m_PersistentCalls:
+      m_Calls: []
+  LockInput:
+    m_PersistentCalls:
+      m_Calls: []
+  GravitySwitch:
+    m_PersistentCalls:
+      m_Calls: []
+  m_cursorUnlockers: 0
+  m_timeScalers: 0
 --- !u!4 &1688847459
 Transform:
   m_ObjectHideFlags: 0
@@ -3358,6 +3435,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Coins: 0
+  LosableObjects: []
+  KeyAmount: 0
+  Respawn:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1694433149
 GameObject:
   m_ObjectHideFlags: 0
@@ -4375,7 +4457,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firstCheckpoint: {fileID: 511620596}
-  deleteBushes: 0
 --- !u!4 &963718171205103733 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6158756602862380758, guid: eaa91203648a18e439ee6598986b1afa, type: 3}
@@ -4929,13 +5010,22 @@ MonoBehaviour:
   LockDir: {x: 1, y: 1}
   lilDot: {fileID: 0}
   CurrentDot: {fileID: 0}
-  MaxPos: {x: 0, y: 0, z: 0}
-  MinPos: {x: 0, y: 0, z: 0}
   MoveSpeed: 0
-  RotationSpeed: {x: 0, y: 0, z: 0}
+  RotationSpeed: 0
   bounceAnim: {fileID: 0}
   interactionSXF: {fileID: 0}
-  soundVolume: 0
+  reactToGravity: 0
+  isSticky: 0
+  destroyOnInteract: 0
+  floorOnInteract: 0
+  ignoreCatapultCollision: 0
+  stopCatapultCollision: 1
+  InteractedWithPlayer:
+    m_PersistentCalls:
+      m_Calls: []
+  ExitInteractionWithPlayer:
+    m_PersistentCalls:
+      m_Calls: []
   interactionParticle: {fileID: 0}
 --- !u!61 &7753378789204728546
 BoxCollider2D:

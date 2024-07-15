@@ -121,6 +121,29 @@ public class PowerSelectorUI : MonoBehaviour
         }
     }
 
+    public void ButtonSelect(int index)
+    {
+        switch (index)
+        {
+            case 0:
+                break;
+            case 1:
+                GloopMain.Instance.CurrentMode = EMode.DASH;
+                break;
+            case 2:
+                GloopMain.Instance.CurrentMode = EMode.GLIDE;
+                break;
+            case 3:
+                GloopMain.Instance.CurrentMode = EMode.GRAVITY;
+                break;
+            case 4:
+                GloopMain.Instance.CurrentMode = EMode.GRAPPLE;
+                break;
+            default:
+                break;
+        }
+    }
+
     private void Highlight(Image image, Color hColor)
     {
         lastImage.color = defaultColor;
