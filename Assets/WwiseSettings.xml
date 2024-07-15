@@ -1,0 +1,9 @@
+<?xml version='1.0'?>
+<WwiseSettings>
+    <CreateWwiseGlobal>true</CreateWwiseGlobal>
+    <CreateWwiseListener>true</CreateWwiseListener>
+    <SoundbankPath>Audio/GeneratedSoundBanks</SoundbankPath>
+    <WwiseProjectPath>../MoonVoyageRepo_WwiseProject/MoonVoyageRepo_WwiseProject.wproj</WwiseProjectPath>
+    <WwiseInstallationPathWindows>C:\Program Files (x86)\Audiokinetic\WwiseMoonVoyage</WwiseInstallationPathWindows>
+    <WwiseInstallationPathMac></WwiseInstallationPathMac>
+</WwiseSettings>
