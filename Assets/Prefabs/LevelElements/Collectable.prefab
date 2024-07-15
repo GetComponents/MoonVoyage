@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2425078228766180269}
   m_Layer: 0
   m_Name: Collectable
-  m_TagString: Untagged
+  m_TagString: Collectable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -107,13 +107,22 @@ MonoBehaviour:
   LockDir: {x: 1, y: 1}
   lilDot: {fileID: 0}
   CurrentDot: {fileID: 0}
-  MaxPos: {x: 0, y: 0, z: 0}
-  MinPos: {x: 0, y: 0, z: 0}
   MoveSpeed: 0
-  RotationSpeed: {x: 0, y: 0, z: 0}
+  RotationSpeed: 0
   bounceAnim: {fileID: 0}
-  interactionSound: {fileID: 0}
   interactionSXF: {fileID: 8300000, guid: 12118bcb39e659d47925a6e11a6580cd, type: 3}
+  reactToGravity: 0
+  isSticky: 0
+  destroyOnInteract: 0
+  floorOnInteract: 0
+  ignoreCatapultCollision: 0
+  stopCatapultCollision: 0
+  InteractedWithPlayer:
+    m_PersistentCalls:
+      m_Calls: []
+  ExitInteractionWithPlayer:
+    m_PersistentCalls:
+      m_Calls: []
   interactionParticle: {fileID: 5191810076854975547, guid: b936977bbc4a87e438dc31e742d67eb5, type: 3}
 --- !u!58 &2203341013608161169
 CircleCollider2D:

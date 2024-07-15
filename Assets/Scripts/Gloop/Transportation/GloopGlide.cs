@@ -22,6 +22,10 @@ public class GloopGlide : GloopMove
     private float sideSpeedMul;
     [SerializeField]
     private float jumpStrength;
+    [SerializeField]
+    bool infinteFlight;
+
+    private bool pressingButton;
     //bool sideinput;
 
 
@@ -42,10 +46,10 @@ public class GloopGlide : GloopMove
 
     public override void MyUpdate()
     {
-        if (!MyBase.InputLocked)
+        MyBase.MyUpdate();
+        if (!(MyBase.InputLocked > 0 || MyBase.PauseLocked > 0))
         {
-            MyBase.MyUpdate();
-            //VerticalInput();
+            VerticalInput();
         }
     }
 
@@ -54,7 +58,7 @@ public class GloopGlide : GloopMove
     private void VerticalInput()
     {
         MyBase.rb.gravityScale = gravityScale;
-        if ((Input.GetKey(KeyCode.Mouse0)) && currentFlightTime > 0)
+        if (pressingButton && currentFlightTime > 0)
         {
             if (MyBase.rb.velocity.y < minGravity)
             {
@@ -67,10 +71,13 @@ public class GloopGlide : GloopMove
                 MyBase.rb.AddForce(new Vector2(0, counterGravity * (MyBase.rb.velocity.y + minGravity) * MyBase.rb.gravityScale), ForceMode2D.Force);
                 //MyBase.rb.gravityScale = counterGravity * (MyBase.rb.velocity.y + minGravity);
             }
-            currentFlightTime -= Time.deltaTime;
-            Vector4 tmp = ModeColor * (Mathf.Lerp(0.3f, 1, Mathf.Clamp(currentFlightTime, 0f, maxFlightTime) / maxFlightTime));
-            tmp.w = ModeColor.a;
-            ModeSprite.color = tmp;
+            if (!infinteFlight)
+            {
+                currentFlightTime -= Time.deltaTime;
+                Vector4 tmp = ModeColor * (Mathf.Lerp(0.3f, 1, Mathf.Clamp(currentFlightTime, 0f, maxFlightTime) / maxFlightTime));
+                tmp.w = ModeColor.a;
+                ModeSprite.color = tmp;
+            }
         }
         else
         {
@@ -128,40 +135,41 @@ public class GloopGlide : GloopMove
 
     public override void ExitGround()
     {
-            //MyBase.GroundExit();       
+        //MyBase.GroundExit();       
     }
 
     public override void TriggerAbility(InputAction.CallbackContext context)
     {
-        if (MyBase.InputLocked)
+        if (MyBase.InputLocked > 0 || MyBase.PauseLocked > 0)
             return;
-        if (context.performed && currentFlightTime > 0)
-        {
-            if (MyBase.rb.velocity.y < minGravity)
-            {
-                MyBase.rb.AddForce(MyBase.MovementDir.normalized * sideSpeedMul * ((MyBase.rb.velocity.y + minGravity) * (MyBase.rb.velocity.y + minGravity)) * Time.deltaTime, ForceMode2D.Force);
-            }
-            MyBase.GloopAnim.SetBool("Flying", true);
-            //rb.gravityScale = upwardsForce;
-            if (MyBase.rb.velocity.y < minGravity)
-            {
-                MyBase.rb.AddForce(new Vector2(0, counterGravity * (MyBase.rb.velocity.y + minGravity) * MyBase.rb.gravityScale), ForceMode2D.Force);
-                //MyBase.rb.gravityScale = counterGravity * (MyBase.rb.velocity.y + minGravity);
-            }
-            currentFlightTime -= Time.deltaTime;
-            Vector4 tmp = ModeColor * (Mathf.Lerp(0.3f, 1, Mathf.Clamp(currentFlightTime, 0f, maxFlightTime) / maxFlightTime));
-            tmp.w = ModeColor.a;
-            ModeSprite.color = tmp;
-        }
-        else
-        {
-            FlySound.Stop();
-            MyBase.GloopAnim.SetBool("Flying", false);
-        }
+        pressingButton = context.performed;
+        //if (context.performed && currentFlightTime > 0)
+        //{
+        //    if (MyBase.rb.velocity.y < minGravity)
+        //    {
+        //        MyBase.rb.AddForce(MyBase.MovementDir.normalized * sideSpeedMul * ((MyBase.rb.velocity.y + minGravity) * (MyBase.rb.velocity.y + minGravity)) * Time.deltaTime, ForceMode2D.Force);
+        //    }
+        //    MyBase.GloopAnim.SetBool("Flying", true);
+        //    //rb.gravityScale = upwardsForce;
+        //    if (MyBase.rb.velocity.y < minGravity)
+        //    {
+        //        MyBase.rb.AddForce(new Vector2(0, counterGravity * (MyBase.rb.velocity.y + minGravity) * MyBase.rb.gravityScale), ForceMode2D.Force);
+        //        //MyBase.rb.gravityScale = counterGravity * (MyBase.rb.velocity.y + minGravity);
+        //    }
+        //    currentFlightTime -= Time.deltaTime;
+        //    Vector4 tmp = ModeColor * (Mathf.Lerp(0.3f, 1, Mathf.Clamp(currentFlightTime, 0f, maxFlightTime) / maxFlightTime));
+        //    tmp.w = ModeColor.a;
+        //    ModeSprite.color = tmp;
+        //}
+        //else
+        //{
+        //    FlySound.Stop();
+        //    MyBase.GloopAnim.SetBool("Flying", false);
+        //}
 
-        if (context.started && currentFlightTime > 0)
-        {
-            FlySound.Play();
-        }
+        //if (context.started && currentFlightTime > 0)
+        //{
+        //    FlySound.Play();
+        //}
     }
 }

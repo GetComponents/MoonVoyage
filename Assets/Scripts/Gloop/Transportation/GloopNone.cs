@@ -15,9 +15,9 @@ public class GloopNone : GloopMove
 
     public override void MyUpdate()
     {
-        if (!MyBase.InputLocked)
+        MyBase.MyUpdate();
+        if (!(MyBase.InputLocked > 0 || MyBase.PauseLocked > 0))
         {
-            MyBase.MyUpdate();
         }
     }
 
@@ -54,7 +54,7 @@ public class GloopNone : GloopMove
 
     public override void TriggerAbility(InputAction.CallbackContext context)
     {
-        if (MyBase.InputLocked)
+        if (MyBase.InputLocked > 0 || MyBase.PauseLocked > 0)
             return;
     }
 }

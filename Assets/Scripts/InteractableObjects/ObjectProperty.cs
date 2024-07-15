@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ObjectProperty : MonoBehaviour
 {
@@ -34,8 +35,8 @@ public class ObjectProperty : MonoBehaviour
     [SerializeField]
     bool floorOnInteract;
     [SerializeField]
-    bool ignoreCatapultCollision;
-
+    bool ignoreCatapultCollision, stopCatapultCollision = true;
+    public UnityEvent InteractedWithPlayer, ExitInteractionWithPlayer;
     [SerializeField]
     GameObject interactionParticle;
 
@@ -55,6 +56,10 @@ public class ObjectProperty : MonoBehaviour
 
     public void EnterCollisionWithObject(Rigidbody2D obj)
     {
+        if (ignoreCatapultCollision && GloopMain.Instance.MyMovement.MyBase.HoldingVelocity == true)
+        {
+            return;
+        }
         switch (Type)
         {
             case ObjectType.NONE:
@@ -81,12 +86,16 @@ public class ObjectProperty : MonoBehaviour
                 }
                 break;
             case ObjectType.HURT:
-                GloopMain.Instance.RespawnPlayer();
+                GloopMain.Instance.DamagePlayer();
                 break;
             case ObjectType.COLLECTABLE:
                 Backpack.Instance.AddStar(gameObject);
                 gameObject.SetActive(false);
                 //TODO: Collect object
+                break;
+            case ObjectType.KEY:
+                Backpack.Instance.AddKey(gameObject);
+                gameObject.SetActive(false);
                 break;
             case ObjectType.CATAPULT:
                 var gloop = GloopMain.Instance.MyMovement.MyBase;
@@ -99,31 +108,34 @@ public class ObjectProperty : MonoBehaviour
                 }
                 break;
             case ObjectType.BOUNCEPLANT:
-                obj.velocity *= LockDir;
-                obj.AddForce(launchStrength * transform.up);
+                //obj.velocity *= LockDir;
+                obj.velocity *= 0;
+                Vector2 launchDir = (obj.transform.position - transform.position).normalized;
+                obj.AddForce(launchStrength * launchDir);
                 if (bounceAnim != null)
                 {
                     bounceAnim.SetBool("Bounce", true);
                 }
-                PiranhiaPlant tmp = GetComponent<PiranhiaPlant>();
-                tmp.Hide();
                 break;
             default:
                 break;
         }
-        if (Moves || Rotates)
+
+        InteractedWithPlayer?.Invoke();
+        if ((Moves || Rotates) && !(Type == ObjectType.COLLECTABLE || Type == ObjectType.KEY))
         {
             GloopMain.Instance.Rotation.UnrotateCursor = true;
             GloopMain.Instance.MyMovement.MyBase.ParentToPlatform(transform);
         }
+
+        if (stopCatapultCollision && GloopMain.Instance.MyMovement.MyBase.HoldingVelocity == true)
+        {
+            GloopMain.Instance.MyMovement.MyBase.HoldingVelocity = false;
+            GloopMain.Instance.MyMovement.MyBase.InputLocked--;
+        }
         if (floorOnInteract)
         {
             GloopMain.Instance.MyMovement.MyBase.GroundEnter();
-        }
-        if (!ignoreCatapultCollision && GloopMain.Instance.MyMovement.MyBase.HoldingVelocity == true)
-        {
-            GloopMain.Instance.MyMovement.MyBase.HoldingVelocity = false;
-            GloopMain.Instance.MyMovement.MyBase.InputLocked = false;
         }
         if (interactionParticle != null)
         {
@@ -141,7 +153,7 @@ public class ObjectProperty : MonoBehaviour
             {
                 GloopMain.Instance.MyMovement.MyBase.GroundExit();
             }
-            if (Moves)
+            if (Moves || Rotates)
             {
                 GloopMain.Instance.MyMovement.MyBase.UnparentFromPlatform();
             }
@@ -190,9 +202,14 @@ public class ObjectProperty : MonoBehaviour
     {
         GloopMain.Instance.MyMovement.MyBase.VelocityToHold = transform.up.normalized * launchStrength;
         GloopMain.Instance.MyMovement.MyBase.HoldingVelocity = true;
-        GloopMain.Instance.MyMovement.MyBase.InputLocked = true;
+        GloopMain.Instance.MyMovement.MyBase.InputLocked++;
         //GloopMain.Instance.MyMovement.MyBase.rb.gravityScale = 0;
         GloopMain.Instance.MyMovement.MyBase.UnstickToSurfaceEvent.RemoveListener(CatapultPlayer);
+        if (GloopMain.Instance.CurrentMode == EMode.DASH)
+        {
+            GloopDash tmp = (GloopDash)GloopMain.Instance.MyMovement;
+            tmp.DashCharge = 1;
+        }
     }
 
     private void Flip()
@@ -259,6 +276,7 @@ public class ObjectProperty : MonoBehaviour
             {
                 GloopMain.Instance.MyMovement.MyBase.UnparentFromPlatform();
             }
+            ExitInteractionWithPlayer?.Invoke();
         }
     }
 }
@@ -270,6 +288,7 @@ public enum ObjectType
     STICKY,
     HURT,
     COLLECTABLE,
+    KEY,
     CATAPULT,
     BOUNCEPLANT
 }

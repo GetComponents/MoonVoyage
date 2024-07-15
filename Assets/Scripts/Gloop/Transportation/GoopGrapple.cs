@@ -49,9 +49,9 @@ public class GoopGrapple : GloopMove
 
     public override void MyUpdate()
     {
-        if (MyBase.InputLocked)
-            return;
         MyBase.MyUpdate();
+        if (MyBase.InputLocked > 0 || MyBase.PauseLocked > 0)
+            return;
         //DirectionalInput();
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
@@ -199,7 +199,7 @@ public class GoopGrapple : GloopMove
 
     public override void TriggerAbility(InputAction.CallbackContext context)
     {
-        if (MyBase.InputLocked)
+        if (MyBase.InputLocked > 0 || MyBase.PauseLocked > 0)
             return;
 
         if (context.started)

@@ -17,9 +17,9 @@ public class GloopGravity : GloopMove
 
     public override void MyUpdate()
     {
-        if (!MyBase.InputLocked)
+        MyBase.MyUpdate();
+        if (!(MyBase.InputLocked > 0 || MyBase.PauseLocked > 0))
         {
-            MyBase.MyUpdate();
             GravitySwitch();
         }
     }
@@ -81,7 +81,7 @@ public class GloopGravity : GloopMove
 
     public override void TriggerAbility(InputAction.CallbackContext context)
     {
-        if (MyBase.InputLocked)
+        if (MyBase.InputLocked > 0 || MyBase.PauseLocked > 0)
             return;
         if (context.started)
         {

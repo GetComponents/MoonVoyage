@@ -40,6 +40,28 @@ public class GloopMain : MonoBehaviour
     SpriteRenderer sr;
 
     public UnityEngine.Events.UnityEvent Respawn;
+
+    bool hasScenicHealth
+    {
+        get => m_hasScenicHealth;
+        set
+        {
+            if (value != m_hasScenicHealth && value == true)
+            {
+                currentHealth = scenicHealth;
+            }
+            m_hasScenicHealth = value;
+        }
+    }
+    [SerializeField]
+    bool m_hasScenicHealth;
+    bool hasIFrames;
+    [SerializeField]
+    float iFrameTimer;
+    [SerializeField]
+    float scenicHealth;
+
+    float currentHealth;
     //public CinemachineVirtualCamera Cinemachine;
 
     public EMode CurrentMode
@@ -93,6 +115,10 @@ public class GloopMain : MonoBehaviour
             return;
         }
         Application.targetFrameRate = 60;
+        if (hasScenicHealth)
+        {
+            currentHealth = scenicHealth;
+        }
     }
 
     private void Start()
@@ -237,6 +263,33 @@ public class GloopMain : MonoBehaviour
         StartCoroutine(TurnAnimOff());
     }
 
+    public void DamagePlayer()
+    {
+        if (hasScenicHealth)
+        {
+            if (hasIFrames)
+                return;
+            currentHealth--;
+            if (currentHealth > 0)
+            {
+                StartCoroutine(IFrames());
+                return;
+            }
+            currentHealth = scenicHealth;
+        }
+        RespawnPlayer();
+    }
+
+    private IEnumerator IFrames()
+    {
+        hasIFrames = true;
+        Color tmp = sr.color;
+        sr.color = Color.gray;
+        yield return new WaitForSeconds(iFrameTimer);
+        sr.color = tmp;
+        hasIFrames = false;
+    }
+
     private IEnumerator TurnAnimOff()
     {
         yield return new WaitForEndOfFrame();
@@ -278,7 +331,14 @@ public class GloopMain : MonoBehaviour
 
     public void LockInput(bool lockInput)
     {
-        MyMovement.MyBase.InputLocked = lockInput;
+        if (lockInput)
+        {
+            MyMovement.MyBase.PauseLocked++;
+        }
+        else
+        {
+            MyMovement.MyBase.PauseLocked--;
+        }
     }
 }
 

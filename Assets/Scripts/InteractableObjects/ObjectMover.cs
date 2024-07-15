@@ -12,6 +12,7 @@ public class ObjectMover : MonoBehaviour
     Vector2 previousDestination, nextDestination;
     [SerializeField]
     float minRotation, maxRotation;
+    float previousRotation, nextRotation;
     [SerializeField]
     bool goFullCircle;
     int pathIndex;
@@ -68,15 +69,13 @@ public class ObjectMover : MonoBehaviour
             transform.eulerAngles += new Vector3(0, 0, RotationSpeed * Time.deltaTime);
             return;
         }
-
-
-
         if (movement == EMovementType.STOPAndGO && currentTimer > 0)
         {
             currentTimer -= Time.deltaTime;
             return;
         }
-        destinationCompletion += Time.deltaTime * RotationSpeed;
+        if (movement != EMovementType.PROJECTILE)
+            destinationCompletion += Time.deltaTime * RotationSpeed;
         if (destinationCompletion >= 1)
         {
             ChangeRotation();
@@ -91,7 +90,7 @@ public class ObjectMover : MonoBehaviour
                 currentCompletion = destinationCompletion;
                 break;
             case EMovementType.SINE:
-                currentCompletion = (Mathf.Sin((destinationCompletion * Mathf.PI) - 0.5f) / 2) + 0.5f;
+                currentCompletion = (Mathf.Sin((destinationCompletion * Mathf.PI) - 1.5f) / 2) + 0.5f;
                 break;
             case EMovementType.STOPAndGO:
                 currentCompletion = destinationCompletion;
@@ -103,17 +102,27 @@ public class ObjectMover : MonoBehaviour
                 break;
 
         }
-        //transform.eulerAngles = Vector3.Lerp(previousDestination, nextDestination, currentCompletion);
+        //transform.position = Vector3.Lerp(previousDestination, nextDestination, currentCompletion);
         Vector3 tmp = Vector3.zero;
-        tmp.z = Mathf.LerpAngle(minRotation, maxRotation, currentCompletion);
+        tmp.z = Mathf.LerpAngle(previousRotation, nextRotation, currentCompletion);
         transform.eulerAngles = tmp;
     }
 
     private void ChangeRotation()
     {
-        float tmp = minRotation;
-        minRotation = maxRotation;
-        maxRotation = tmp;
+        //float tmp = minRotation;
+        //minRotation = maxRotation;
+        //maxRotation = tmp;
+        //destinationCompletion = 0;
+        //currentTimer = StopTimer;
+
+        previousRotation = Path[pathIndex].localEulerAngles.z;
+        pathIndex++;
+        if (pathIndex >= Path.Count)
+        {
+            pathIndex = 0;
+        }
+        nextRotation = Path[pathIndex].localEulerAngles.z;
         destinationCompletion = 0;
         currentTimer = StopTimer;
     }

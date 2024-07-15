@@ -8,7 +8,19 @@ public class GloopDash : GloopMove
 {
     //[SerializeField]
     //float movementSpeed;
-    public int DashCharge;
+    public int DashCharge
+    {
+        get => m_dashCharge;
+        set
+        {
+            m_dashCharge = value;
+            if (m_dashCharge > 0)
+            {
+                ModeSprite.color = ModeColor;
+            }
+        }
+    }
+    private int m_dashCharge;
     //[SerializeField]
     //float lookSensitivity;
     public Vector3 DashDir;
@@ -67,7 +79,7 @@ public class GloopDash : GloopMove
     public override void MyUpdate()
     {
         MyBase.MyUpdate();
-        if (!MyBase.InputLocked)
+        if (!(MyBase.InputLocked > 0 || MyBase.PauseLocked > 0))
         {
             if (IsDashing)
             {
@@ -97,6 +109,8 @@ public class GloopDash : GloopMove
                     ModeSprite.color = tmp;
                 }
             }
+            MyBase.InputLocked = 0;
+            MyBase.HoldingVelocity = false;
             rotateSprite.Rotate = true;
             MyBase.GloopAnim.SetBool("Dashing", true);
             PlayRandomDashSound();
@@ -172,7 +186,6 @@ public class GloopDash : GloopMove
         DashCharge = 1;
         if (GloopMain.Instance.MyMovement == this)
         {
-            ModeSprite.color = ModeColor;
             InterruptDash();
         }
     }
@@ -204,7 +217,7 @@ public class GloopDash : GloopMove
 
     public override void TriggerAbility(InputAction.CallbackContext context)
     {
-        if (MyBase.InputLocked)
+        if (MyBase.PauseLocked > 0)
             return;
         if (context.started)
             Dash();

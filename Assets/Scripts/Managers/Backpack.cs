@@ -8,6 +8,7 @@ public class Backpack : MonoBehaviour
     public static Backpack Instance;
     public int Coins;
     public List<GameObject> LosableObjects = new List<GameObject>();
+    public int KeyAmount;
     public UnityEvent Respawn;
     
 
@@ -32,8 +33,19 @@ public class Backpack : MonoBehaviour
 
     public void RemoveStar(int amount)
     {
-        Coins += amount;
+        Coins -= amount;
     }
+
+    public void AddKey(GameObject key)
+    {
+        LosableObjects.Add(key);
+        KeyAmount++;
+    }
+
+    public void RemoveKey()
+    {
+        KeyAmount--;
+    } 
 
     public void RespawnPlayer()
     {
@@ -49,6 +61,10 @@ public class Backpack : MonoBehaviour
             if (gameObject.tag == "Collectable")
             {
                 GameManager.Instance.RemoveStar();
+            }
+            else if (gameObject.tag == "Key")
+            {
+                RemoveKey();
             }
         }
         LosableObjects = new List<GameObject>();

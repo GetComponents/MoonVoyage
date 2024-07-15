@@ -7,7 +7,8 @@ using UnityEngine.InputSystem;
 public class GloopMoveBase : MonoBehaviour
 {
     public Rigidbody2D rb;
-    public bool InputLocked;
+    public int InputLocked;
+    public int PauseLocked;
     public Vector2 MovementDir;
     public float movementSpeed, airborneSpeed;
     public float airborneMul;
@@ -25,7 +26,16 @@ public class GloopMoveBase : MonoBehaviour
     bool stickingToSurface;
     public UnityEvent StickToSurfaceEvent, UnstickToSurfaceEvent;
     public bool jumped;
-    public bool HoldingVelocity;
+    public bool HoldingVelocity
+    {
+        get => m_holdingVelocity;
+        set
+        {
+            //Debug.Log("Holding velocity is " + value);
+            m_holdingVelocity = value;
+        }
+    }
+    private bool m_holdingVelocity;
     public Vector2 VelocityToHold;
     public Vector2 CurrentMovement;
     [SerializeField]
@@ -109,7 +119,7 @@ public class GloopMoveBase : MonoBehaviour
     {
         if (HoldingVelocity)
             HoldVelocity();
-        if (InputLocked)
+        if (InputLocked > 0 || PauseLocked > 0)
             return;
         ExtraJumpHeight();
         GracePeriod -= Time.deltaTime;
@@ -214,6 +224,11 @@ public class GloopMoveBase : MonoBehaviour
         airborneMul = 1;
         GloopAnim.SetBool("Grounded", true);
         GloopMain.Instance.MyMovement.EnterGround();
+        if (HoldingVelocity == true)
+        {
+            HoldingVelocity = false;
+            InputLocked = 0;
+        }
     }
 
     public void GroundExit()

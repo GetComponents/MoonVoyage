@@ -42,7 +42,7 @@ public class GloopFly : GloopMove
         //{
         //    rb.AddForce(-FlightDir * Time.deltaTime * flySpeed / (rb.velocity.x * velocityDecrease + 1));
         //}
-        if (!MyBase.InputLocked)
+        if (!(MyBase.InputLocked > 0 || MyBase.PauseLocked > 0))
         {
             VerticalInput();
             MyBase.MyUpdate();

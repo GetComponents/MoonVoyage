@@ -38,6 +38,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 521771716, guid: 73ab03fbeb6041243b0f0950667476f4, type: 3}
+      propertyPath: stopCatapultCollision
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 353021153324018705, guid: 73ab03fbeb6041243b0f0950667476f4, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -105,6 +109,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 353021153324018705, guid: 73ab03fbeb6041243b0f0950667476f4, type: 3}
   m_PrefabInstance: {fileID: 6160201660559227698}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6160201660745310710 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 521771716, guid: 73ab03fbeb6041243b0f0950667476f4, type: 3}
+  m_PrefabInstance: {fileID: 6160201660559227698}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9192905834249317632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3fee67138a6c5c438a6ed7bdc270ead, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9192905834249317632 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3093601188183840306, guid: 73ab03fbeb6041243b0f0950667476f4, type: 3}
@@ -123,3 +138,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   respawnTransform: {fileID: 92129426235553415}
+  op: {fileID: 6160201660745310710}

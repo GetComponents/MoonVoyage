@@ -7,6 +7,8 @@ public class PiranhiaPlant : MonoBehaviour
     //[SerializeField]
     //int maxSegment;
     [SerializeField]
+    ObjectProperty op;
+    [SerializeField]
     GameObject segmentPrefab;
     [SerializeField]
     Transform parentTransform;
@@ -26,6 +28,11 @@ public class PiranhiaPlant : MonoBehaviour
     [SerializeField]
     float timeToRegress = 1, timeToWait = 1;
     Vector3 headPrevPos, headNextPos;
+
+    private void Start()
+    {
+        op.InteractedWithPlayer.AddListener(Hide);
+    }
 
     void Update()
     {
@@ -112,6 +119,7 @@ public class PiranhiaPlant : MonoBehaviour
         if (growTimer > growThreshhold)
         {
             growTimer = 0;
+            //if (CurrentSegments.Count < PathIndicators.Length - 1)
             AddSegment();
             MoveHead(1);
         }
@@ -146,7 +154,7 @@ public class PiranhiaPlant : MonoBehaviour
 
     private void MoveSegment(int index, GameObject segment, int inverse)
     {
-        if (PathIndicators[index].x > 0)
+        if (PathIndicators[index].x != 0)
         {
             //segment.transform.localEulerAngles = new Vector3(0, 0, 90 + (PathIndicators[index].x * 90));
             segment.transform.position += new Vector3(PathIndicators[index].x * segmentPrefab.transform.lossyScale.x * inverse, 0, 0);

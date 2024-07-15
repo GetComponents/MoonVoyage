@@ -116,7 +116,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Moves: 0
   Rotates: 0
-  Type: 5
+  Type: 6
   launchStrength: 10
   LockDir: {x: 1, y: 1}
   lilDot: {fileID: 0}
@@ -127,6 +127,7 @@ MonoBehaviour:
   interactionSXF: {fileID: 0}
   reactToGravity: 0
   isSticky: 0
+  destroyOnInteract: 0
   floorOnInteract: 0
   ignoreCatapultCollision: 0
   interactionParticle: {fileID: 0}
@@ -270,7 +271,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9042210174348291915}
-  m_LocalRotation: {x: 0, y: 0, z: 0.7091402, w: 0.7050676}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 17.17, y: 5.04, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -278,4 +279,4 @@ Transform:
   - {fileID: 9042210173158940215}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90.33}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

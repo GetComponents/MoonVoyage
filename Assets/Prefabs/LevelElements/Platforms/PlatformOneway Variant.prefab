@@ -133,6 +133,13 @@ MonoBehaviour:
   destroyOnInteract: 0
   floorOnInteract: 0
   ignoreCatapultCollision: 1
+  stopCatapultCollision: 0
+  InteractedWithPlayer:
+    m_PersistentCalls:
+      m_Calls: []
+  ExitInteractionWithPlayer:
+    m_PersistentCalls:
+      m_Calls: []
   interactionParticle: {fileID: 0}
 --- !u!114 &6644251323742005331
 MonoBehaviour:
