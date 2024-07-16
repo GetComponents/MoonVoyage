@@ -13,6 +13,10 @@ public class Teleporter : MonoBehaviour
 
     public bool DisableTeleporter;
 
+    private void Start()
+    {
+        //WwisePlay ObAmTeleporter
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.transform.tag == "Player" && !DisableTeleporter)
@@ -31,15 +35,19 @@ public class Teleporter : MonoBehaviour
 
     private void TeleportPlayer()
     {
+
+        //WwisePlay ObTeleportPlayer
         var player = GloopMain.Instance.MyMovement.MyBase;
         player.transform.position = destination.TeleportPos.position;
         destination.DisableTeleporter = true;
         var rot = Quaternion.AngleAxis((destination.transform.eulerAngles.z - transform.eulerAngles.z) + 180, Vector3.forward);
-        //Debug.Log($"MyEA : {transform.eulerAngles.z}, targetEA {destination.transform.eulerAngles.z}; launch vector {rot * player.rb.velocity}");
         player.rb.velocity = rot * player.rb.velocity * destination.LockDir;
         player.VelocityToHold = rot * player.VelocityToHold * destination.LockDir;
-        //player.rb.AddForce(rot * player.rb.velocity, ForceMode2D.Impulse);
-        //GloopMain.Instance.MyMovement.MyBase.rb.AddForce(launchAngle * launchStrength);
-        //GloopMain.Instance.Rotation.UnrotateCursor = false;
+
+        if (GloopMain.Instance.CurrentMode == EMode.DASH)
+        {
+            GloopDash tmp = (GloopDash)GloopMain.Instance.MyMovement;
+            tmp.DashDir = rot * tmp.DashDir * destination.LockDir;
+        }
     }
 }

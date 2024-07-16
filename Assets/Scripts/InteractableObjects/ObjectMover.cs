@@ -134,14 +134,25 @@ public class ObjectMover : MonoBehaviour
 
         if (movement == EMovementType.STOPAndGO && currentTimer > 0)
         {
-            currentTimer -= Time.deltaTime;
-            return;
+            if (currentTimer > 0)
+            {
+                currentTimer -= Time.deltaTime;
+                return;
+            }
+            else if (destinationCompletion == 0)
+            {
+                StartMovingSoundLoop();
+            }
         }
         if (movement != EMovementType.PROJECTILE)
             destinationCompletion += Time.deltaTime * MovementSpeed;
         if (destinationCompletion >= 1)
         {
+            StopMovingSoundLoop();
             NextPoint();
+            if (movement == EMovementType.STOPAndGO)
+                return;
+            StartMovingSoundLoop();
         }
         float currentCompletion = 0;
         switch (movement)
@@ -179,6 +190,40 @@ public class ObjectMover : MonoBehaviour
         nextDestination = Path[pathIndex].position;
         destinationCompletion = 0;
         currentTimer = StopTimer;
+    }
+
+    private void StartMovingSoundLoop()
+    {
+        //WwisePlay ObMoveLoop
+
+        //switch (MaterialType)
+        //{
+        //    case EPlant:
+        //        //WwisePlay ObPlantMoveLoop
+        //        break;
+        //    case EStone:
+        //        //WwisePlay ObStoneMoveLoop
+        //        break;
+        //    default:
+        //        break;
+        //}
+    }
+
+    private void StopMovingSoundLoop()
+    {
+        //WwiseStopPlay ObMoveLoop
+
+        //switch (MaterialType)
+        //{
+        //    case EPlant:
+        //        //WwiseStopPlay ObPlantMoveLoop
+        //        break;
+        //    case EStone:
+        //        //WwiseStopPlay ObStoneMoveLoop
+        //        break;
+        //    default:
+        //        break;
+        //}
     }
 }
 

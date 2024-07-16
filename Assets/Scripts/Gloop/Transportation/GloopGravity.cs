@@ -88,6 +88,14 @@ public class GloopGravity : GloopMove
             GameManager.Instance.GravitySwitch?.Invoke();
             MyBase.rb.gravityScale *= -1;
             spriteRotator.ChangeGravity();
+            if (MyBase.rb.gravityScale > 0)
+            {
+                //WwisePlay PlChangeGravityDown
+            }
+            else
+            {
+                //WwisePlay PlChangeGravityUp
+            }
         }
     }
 }

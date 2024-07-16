@@ -51,9 +51,6 @@ public class MainGameUI : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-        }
         int minutes = (int)gm.Timer / 60;
         int seconds = (int)gm.Timer % 60;
         timerUI.text = ((minutes < 10) ? ("0") : ("")) + minutes.ToString() + ":" + ((seconds < 10) ? ("0") : ("")) + seconds.ToString();
@@ -112,6 +109,7 @@ public class MainGameUI : MonoBehaviour
 
     public void OpenMenu()
     {
+        //WwisePlay UIMenuOpenJingle
         gm.TimeScalers++;
         gm.CursorUnlockers++;
         openMenu = true;
@@ -121,6 +119,7 @@ public class MainGameUI : MonoBehaviour
 
     public void CloseMenu()
     {
+        //WwisePlay UIMenuCloseJingle
         gm.TimeScalers--;
         gm.CursorUnlockers--;
         openMenu = false;
@@ -135,12 +134,14 @@ public class MainGameUI : MonoBehaviour
         //masterSlider.value = PlayerPrefs.GetFloat("MasterVolume");
         //effectsSlider.value = PlayerPrefs.GetFloat("EffectsVolume");
         //musicSlider.value = PlayerPrefs.GetFloat("MusicVolume");
+        //WwisePlay UIOpenSettingsJingle
         gameMenu.SetActive(false);
         settingsMenu.SetActive(true);
     }
 
     public void CloseSettings()
     {
+        //WwisePlay UICloseSettingsJingle
         openMenu = true;
         gameMenu.SetActive(true);
         settingsMenu.SetActive(false);

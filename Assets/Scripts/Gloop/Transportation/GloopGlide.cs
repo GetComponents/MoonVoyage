@@ -81,13 +81,9 @@ public class GloopGlide : GloopMove
         }
         else
         {
+            //WwiseStopPlay PlFloatLoop
             FlySound.Stop();
             MyBase.GloopAnim.SetBool("Flying", false);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Mouse0) && currentFlightTime > 0)
-        {
-            FlySound.Play();
         }
     }
 
@@ -102,6 +98,7 @@ public class GloopGlide : GloopMove
         {
             MyBase.airborneMul = MyBase.airborneSpeed;
         }
+        //WwiseStopPlay PlFloatLoop
         MySoundtrack.volume = 0;
         FlySound.Stop();
         MyBase.GloopAnim.SetBool("Flying", false);
@@ -143,33 +140,13 @@ public class GloopGlide : GloopMove
         if (MyBase.InputLocked > 0 || MyBase.PauseLocked > 0)
             return;
         pressingButton = context.performed;
-        //if (context.performed && currentFlightTime > 0)
-        //{
-        //    if (MyBase.rb.velocity.y < minGravity)
-        //    {
-        //        MyBase.rb.AddForce(MyBase.MovementDir.normalized * sideSpeedMul * ((MyBase.rb.velocity.y + minGravity) * (MyBase.rb.velocity.y + minGravity)) * Time.deltaTime, ForceMode2D.Force);
-        //    }
-        //    MyBase.GloopAnim.SetBool("Flying", true);
-        //    //rb.gravityScale = upwardsForce;
-        //    if (MyBase.rb.velocity.y < minGravity)
-        //    {
-        //        MyBase.rb.AddForce(new Vector2(0, counterGravity * (MyBase.rb.velocity.y + minGravity) * MyBase.rb.gravityScale), ForceMode2D.Force);
-        //        //MyBase.rb.gravityScale = counterGravity * (MyBase.rb.velocity.y + minGravity);
-        //    }
-        //    currentFlightTime -= Time.deltaTime;
-        //    Vector4 tmp = ModeColor * (Mathf.Lerp(0.3f, 1, Mathf.Clamp(currentFlightTime, 0f, maxFlightTime) / maxFlightTime));
-        //    tmp.w = ModeColor.a;
-        //    ModeSprite.color = tmp;
-        //}
-        //else
-        //{
-        //    FlySound.Stop();
-        //    MyBase.GloopAnim.SetBool("Flying", false);
-        //}
-
-        //if (context.started && currentFlightTime > 0)
-        //{
-        //    FlySound.Play();
-        //}
+        if (pressingButton && currentFlightTime > 0 && MyBase.GroundedAmount == 0)
+        {
+            //WwisePlay PlFloatLoop
+        }
+        else
+        {
+            //WwiseStopPlay PlFloatLoop
+        }
     }
 }

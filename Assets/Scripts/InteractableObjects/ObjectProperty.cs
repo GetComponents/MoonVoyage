@@ -52,6 +52,30 @@ public class ObjectProperty : MonoBehaviour
         {
             GameManager.Instance.GravitySwitch?.AddListener(Flip);
         }
+
+        switch (Type)
+        {
+            case ObjectType.NONE:
+                break;
+            case ObjectType.BOUNCE:
+                break;
+            case ObjectType.STICKY:
+                break;
+            case ObjectType.HURT:
+                break;
+            case ObjectType.COLLECTABLE:
+                //WwisePlay ObAmStardust
+                break;
+            case ObjectType.KEY:
+                //WwisePlay ObAmKey
+                break;
+            case ObjectType.CATAPULT:
+                break;
+            case ObjectType.BOUNCEPLANT:
+                break;
+            default:
+                break;
+        }
     }
 
     public void EnterCollisionWithObject(Rigidbody2D obj)
@@ -71,7 +95,7 @@ public class ObjectProperty : MonoBehaviour
                 {
                     bounceAnim.SetBool("Bounce", true);
                 }
-                //obj.velocity = launchStrength * transform.up;
+                //WwisePlay ObMushroomBounce
                 break;
             case ObjectType.STICKY:
                 var player = GloopMain.Instance.MyMovement.MyBase;
@@ -89,11 +113,13 @@ public class ObjectProperty : MonoBehaviour
                 GloopMain.Instance.DamagePlayer();
                 break;
             case ObjectType.COLLECTABLE:
+                //WwisePlay ObCollectStardust
                 Backpack.Instance.AddStar(gameObject);
                 gameObject.SetActive(false);
                 //TODO: Collect object
                 break;
             case ObjectType.KEY:
+                //WwisePlay ObCollectKey
                 Backpack.Instance.AddKey(gameObject);
                 gameObject.SetActive(false);
                 break;
@@ -108,7 +134,7 @@ public class ObjectProperty : MonoBehaviour
                 }
                 break;
             case ObjectType.BOUNCEPLANT:
-                //obj.velocity *= LockDir;
+                //WwisePlay ObBouncePlantBounce
                 obj.velocity *= 0;
                 Vector2 launchDir = (obj.transform.position - transform.position).normalized;
                 obj.AddForce(launchStrength * launchDir);
@@ -193,6 +219,7 @@ public class ObjectProperty : MonoBehaviour
             GloopMain.Instance.MyMovement.MyBase.rb.AddForce(launchAngle * launchStrength);
             GloopMain.Instance.Rotation.UnrotateCursor = false;
         }
+        //WwisePlay PlDetachFromStickyJump?
         GloopMain.Instance.Rotation.disableOtherRotations = false;
         GloopMain.Instance.Rotation.RotateToGravity();
         GloopMain.Instance.MyMovement.MyBase.UnstickToSurfaceEvent.RemoveListener(MomentumLaunchPlayer);
@@ -200,6 +227,7 @@ public class ObjectProperty : MonoBehaviour
 
     private void CatapultPlayer()
     {
+        //WwisePlay ObCatapultPlayerStart
         GloopMain.Instance.MyMovement.MyBase.VelocityToHold = transform.up.normalized * launchStrength;
         GloopMain.Instance.MyMovement.MyBase.HoldingVelocity = true;
         GloopMain.Instance.MyMovement.MyBase.InputLocked++;

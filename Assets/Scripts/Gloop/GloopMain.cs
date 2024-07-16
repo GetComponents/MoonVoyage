@@ -74,24 +74,29 @@ public class GloopMain : MonoBehaviour
             switch (currentMode)
             {
                 case EMode.NONE:
+                    Debug.Log("???");
                     break;
                 case EMode.DEFAULT:
                     gloopDefault.enabled = true;
                     MyMovement = gloopDefault;
                     break;
                 case EMode.GLIDE:
+                    //WwisePlay MuGlideOST
                     glideMode.enabled = true;
                     MyMovement = glideMode;
                     break;
                 case EMode.DASH:
+                    //WwisePlay MuDashOST
                     dashMode.enabled = true;
                     MyMovement = dashMode;
                     break;
                 case EMode.GRAPPLE:
+                    //WwisePlay MuGrappleOST
                     grappleMode.enabled = true;
                     MyMovement = grappleMode;
                     break;
                 case EMode.GRAVITY:
+                    //WwisePlay MuGravityOST
                     gravityMode.enabled = true;
                     MyMovement = gravityMode;
                     break;
@@ -145,6 +150,7 @@ public class GloopMain : MonoBehaviour
         grappleMode.enabled = false;
         gravityMode.enabled = false;
         gloopDefault.enabled = false;
+        //WwisePlay PlAmCursorAmbiance
         //StartCoroutine(SpawnPlayer());
     }
 
@@ -175,8 +181,8 @@ public class GloopMain : MonoBehaviour
         lookPoint.y = Mathf.Clamp(lookPoint.y, -1f, 1f);
         //lookPoint.Normalize();
         //lookPoint = Vector2.zero;
+        //WwiseSpecial Volume of PlAmCursorAmbiance = (Vector2.Distance(lastInput, lookPoint) * cursorDefaultVolume) + 1;
         lookPoint.x += (lastInput.x - lookPoint.x) * lookSensitivity * Time.deltaTime;
-
         lookPoint.y += (lastInput.y - lookPoint.y) * lookSensitivity * Time.deltaTime;
         if (lookPoint == Vector2.zero)
         {
@@ -221,20 +227,12 @@ public class GloopMain : MonoBehaviour
         if (vec == Vector2.zero)
             return;
         lastInput = vec.normalized;
-        ////Debug.Log(vec);
-        //lookPoint.x += vec.x * lookSensitivity * Time.deltaTime;
-        //lookPoint.y += vec.y * lookSensitivity * Time.deltaTime;
-        //lookPoint.x = Mathf.Clamp(lookPoint.x, -1, 1);
-        //lookPoint.y = Mathf.Clamp(lookPoint.y, -1, 1);
-        ////vec.x = Mathf.Clamp(vec.x, -1, 1);
-        ////vec.y = Mathf.Clamp(vec.y, -1, 1);
-        //firePoint.localPosition = Vector3.Normalize(lookPoint) * aimRadius;
-        //Debug.Log("Left: " + lookPoint);
     }
 
 
     public void RespawnPlayer()
     {
+        //WwisePlay PlDeath
         Respawn?.Invoke();
         Backpack.Instance.RespawnPlayer();
         /////////////CheckpointEvent/////////////////////////////////////////////////////////
@@ -259,6 +257,7 @@ public class GloopMain : MonoBehaviour
         SoundManager.Instance.PlayEffect(respawnSound);
         //LosableObjects = new List<GameObject>();
         //LastCheckpoint.RespawnPlayer();
+        MyMovement.MyBase.Unstick();
         rb.velocity = Vector2.zero;
         StartCoroutine(TurnAnimOff());
     }
@@ -272,6 +271,7 @@ public class GloopMain : MonoBehaviour
             currentHealth--;
             if (currentHealth > 0)
             {
+                //WwisePlay PlTakeDmg
                 StartCoroutine(IFrames());
                 return;
             }
@@ -286,6 +286,7 @@ public class GloopMain : MonoBehaviour
         Color tmp = sr.color;
         sr.color = Color.gray;
         yield return new WaitForSeconds(iFrameTimer);
+        //WwisePlay PlLostIFrames
         sr.color = tmp;
         hasIFrames = false;
     }

@@ -13,6 +13,7 @@ public class MenuButtons : MonoBehaviour
     bool settingsOpen;
     private void Start()
     {
+        //WwisePlay MuMainMenuTheme
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
         if (PlayerPrefs.GetInt("LevelIndex") == 0)
@@ -47,12 +48,16 @@ public class MenuButtons : MonoBehaviour
 
     public void StartGame()
     {
+        //WwisePlay UIButtonPress
+        //WwisePlay UIContinueGame
         Debug.Log("LoadingTheGame");
         SceneManager.LoadScene("LevelScene");
     }
 
     public void NewGame()
     {
+        //WwisePlay UIButtonPress
+        //WwisePlay UIStartNewGame
         Debug.Log("LoadingTheGame");
         PlayerPrefs.SetInt("LevelIndex", 0);
         PlayerPrefs.SetInt("StarCount", 0);
@@ -62,11 +67,14 @@ public class MenuButtons : MonoBehaviour
 
     public void QuitGame()
     {
+        //WwisePlay UIButtonPress
         Application.Quit();
     }
 
     public void OpenSettings()
     {
+        //WwisePlay UIButtonPress
+        //WwisePlay UIOpenSettingsJingle
         settingsOpen = true;
         Settings.SetActive(true);
         if (Settings.TryGetComponent<SettingsManager>(out SettingsManager sm))
@@ -77,17 +85,22 @@ public class MenuButtons : MonoBehaviour
 
     public void CloseSettings()
     {
+        //WwisePlay UICloseSettingsJingle
+        //WwisePlay UIButtonPress
         settingsOpen = false;
         Settings.SetActive(false);
     }
 
     public void OpenCredits()
     {
+        //WwisePlay UIOpenCreditsJingle
+        //WwisePlay UIButtonPress
         SceneManager.LoadScene("Credits");
     }
 
     public void GoToMainMenu()
     {
+        //WwisePlay UIButtonPress
         SceneManager.LoadScene("MainMenu");
     }
 }

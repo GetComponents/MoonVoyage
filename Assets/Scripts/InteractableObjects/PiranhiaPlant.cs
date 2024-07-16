@@ -20,7 +20,7 @@ public class PiranhiaPlant : MonoBehaviour
     [SerializeField]
     float growThreshhold;
     private float growTimer;
-    bool regressing, waiting;
+    bool regressing, waiting, growing;
     [SerializeField]
     float regressIncrease;
     float regressMul = 1;
@@ -32,6 +32,7 @@ public class PiranhiaPlant : MonoBehaviour
     private void Start()
     {
         op.InteractedWithPlayer.AddListener(Hide);
+        growing = true;
     }
 
     void Update()
@@ -41,7 +42,9 @@ public class PiranhiaPlant : MonoBehaviour
             waitTimer += Time.deltaTime;
             if (waitTimer > timeToWait)
             {
+                //WwisePlay ObBouncePlantGrowLoop
                 waiting = false;
+                growing = true;
                 waitTimer = 0;
                 headPrevPos = Vector3.zero;
                 headNextPos = Vector3.zero;
@@ -52,7 +55,7 @@ public class PiranhiaPlant : MonoBehaviour
                 return;
             }
         }
-        if (!regressing && CurrentSegments.Count < PathIndicators.Length)
+        if (!regressing && CurrentSegments.Count < PathIndicators.Length && growing)
         {
             Grow();
         }
@@ -67,12 +70,14 @@ public class PiranhiaPlant : MonoBehaviour
         if (regressing)
         {
             regressMul *= regressIncrease;
+            //WwiseSpecial Increase speed of ObBouncePlantHideLoop
             return;
         }
         if (CurrentSegments.Count == 0)
         {
             return;
         }
+        //WwisePlay ObBouncePlantHideLoop
         regressing = true;
         regressTimer = (1 - (growTimer / growThreshhold)) * timeToRegress;
         Vector3 tmp = headPrevPos;
@@ -107,6 +112,7 @@ public class PiranhiaPlant : MonoBehaviour
         {
             regressing = false;
             waiting = true;
+            //WwiseStopPlay ObBouncePlantHideLoop
         }
         regressTimer = 0;
         //if (CurrentSegments.Count == 1 || hideStops. CurrentSegments)
@@ -146,6 +152,11 @@ public class PiranhiaPlant : MonoBehaviour
         {
             //    headNextPos = transform.position + new Vector3(PathIndicators[CurrentSegments.Count + 1].x, PathIndicators[CurrentSegments.Count + 1].y, 0);
             headNextPos = transform.localPosition + (inverse * new Vector3(PathIndicators[CurrentSegments.Count].x, PathIndicators[CurrentSegments.Count].y, 0));
+        }
+        else
+        {
+            growing = false;
+            //WwiseStopPlay ObBouncePlantGrowLoop
         }
         //else
         //{

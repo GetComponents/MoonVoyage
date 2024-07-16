@@ -52,11 +52,6 @@ public class GoopGrapple : GloopMove
         MyBase.MyUpdate();
         if (MyBase.InputLocked > 0 || MyBase.PauseLocked > 0)
             return;
-        //DirectionalInput();
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-
-        }
         if (stickingToSurface)
         {
             return;
@@ -69,14 +64,11 @@ public class GoopGrapple : GloopMove
         {
             UpdateTongue();
         }
-        if (Input.GetKeyUp(KeyCode.Mouse0))
-        {
-
-        }
     }
 
     private void RaycastToMousePos()
     {
+        //WwisePlay PlShootGrappleShot
         SoundManager.Instance.PlayEffect(shotSound);
         //AudioSource.PlayClipAtPoint(shotSound, transform.position);
         currentShot = Instantiate(gloopShot, firePoint.position, Quaternion.identity);
@@ -131,6 +123,7 @@ public class GoopGrapple : GloopMove
 
     public void DisableTongue()
     {
+        //WwiseStopPlay PlReelInLoop
         MyBase.GloopAnim.SetBool("Grappling", false);
         tongueAnchorPos = null;
         tongueRender.enabled = false;

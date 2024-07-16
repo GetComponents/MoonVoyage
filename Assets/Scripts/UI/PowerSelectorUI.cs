@@ -13,6 +13,8 @@ public class PowerSelectorUI : MonoBehaviour
     [SerializeField]
     Canvas canvas;
 
+    bool changedPower;
+
 
     Image lastImage;
     Vector2 lastInput;
@@ -30,12 +32,16 @@ public class PowerSelectorUI : MonoBehaviour
     {
         if (context.started)
         {
+            //WwisePlay SlowMainSoundtrack and lower volume
             EnableCanvas(true);
+            changedPower = false;
         }
         else if (context.canceled)
         {
+            //WwisePlay ContinueSoundtrack at normal speed and volume
             EnableCanvas(false);
-            ChangeState(lastInput);
+            if (!changedPower)
+                ChangeState(lastInput);
         }
     }
 
@@ -78,6 +84,8 @@ public class PowerSelectorUI : MonoBehaviour
             default:
                 break;
         }
+        if (mode == EMode.NONE)
+            return;
         GloopMain.Instance.CurrentMode = mode;
     }
 
@@ -106,17 +114,21 @@ public class PowerSelectorUI : MonoBehaviour
         if (dir.x > 0.5f)
         {
             Highlight(rightImage, rightColor);
+            //WwisePlay UISelectFloat
         }
         else if (dir.x < -0.5f)
         {
+            //WwisePlay UISelectGrapple
             Highlight(leftImage, leftColor);
         }
         else if (dir.y > 0.5f)
         {
+            //WwisePlay UISelectDash
             Highlight(topImage, topColor);
         }
         else if (dir.y < -0.5f)
         {
+            //WwisePlay UISelectGravity
             Highlight(bottomImage, bottomColor);
         }
     }
@@ -142,6 +154,7 @@ public class PowerSelectorUI : MonoBehaviour
             default:
                 break;
         }
+        changedPower = true;
     }
 
     private void Highlight(Image image, Color hColor)

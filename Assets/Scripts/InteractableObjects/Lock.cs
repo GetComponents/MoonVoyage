@@ -17,6 +17,7 @@ public class Lock : MonoBehaviour
             {
                 Backpack.Instance.RemoveKey();
             }
+            //WwisePlay ObKeyUse
             Destroy(parent);
         }
     }

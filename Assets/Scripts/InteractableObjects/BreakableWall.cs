@@ -62,6 +62,7 @@ public class BreakableWall : MonoBehaviour
 
     private void Break()
     {
+        //WwisePlay ObBlockBreak
         Backpack.Instance.LosableObjects.Add(gameObject);
         GloopDash tmp = (GloopDash)GloopMain.Instance.MyMovement;
         if (tmp != null)

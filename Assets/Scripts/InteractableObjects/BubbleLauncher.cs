@@ -24,6 +24,7 @@ public class BubbleLauncher : MonoBehaviour
     private void SpawnBubble()
     {
         ObjectMover tmp = Instantiate(bubblePrefab, launchPos.position, Quaternion.identity);
+        //WwisePlay ObShootBubble
         tmp.MovementSpeed = launchSpeed;
         tmp.ProjectileDirection = transform.up.normalized;
         timer = 0;

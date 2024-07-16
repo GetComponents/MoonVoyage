@@ -32,6 +32,17 @@ public class GloopMoveBase : MonoBehaviour
         set
         {
             //Debug.Log("Holding velocity is " + value);
+            if (value != m_holdingVelocity)
+            {
+                if (value)
+                {
+                    //WwisePlay PlFlyingAroundLoop
+                }
+                else
+                {
+                    //WwiseStopPlay PlFlyingAroundLoop
+                }
+            }
             m_holdingVelocity = value;
         }
     }
@@ -52,6 +63,7 @@ public class GloopMoveBase : MonoBehaviour
         {
             if (value < 0)
             {
+                //WwiseStopPlay PlFootstepLoop
                 m_groundedAmount = 0;
             }
             else
@@ -66,6 +78,17 @@ public class GloopMoveBase : MonoBehaviour
     public void NewMove(InputAction.CallbackContext context)
     {
         //if (context.phase)
+        if (Mathf.Approximately(CurrentMovement.x, 0) && !Mathf.Approximately(context.ReadValue<Vector2>().x, 0))
+        {
+            if (GroundedAmount > 0)
+            {
+                //WwisePlay PlFootstepLoop (extra logic for different kinds of footstep missing)
+            }
+        }
+        if (Mathf.Approximately(context.ReadValue<Vector2>().x, 0))
+        {
+            //WwiseStopPlay PlFootstepLoop
+        }
         CurrentMovement = context.ReadValue<Vector2>();
         MovementDir.y = CurrentMovement.y;
 
@@ -115,6 +138,11 @@ public class GloopMoveBase : MonoBehaviour
         //}
     }
 
+    private void Start()
+    {
+        GameManager.Instance.GravitySwitch.AddListener(MoveHitbox);
+    }
+
     public void MyUpdate()
     {
         if (HoldingVelocity)
@@ -125,15 +153,15 @@ public class GloopMoveBase : MonoBehaviour
         GracePeriod -= Time.deltaTime;
         //if (CurrentMovement != Vector2.zero)
         //{
-            //if (GameManager.Instance.InputType == 0)
-            //{
-            GroundMovement(CurrentMovement);
-            //}
-            //else
-            //{
+        //if (GameManager.Instance.InputType == 0)
+        //{
+        GroundMovement(CurrentMovement);
+        //}
+        //else
+        //{
 
-            //}
-            //GroundMovement();
+        //}
+        //GroundMovement();
         //}
         //if (GroundedAmount != 0 && Mathf.Abs(rb.velocity.x) > 0.001f && Mathf.Abs(rb.velocity.x) > highEnd)
         //{
@@ -191,6 +219,7 @@ public class GloopMoveBase : MonoBehaviour
     public void Jump()
     {
         //Debug.Log(GroundedAmount + " " + GracePeriod);
+        //WwisePlay PlJump
         jumped = true;
         GracePeriod = 0;
         Vector2 tmp = rb.velocity;
@@ -256,6 +285,7 @@ public class GloopMoveBase : MonoBehaviour
 
     public void StickToSurface(Transform surface)
     {
+        //WwisePlay PlStickToStickySurface
         StickToSurfaceEvent?.Invoke();
         rb.constraints |= RigidbodyConstraints2D.FreezePositionX;
         rb.constraints |= RigidbodyConstraints2D.FreezePositionY;
@@ -270,6 +300,7 @@ public class GloopMoveBase : MonoBehaviour
 
     public void Unstick()
     {
+        //WwisePlay PlUnstickFromStickySurface
         stickingToSurface = false;
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
         rb.constraints &= ~RigidbodyConstraints2D.FreezePositionX;
@@ -283,5 +314,10 @@ public class GloopMoveBase : MonoBehaviour
         transform.SetParent(GloopMain.Instance.transform);
         transform.eulerAngles = Vector3.zero;
         transform.localScale = Vector3.one;
+    }
+
+    private void MoveHitbox()
+    {
+        GetComponent<BoxCollider2D>().offset *= new Vector2(1, -1);
     }
 }

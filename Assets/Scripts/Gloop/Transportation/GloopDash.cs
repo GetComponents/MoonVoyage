@@ -119,6 +119,7 @@ public class GloopDash : GloopMove
             MyBase.rb.velocity = Vector3.zero;
             DashDir = GloopMain.Instance.firePoint.localPosition;
             MyBase.rb.AddForce(Vector3.Normalize(DashDir) * dashStrength);
+            //WwisePlay PlDash
             DashEvent?.Invoke();
             DashEndCor = StartCoroutine(DashEnd());
         }

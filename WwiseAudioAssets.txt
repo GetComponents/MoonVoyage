@@ -1,0 +1,102 @@
+All in script assets have the prefix //WwisePlay [...]
+Loop assets also have //WwiseStopPlay [...]
+There are also other edge cases where it says //WwiseSpecial [...]
+Sfx with the *[...]* attribute are placeholders
+
+the layout is 
+[name in script] - [notes on the sfx]
+!All notes are just general feelings of how it *could* sound not *must*! 
+Notes with "/" or "?" are especially there to try out different things out
+
+----PlayerSfx----
+
+(Player is going through a redesign)
+PlDeath - /
+PlTakeDmg - /
+(PlLostIFrames) - /
+PlRespawn - /
+PlJump - /
+
+PlDash - powerful
+PlFloatLoop - jingle that is meditative and calm (maybe bell or reverbed piano?)
+PlChangeGravityUp - mysterious sound that goes from low to high
+PlChangeGravityDown - mysterious sound that goes from high to low
+PlShootGrappleShot - / depends on Player rework
+PlShotFlyingLoop - /
+PlShitHitGround - base heavy; hook hitting soft solid
+PlReelInSoundLoop - reel in of fishing hook or similar; can be made melodic with a looped flourish?
+
+*PlFootstepLoop*
+PlFlyingAroundLoop - Player is not in control; should sound somewhat fun
+PlAmCursorAmbiance - Star ambiance; synth or light bells probably
+
+PlStickToStickySurface - gooey, sticky
+PlUnstickToStickySurface - gooey, sticky
+PlDetachFromStickyJump? - strong release of goo/glue
+
+**Not defined/incomplete sfx**
+PlFootstepGroundLoop
+PlFootstepGrassLoop
+
+
+----ObjectSfx----
+*ObPlayerHitsGround*
+
+ObAmKey - high pitch mysterious sounds
+ObKeyUse - Key turning sounds and dissolve for the gate (dust or sad fall)
+ObCollectKey - Two or three piano notes
+ObAmStardust - Star ambiance; synth or light bells probably; but different from cursor ambiance
+ObCollectStardust - a lot of small grains of stars resonate with the player one after the other
+ObAmTeleporter - low sounds sine wave synth sounds and air being sucked 
+ObTeleportPlayer - synth flourish?
+
+ObBlockBreak - Crumble brittle stone
+ObShootBubble - BubblePop but reverse?;
+ObMushroomBounce - timpani in different frequencies for different size mushrooms with added base or somtheing like: https://www.youtube.com/watch?v=DBEy9jSEWjI
+ObCatapultPlayer - kind of like a canon shot, maybe plant like noises added? (https://www.youtube.com/watch?v=Ar3C1YOD4yo)
+
+ObBouncePlantBounce - similar to mushroom bounce but can be less dence
+ObBouncePlantGrowLoop - sounds of leaves and plant unfolding
+ObBouncePlantHideLoop - sound of plant being pulled or a plant retreating
+
+*ObMoveLoop*
+
+
+**Not defined/incomplete sfx**
+ObPlayerHitsGrass
+ObPlayerHitsRock
+ObPlantMoveLoop
+ObStoneMoveLoop
+
+
+
+
+----UISfx----
+
+-These can just be button presses or something different-
+UISelectFloat - /
+UISelectDash - /
+UISelectGrapple - /
+UISelectGravity - /
+
+UIButtonPress - low pitch click sound?
+
+
+UIStartNewGame - Binding of Isaac but less churchy? (https://www.youtube.com/watch?v=BMclJdX172c)
+UIContinueGame - Something similar but  happier than the Start new game
+UIMenuOpenJingle - /
+UIMenuCloseJingle - /
+UIOpenSettingsJingle - /
+UICloseSettingsJingle - /
+UIOpenCreditsJingle - /
+
+
+
+
+----Music----
+
+MuMainMenuTheme
+MuGlideOST
+MuDashOST
+MuGrappleOST
+MuGravityOST

@@ -20,6 +20,18 @@ public class GloopCollision : MonoBehaviour
         //Debug.Log($"I, {gameObject.name} collided with {collision.gameObject.name}");
         if (collision.tag == "Floor")
         {
+            //WwisePlay ObPlayerHitsGround
+            //switch (groundType)
+            //{
+            //    case EGrass:
+            //        //WwisePlay ObPlayerHitsGrass
+            //        break;
+            //    case ERock:
+            //        //WwisePlay ObPlayerHitsRock
+            //        break;
+            //    default:
+            //        break;
+            //}
             gloopMove.GroundEnter();
         }
     }
