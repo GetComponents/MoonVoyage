@@ -24,7 +24,7 @@ MonoBehaviour:
     ParentPath: Virtual Acoustics\Default Work Unit
     guid: e1613fdc38082b4abb5b131195053c41
     GuidInternal: 
-    m_lastTime: -8584805416531213034
+    m_lastTime: -8584788342793580886
     List: []
   AuxBusWwu:
   - PhysicalPath: Master-Mixer Hierarchy\Default Work Unit.wwu
@@ -38,7 +38,7 @@ MonoBehaviour:
     ParentPath: Master-Mixer Hierarchy\Default Work Unit
     guid: 7162d23289eb2046848cdb15a1170c88
     GuidInternal: 
-    m_lastTime: -8584805416532490267
+    m_lastTime: -8584788342793789648
     List:
     - name: Master Audio Bus
       guid: d8a41415a61d2a41a17e75ca0c2149f3
@@ -66,7 +66,7 @@ MonoBehaviour:
     ParentPath: SoundBanks\Default Work Unit
     guid: 48658acd52be24499b7af592b5860ea9
     GuidInternal: 
-    m_lastTime: -8584805416530923848
+    m_lastTime: -8584788342793701543
     List: []
   EventWwu:
   - PhysicalPath: Events\Default Work Unit.wwu
@@ -80,8 +80,1255 @@ MonoBehaviour:
     ParentPath: Events\Default Work Unit
     guid: 7085a10ffcf2e146b2ad1be673cded2c
     GuidInternal: 
-    m_lastTime: -8584805416532410371
-    List: []
+    m_lastTime: -8584782903926522835
+    List:
+    - name: evt_music_play
+      guid: 41f40a1c4202434a851cca55ade67d18
+      id: 579437105
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 7085a10ffcf2e146b2ad1be673cded2c
+      - ElementName: music
+        ObjectType: 4
+        guid: 084569e8a904d941b0c107f4b3019f8c
+      - ElementName: evt_music_play
+        ObjectType: 3
+        guid: 41f40a1c4202434a851cca55ade67d18
+      Path: Events\Default Work Unit\music\evt_music_play
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: evt_music_stop
+      guid: a5220e066d63ae42a9de7e7a582de813
+      id: 1830955495
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 7085a10ffcf2e146b2ad1be673cded2c
+      - ElementName: music
+        ObjectType: 4
+        guid: 084569e8a904d941b0c107f4b3019f8c
+      - ElementName: evt_music_stop
+        ObjectType: 3
+        guid: a5220e066d63ae42a9de7e7a582de813
+      Path: Events\Default Work Unit\music\evt_music_stop
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: evt_music_theme_dash_set
+      guid: cc777abf8decad47b8f936cf60e23ad6
+      id: 760562508
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 7085a10ffcf2e146b2ad1be673cded2c
+      - ElementName: music
+        ObjectType: 4
+        guid: 084569e8a904d941b0c107f4b3019f8c
+      - ElementName: evt_music_theme_dash_set
+        ObjectType: 3
+        guid: cc777abf8decad47b8f936cf60e23ad6
+      Path: Events\Default Work Unit\music\evt_music_theme_dash_set
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: evt_music_theme_glide_set
+      guid: 81af9def3bb27241b872f1fd53a9aeac
+      id: 15878125
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 7085a10ffcf2e146b2ad1be673cded2c
+      - ElementName: music
+        ObjectType: 4
+        guid: 084569e8a904d941b0c107f4b3019f8c
+      - ElementName: evt_music_theme_glide_set
+        ObjectType: 3
+        guid: 81af9def3bb27241b872f1fd53a9aeac
+      Path: Events\Default Work Unit\music\evt_music_theme_glide_set
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: evt_music_theme_grapple_set
+      guid: 5da8e94b4c8cb14caf6de12fa3a60489
+      id: 4222349871
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 7085a10ffcf2e146b2ad1be673cded2c
+      - ElementName: music
+        ObjectType: 4
+        guid: 084569e8a904d941b0c107f4b3019f8c
+      - ElementName: evt_music_theme_grapple_set
+        ObjectType: 3
+        guid: 5da8e94b4c8cb14caf6de12fa3a60489
+      Path: Events\Default Work Unit\music\evt_music_theme_grapple_set
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: evt_music_theme_gravity_set
+      guid: 5366859be1b6e045bfcbe4bee418a2e8
+      id: 901441104
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 7085a10ffcf2e146b2ad1be673cded2c
+      - ElementName: music
+        ObjectType: 4
+        guid: 084569e8a904d941b0c107f4b3019f8c
+      - ElementName: evt_music_theme_gravity_set
+        ObjectType: 3
+        guid: 5366859be1b6e045bfcbe4bee418a2e8
+      Path: Events\Default Work Unit\music\evt_music_theme_gravity_set
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: evt_music_theme_main_set
+      guid: fe9c7b06bfad4145a33fd1ca6d9c5ead
+      id: 2379711267
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 7085a10ffcf2e146b2ad1be673cded2c
+      - ElementName: music
+        ObjectType: 4
+        guid: 084569e8a904d941b0c107f4b3019f8c
+      - ElementName: evt_music_theme_main_set
+        ObjectType: 3
+        guid: fe9c7b06bfad4145a33fd1ca6d9c5ead
+      Path: Events\Default Work Unit\music\evt_music_theme_main_set
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: evt_object_block_break_play
+      guid: 020bc1b738f1b54bac65a1a029e496b5
+      id: 161239605
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 7085a10ffcf2e146b2ad1be673cded2c
+      - ElementName: objects
+        ObjectType: 4
+        guid: 1a370261056aab4ab553fd3c7f3c0b8a
+      - ElementName: evt_object_block_break_play
+        ObjectType: 3
+        guid: 020bc1b738f1b54bac65a1a029e496b5
+      Path: Events\Default Work Unit\objects\evt_object_block_break_play
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: evt_object_bubble_shoot_play
+      guid: 89137e510372d94b88b6001903f84cfb
+      id: 181060708
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 7085a10ffcf2e146b2ad1be673cded2c
+      - ElementName: objects
+        ObjectType: 4
+        guid: 1a370261056aab4ab553fd3c7f3c0b8a
+      - ElementName: evt_object_bubble_shoot_play
+        ObjectType: 3
+        guid: 89137e510372d94b88b6001903f84cfb
+      Path: Events\Default Work Unit\objects\evt_object_bubble_shoot_play
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: evt_object_catapult_play
+      guid: 78c8a579ca80d34eba2c93ac19019657
+      id: 1702666066
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 7085a10ffcf2e146b2ad1be673cded2c
+      - ElementName: objects
+        ObjectType: 4
+        guid: 1a370261056aab4ab553fd3c7f3c0b8a
+      - ElementName: evt_object_catapult_play
+        ObjectType: 3
+        guid: 78c8a579ca80d34eba2c93ac19019657
+      Path: Events\Default Work Unit\objects\evt_object_catapult_play
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: evt_object_key_amb_play
+      guid: c0b1a04a1ed15e4d8a95ffae5914c83c
+      id: 1083996208
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 7085a10ffcf2e146b2ad1be673cded2c
+      - ElementName: objects
+        ObjectType: 4
+        guid: 1a370261056aab4ab553fd3c7f3c0b8a
+      - ElementName: objects_key
+        ObjectType: 4
+        guid: ebafdbe6e8be44468dd3128ce2728a9e
+      - ElementName: evt_object_key_amb_play
+        ObjectType: 3
+        guid: c0b1a04a1ed15e4d8a95ffae5914c83c
+      Path: Events\Default Work Unit\objects\objects_key\evt_object_key_amb_play
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: evt_object_key_amb_stop
+      guid: d8431db20b833d499f61951d9b023804
+      id: 3727445458
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 7085a10ffcf2e146b2ad1be673cded2c
+      - ElementName: objects
+        ObjectType: 4
+        guid: 1a370261056aab4ab553fd3c7f3c0b8a
+      - ElementName: objects_key
+        ObjectType: 4
+        guid: ebafdbe6e8be44468dd3128ce2728a9e
+      - ElementName: evt_object_key_amb_stop
+        ObjectType: 3
+        guid: d8431db20b833d499f61951d9b023804
+      Path: Events\Default Work Unit\objects\objects_key\evt_object_key_amb_stop
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: evt_object_key_collect_play
+      guid: c9acef996b3bba4aad860ac8b4a36937
+      id: 2262896866
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 7085a10ffcf2e146b2ad1be673cded2c
+      - ElementName: objects
+        ObjectType: 4
+        guid: 1a370261056aab4ab553fd3c7f3c0b8a
+      - ElementName: objects_key
+        ObjectType: 4
+        guid: ebafdbe6e8be44468dd3128ce2728a9e
+      - ElementName: evt_object_key_collect_play
+        ObjectType: 3
+        guid: c9acef996b3bba4aad860ac8b4a36937
+      Path: Events\Default Work Unit\objects\objects_key\evt_object_key_collect_play
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: evt_object_key_use_play
+      guid: f635ad0b9897c640a631cdf0a6b20d16
+      id: 1367347931
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 7085a10ffcf2e146b2ad1be673cded2c
+      - ElementName: objects
+        ObjectType: 4
+        guid: 1a370261056aab4ab553fd3c7f3c0b8a
+      - ElementName: objects_key
+        ObjectType: 4
+        guid: ebafdbe6e8be44468dd3128ce2728a9e
+      - ElementName: evt_object_key_use_play
+        ObjectType: 3
+        guid: f635ad0b9897c640a631cdf0a6b20d16
+      Path: Events\Default Work Unit\objects\objects_key\evt_object_key_use_play
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: evt_object_mushroom_bounce_play
+      guid: e714074ec516bd44825a388600879220
+      id: 463021067
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 7085a10ffcf2e146b2ad1be673cded2c
+      - ElementName: objects
+        ObjectType: 4
+        guid: 1a370261056aab4ab553fd3c7f3c0b8a
+      - ElementName: evt_object_mushroom_bounce_play
+        ObjectType: 3
+        guid: e714074ec516bd44825a388600879220
+      Path: Events\Default Work Unit\objects\evt_object_mushroom_bounce_play
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: evt_object_plant_bounce_play
+      guid: 906f07c127eab046a433841add0e305e
+      id: 4207432008
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 7085a10ffcf2e146b2ad1be673cded2c
+      - ElementName: objects
+        ObjectType: 4
+        guid: 1a370261056aab4ab553fd3c7f3c0b8a
+      - ElementName: object_plant
+        ObjectType: 4
+        guid: ce26f18d9cdcda4d831230e153c2f1b6
+      - ElementName: evt_object_plant_bounce_play
+        ObjectType: 3
+        guid: 906f07c127eab046a433841add0e305e
+      Path: Events\Default Work Unit\objects\object_plant\evt_object_plant_bounce_play
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: evt_object_plant_grow_play
+      guid: 0ef6bd3b8dcea84790cf15fd8304597a
+      id: 3721625695
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 7085a10ffcf2e146b2ad1be673cded2c
+      - ElementName: objects
+        ObjectType: 4
+        guid: 1a370261056aab4ab553fd3c7f3c0b8a
+      - ElementName: object_plant
+        ObjectType: 4
+        guid: ce26f18d9cdcda4d831230e153c2f1b6
+      - ElementName: evt_object_plant_grow_play
+        ObjectType: 3
+        guid: 0ef6bd3b8dcea84790cf15fd8304597a
+      Path: Events\Default Work Unit\objects\object_plant\evt_object_plant_grow_play
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: evt_object_plant_hide_play
+      guid: f690c37369fdb14aa4c93e719ac9bff4
+      id: 2057914264
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 7085a10ffcf2e146b2ad1be673cded2c
+      - ElementName: objects
+        ObjectType: 4
+        guid: 1a370261056aab4ab553fd3c7f3c0b8a
+      - ElementName: object_plant
+        ObjectType: 4
+        guid: ce26f18d9cdcda4d831230e153c2f1b6
+      - ElementName: evt_object_plant_hide_play
+        ObjectType: 3
+        guid: f690c37369fdb14aa4c93e719ac9bff4
+      Path: Events\Default Work Unit\objects\object_plant\evt_object_plant_hide_play
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: evt_object_star_amb_play
+      guid: 3c9ba34b89f84b4180c15119e3983050
+      id: 3925552417
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 7085a10ffcf2e146b2ad1be673cded2c
+      - ElementName: objects
+        ObjectType: 4
+        guid: 1a370261056aab4ab553fd3c7f3c0b8a
+      - ElementName: object_star
+        ObjectType: 4
+        guid: 6b56ca6b5f72db4fa0283c5e23df9fde
+      - ElementName: evt_object_star_amb_play
+        ObjectType: 3
+        guid: 3c9ba34b89f84b4180c15119e3983050
+      Path: Events\Default Work Unit\objects\object_star\evt_object_star_amb_play
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: evt_object_star_amb_stop
+      guid: 44f9263113aeaf4bbdd5a4141ded4396
+      id: 1950545143
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 7085a10ffcf2e146b2ad1be673cded2c
+      - ElementName: objects
+        ObjectType: 4
+        guid: 1a370261056aab4ab553fd3c7f3c0b8a
+      - ElementName: object_star
+        ObjectType: 4
+        guid: 6b56ca6b5f72db4fa0283c5e23df9fde
+      - ElementName: evt_object_star_amb_stop
+        ObjectType: 3
+        guid: 44f9263113aeaf4bbdd5a4141ded4396
+      Path: Events\Default Work Unit\objects\object_star\evt_object_star_amb_stop
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: evt_object_star_collect_play
+      guid: 4d7e85b90284ba448920571586d1fe6a
+      id: 3351936951
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 7085a10ffcf2e146b2ad1be673cded2c
+      - ElementName: objects
+        ObjectType: 4
+        guid: 1a370261056aab4ab553fd3c7f3c0b8a
+      - ElementName: object_star
+        ObjectType: 4
+        guid: 6b56ca6b5f72db4fa0283c5e23df9fde
+      - ElementName: evt_object_star_collect_play
+        ObjectType: 3
+        guid: 4d7e85b90284ba448920571586d1fe6a
+      Path: Events\Default Work Unit\objects\object_star\evt_object_star_collect_play
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: evt_object_teleport_play
+      guid: 88ed3feedbc89147a17cabd68bced8e5
+      id: 1134251093
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 7085a10ffcf2e146b2ad1be673cded2c
+      - ElementName: objects
+        ObjectType: 4
+        guid: 1a370261056aab4ab553fd3c7f3c0b8a
+      - ElementName: object_teleporter
+        ObjectType: 4
+        guid: 88c165e793f4c34ca48a66841331e944
+      - ElementName: evt_object_teleport_play
+        ObjectType: 3
+        guid: 88ed3feedbc89147a17cabd68bced8e5
+      Path: Events\Default Work Unit\objects\object_teleporter\evt_object_teleport_play
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: evt_object_teleporter_amb_play
+      guid: 1f62abfe96d43746ad7da267576a8dd9
+      id: 1392284573
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 7085a10ffcf2e146b2ad1be673cded2c
+      - ElementName: objects
+        ObjectType: 4
+        guid: 1a370261056aab4ab553fd3c7f3c0b8a
+      - ElementName: object_teleporter
+        ObjectType: 4
+        guid: 88c165e793f4c34ca48a66841331e944
+      - ElementName: evt_object_teleporter_amb_play
+        ObjectType: 3
+        guid: 1f62abfe96d43746ad7da267576a8dd9
+      Path: Events\Default Work Unit\objects\object_teleporter\evt_object_teleporter_amb_play
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: evt_object_teleporter_amb_stop
+      guid: 817e473248251c45b987d93424b21dd6
+      id: 3578126603
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 7085a10ffcf2e146b2ad1be673cded2c
+      - ElementName: objects
+        ObjectType: 4
+        guid: 1a370261056aab4ab553fd3c7f3c0b8a
+      - ElementName: object_teleporter
+        ObjectType: 4
+        guid: 88c165e793f4c34ca48a66841331e944
+      - ElementName: evt_object_teleporter_amb_stop
+        ObjectType: 3
+        guid: 817e473248251c45b987d93424b21dd6
+      Path: Events\Default Work Unit\objects\object_teleporter\evt_object_teleporter_amb_stop
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: evt_player_dash_play
+      guid: bc13bf0b3813764397b70c551d6934c9
+      id: 529918220
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 7085a10ffcf2e146b2ad1be673cded2c
+      - ElementName: player
+        ObjectType: 4
+        guid: 75ca56b3d03d604fb4f67e5d157fa65f
+      - ElementName: evt_player_dash_play
+        ObjectType: 3
+        guid: bc13bf0b3813764397b70c551d6934c9
+      Path: Events\Default Work Unit\player\evt_player_dash_play
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: evt_player_float_play
+      guid: f34d06ec597a684cbe12e12ade1d68da
+      id: 4179331308
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 7085a10ffcf2e146b2ad1be673cded2c
+      - ElementName: player
+        ObjectType: 4
+        guid: 75ca56b3d03d604fb4f67e5d157fa65f
+      - ElementName: evt_player_float_play
+        ObjectType: 3
+        guid: f34d06ec597a684cbe12e12ade1d68da
+      Path: Events\Default Work Unit\player\evt_player_float_play
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: evt_player_float_stop
+      guid: 7e8cdb6950114246b8f3065f152ddf93
+      id: 1854148598
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 7085a10ffcf2e146b2ad1be673cded2c
+      - ElementName: player
+        ObjectType: 4
+        guid: 75ca56b3d03d604fb4f67e5d157fa65f
+      - ElementName: evt_player_float_stop
+        ObjectType: 3
+        guid: 7e8cdb6950114246b8f3065f152ddf93
+      Path: Events\Default Work Unit\player\evt_player_float_stop
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: evt_player_flying_around_play
+      guid: fb11b42d007d994589594a9d55d2a61c
+      id: 213915415
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 7085a10ffcf2e146b2ad1be673cded2c
+      - ElementName: player
+        ObjectType: 4
+        guid: 75ca56b3d03d604fb4f67e5d157fa65f
+      - ElementName: evt_player_flying_around_play
+        ObjectType: 3
+        guid: fb11b42d007d994589594a9d55d2a61c
+      Path: Events\Default Work Unit\player\evt_player_flying_around_play
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: evt_player_flying_around_stop
+      guid: e2ff05a497ff634394558955f3e48784
+      id: 3197325125
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 7085a10ffcf2e146b2ad1be673cded2c
+      - ElementName: player
+        ObjectType: 4
+        guid: 75ca56b3d03d604fb4f67e5d157fa65f
+      - ElementName: evt_player_flying_around_stop
+        ObjectType: 3
+        guid: e2ff05a497ff634394558955f3e48784
+      Path: Events\Default Work Unit\player\evt_player_flying_around_stop
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: evt_player_grapple_fly_play
+      guid: 1116b4a4f94c7044bbc7e9ad21193742
+      id: 4273278391
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 7085a10ffcf2e146b2ad1be673cded2c
+      - ElementName: player
+        ObjectType: 4
+        guid: 75ca56b3d03d604fb4f67e5d157fa65f
+      - ElementName: evt_player_grapple_fly_play
+        ObjectType: 3
+        guid: 1116b4a4f94c7044bbc7e9ad21193742
+      Path: Events\Default Work Unit\player\evt_player_grapple_fly_play
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: evt_player_grapple_hit_play
+      guid: 2a569f3f5c5bf54b88894b10ae4c2d02
+      id: 3416031439
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 7085a10ffcf2e146b2ad1be673cded2c
+      - ElementName: player
+        ObjectType: 4
+        guid: 75ca56b3d03d604fb4f67e5d157fa65f
+      - ElementName: evt_player_grapple_hit_play
+        ObjectType: 3
+        guid: 2a569f3f5c5bf54b88894b10ae4c2d02
+      Path: Events\Default Work Unit\player\evt_player_grapple_hit_play
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: evt_player_grapple_shoot_play
+      guid: 97d3a72bf692c245ac138e9e1ce653fe
+      id: 3569567033
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 7085a10ffcf2e146b2ad1be673cded2c
+      - ElementName: player
+        ObjectType: 4
+        guid: 75ca56b3d03d604fb4f67e5d157fa65f
+      - ElementName: evt_player_grapple_shoot_play
+        ObjectType: 3
+        guid: 97d3a72bf692c245ac138e9e1ce653fe
+      Path: Events\Default Work Unit\player\evt_player_grapple_shoot_play
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: evt_player_gravity_down_play
+      guid: 47ae82e80068254dac1aedfe5364e045
+      id: 2721125855
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 7085a10ffcf2e146b2ad1be673cded2c
+      - ElementName: player
+        ObjectType: 4
+        guid: 75ca56b3d03d604fb4f67e5d157fa65f
+      - ElementName: evt_player_gravity_down_play
+        ObjectType: 3
+        guid: 47ae82e80068254dac1aedfe5364e045
+      Path: Events\Default Work Unit\player\evt_player_gravity_down_play
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: evt_player_gravity_up_play
+      guid: f4f328e408d0124ea9b6552a013d299d
+      id: 2676668214
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 7085a10ffcf2e146b2ad1be673cded2c
+      - ElementName: player
+        ObjectType: 4
+        guid: 75ca56b3d03d604fb4f67e5d157fa65f
+      - ElementName: evt_player_gravity_up_play
+        ObjectType: 3
+        guid: f4f328e408d0124ea9b6552a013d299d
+      Path: Events\Default Work Unit\player\evt_player_gravity_up_play
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: evt_player_jump_play
+      guid: b8db5bcdac53cf4f8f74221f40e25ab0
+      id: 2041639324
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 7085a10ffcf2e146b2ad1be673cded2c
+      - ElementName: player
+        ObjectType: 4
+        guid: 75ca56b3d03d604fb4f67e5d157fa65f
+      - ElementName: evt_player_jump_play
+        ObjectType: 3
+        guid: b8db5bcdac53cf4f8f74221f40e25ab0
+      Path: Events\Default Work Unit\player\evt_player_jump_play
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: evt_player_respawn_play
+      guid: b990a35185f5cd4bbc5be8a8e06d3fbc
+      id: 3522507034
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 7085a10ffcf2e146b2ad1be673cded2c
+      - ElementName: player
+        ObjectType: 4
+        guid: 75ca56b3d03d604fb4f67e5d157fa65f
+      - ElementName: evt_player_respawn_play
+        ObjectType: 3
+        guid: b990a35185f5cd4bbc5be8a8e06d3fbc
+      Path: Events\Default Work Unit\player\evt_player_respawn_play
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: evt_player_stick_play
+      guid: b25d55ad58a2d24ca538fbc83b4081ea
+      id: 1242543586
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 7085a10ffcf2e146b2ad1be673cded2c
+      - ElementName: player
+        ObjectType: 4
+        guid: 75ca56b3d03d604fb4f67e5d157fa65f
+      - ElementName: evt_player_stick_play
+        ObjectType: 3
+        guid: b25d55ad58a2d24ca538fbc83b4081ea
+      Path: Events\Default Work Unit\player\evt_player_stick_play
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: evt_player_take_damage_play
+      guid: b0f8c5942ffa6149888d4c89254c0bf4
+      id: 2795386163
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 7085a10ffcf2e146b2ad1be673cded2c
+      - ElementName: player
+        ObjectType: 4
+        guid: 75ca56b3d03d604fb4f67e5d157fa65f
+      - ElementName: evt_player_take_damage_play
+        ObjectType: 3
+        guid: b0f8c5942ffa6149888d4c89254c0bf4
+      Path: Events\Default Work Unit\player\evt_player_take_damage_play
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: evt_player_unstick_play
+      guid: f3977bea5adbe74a807359694e2e3a93
+      id: 3920378795
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 7085a10ffcf2e146b2ad1be673cded2c
+      - ElementName: player
+        ObjectType: 4
+        guid: 75ca56b3d03d604fb4f67e5d157fa65f
+      - ElementName: evt_player_unstick_play
+        ObjectType: 3
+        guid: f3977bea5adbe74a807359694e2e3a93
+      Path: Events\Default Work Unit\player\evt_player_unstick_play
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: evt_ui_button_credits_open_play
+      guid: bf567f1ee4b34040a90c5da489bdbf47
+      id: 456903495
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 7085a10ffcf2e146b2ad1be673cded2c
+      - ElementName: ui
+        ObjectType: 4
+        guid: 0badb645707ea0439e7d5b5457ec31ec
+      - ElementName: evt_ui_button_credits_open_play
+        ObjectType: 3
+        guid: bf567f1ee4b34040a90c5da489bdbf47
+      Path: Events\Default Work Unit\ui\evt_ui_button_credits_open_play
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: evt_ui_button_game_continue_play
+      guid: 56121fc6a2aaf94ab3e3fadd9e155a7b
+      id: 4041781752
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 7085a10ffcf2e146b2ad1be673cded2c
+      - ElementName: ui
+        ObjectType: 4
+        guid: 0badb645707ea0439e7d5b5457ec31ec
+      - ElementName: evt_ui_button_game_continue_play
+        ObjectType: 3
+        guid: 56121fc6a2aaf94ab3e3fadd9e155a7b
+      Path: Events\Default Work Unit\ui\evt_ui_button_game_continue_play
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: evt_ui_button_game_start_new_play
+      guid: 70986bf2c6d3bc4d99fda8fac12c617b
+      id: 781634772
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 7085a10ffcf2e146b2ad1be673cded2c
+      - ElementName: ui
+        ObjectType: 4
+        guid: 0badb645707ea0439e7d5b5457ec31ec
+      - ElementName: evt_ui_button_game_start_new_play
+        ObjectType: 3
+        guid: 70986bf2c6d3bc4d99fda8fac12c617b
+      Path: Events\Default Work Unit\ui\evt_ui_button_game_start_new_play
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: evt_ui_button_menu_close_play
+      guid: aaf1035fed7057468172fe04109b4fdc
+      id: 1064996972
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 7085a10ffcf2e146b2ad1be673cded2c
+      - ElementName: ui
+        ObjectType: 4
+        guid: 0badb645707ea0439e7d5b5457ec31ec
+      - ElementName: evt_ui_button_menu_close_play
+        ObjectType: 3
+        guid: aaf1035fed7057468172fe04109b4fdc
+      Path: Events\Default Work Unit\ui\evt_ui_button_menu_close_play
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: evt_ui_button_menu_open_play
+      guid: 5c82deeba67b70448e004c8f005e5283
+      id: 978908910
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 7085a10ffcf2e146b2ad1be673cded2c
+      - ElementName: ui
+        ObjectType: 4
+        guid: 0badb645707ea0439e7d5b5457ec31ec
+      - ElementName: evt_ui_button_menu_open_play
+        ObjectType: 3
+        guid: 5c82deeba67b70448e004c8f005e5283
+      Path: Events\Default Work Unit\ui\evt_ui_button_menu_open_play
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: evt_ui_button_press_play
+      guid: d2853817f80d8743b828d54f1efc75cf
+      id: 3119228665
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 7085a10ffcf2e146b2ad1be673cded2c
+      - ElementName: ui
+        ObjectType: 4
+        guid: 0badb645707ea0439e7d5b5457ec31ec
+      - ElementName: evt_ui_button_press_play
+        ObjectType: 3
+        guid: d2853817f80d8743b828d54f1efc75cf
+      Path: Events\Default Work Unit\ui\evt_ui_button_press_play
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: evt_ui_button_settings_close_play
+      guid: c4e31442ddbd4e4f8a0d049ca0c99582
+      id: 498149566
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 7085a10ffcf2e146b2ad1be673cded2c
+      - ElementName: ui
+        ObjectType: 4
+        guid: 0badb645707ea0439e7d5b5457ec31ec
+      - ElementName: evt_ui_button_settings_close_play
+        ObjectType: 3
+        guid: c4e31442ddbd4e4f8a0d049ca0c99582
+      Path: Events\Default Work Unit\ui\evt_ui_button_settings_close_play
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: evt_ui_button_settings_open_play
+      guid: 4b529da9f4649244b0346720faae506e
+      id: 1679339968
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 7085a10ffcf2e146b2ad1be673cded2c
+      - ElementName: ui
+        ObjectType: 4
+        guid: 0badb645707ea0439e7d5b5457ec31ec
+      - ElementName: evt_ui_button_settings_open_play
+        ObjectType: 3
+        guid: 4b529da9f4649244b0346720faae506e
+      Path: Events\Default Work Unit\ui\evt_ui_button_settings_open_play
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: evt_ui_cursor_move_play
+      guid: efdc0cc8d735a94199e3292bdb8991d6
+      id: 3319604467
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 7085a10ffcf2e146b2ad1be673cded2c
+      - ElementName: ui
+        ObjectType: 4
+        guid: 0badb645707ea0439e7d5b5457ec31ec
+      - ElementName: evt_ui_cursor_move_play
+        ObjectType: 3
+        guid: efdc0cc8d735a94199e3292bdb8991d6
+      Path: Events\Default Work Unit\ui\evt_ui_cursor_move_play
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: evt_ui_cursor_move_stop
+      guid: 1a5fee2a69703e4b8604feaa821d7a50
+      id: 2449726425
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 7085a10ffcf2e146b2ad1be673cded2c
+      - ElementName: ui
+        ObjectType: 4
+        guid: 0badb645707ea0439e7d5b5457ec31ec
+      - ElementName: evt_ui_cursor_move_stop
+        ObjectType: 3
+        guid: 1a5fee2a69703e4b8604feaa821d7a50
+      Path: Events\Default Work Unit\ui\evt_ui_cursor_move_stop
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: evt_ui_select_dash_play
+      guid: 7cf733b237798c498d996c0c171729ca
+      id: 1708767136
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 7085a10ffcf2e146b2ad1be673cded2c
+      - ElementName: ui
+        ObjectType: 4
+        guid: 0badb645707ea0439e7d5b5457ec31ec
+      - ElementName: evt_ui_select_dash_play
+        ObjectType: 3
+        guid: 7cf733b237798c498d996c0c171729ca
+      Path: Events\Default Work Unit\ui\evt_ui_select_dash_play
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: evt_ui_select_float_play
+      guid: ca20f67f04b03e42b3f86e608154de56
+      id: 1592630512
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 7085a10ffcf2e146b2ad1be673cded2c
+      - ElementName: ui
+        ObjectType: 4
+        guid: 0badb645707ea0439e7d5b5457ec31ec
+      - ElementName: evt_ui_select_float_play
+        ObjectType: 3
+        guid: ca20f67f04b03e42b3f86e608154de56
+      Path: Events\Default Work Unit\ui\evt_ui_select_float_play
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: evt_ui_select_grapple_play
+      guid: 52ede90313ee864d877101c358c733d4
+      id: 4124811165
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 7085a10ffcf2e146b2ad1be673cded2c
+      - ElementName: ui
+        ObjectType: 4
+        guid: 0badb645707ea0439e7d5b5457ec31ec
+      - ElementName: evt_ui_select_grapple_play
+        ObjectType: 3
+        guid: 52ede90313ee864d877101c358c733d4
+      Path: Events\Default Work Unit\ui\evt_ui_select_grapple_play
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: evt_ui_select_gravity_play
+      guid: ec3dbfcfe1b0134c834145f86198ba62
+      id: 3254982992
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 7085a10ffcf2e146b2ad1be673cded2c
+      - ElementName: ui
+        ObjectType: 4
+        guid: 0badb645707ea0439e7d5b5457ec31ec
+      - ElementName: evt_ui_select_gravity_play
+        ObjectType: 3
+        guid: ec3dbfcfe1b0134c834145f86198ba62
+      Path: Events\Default Work Unit\ui\evt_ui_select_gravity_play
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: music
+      guid: 084569e8a904d941b0c107f4b3019f8c
+      id: 3991942870
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 7085a10ffcf2e146b2ad1be673cded2c
+      - ElementName: music
+        ObjectType: 4
+        guid: 084569e8a904d941b0c107f4b3019f8c
+      Path: Events\Default Work Unit\music
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: object_plant
+      guid: ce26f18d9cdcda4d831230e153c2f1b6
+      id: 1473891410
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 7085a10ffcf2e146b2ad1be673cded2c
+      - ElementName: objects
+        ObjectType: 4
+        guid: 1a370261056aab4ab553fd3c7f3c0b8a
+      - ElementName: object_plant
+        ObjectType: 4
+        guid: ce26f18d9cdcda4d831230e153c2f1b6
+      Path: Events\Default Work Unit\objects\object_plant
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: object_star
+      guid: 6b56ca6b5f72db4fa0283c5e23df9fde
+      id: 4043267839
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 7085a10ffcf2e146b2ad1be673cded2c
+      - ElementName: objects
+        ObjectType: 4
+        guid: 1a370261056aab4ab553fd3c7f3c0b8a
+      - ElementName: object_star
+        ObjectType: 4
+        guid: 6b56ca6b5f72db4fa0283c5e23df9fde
+      Path: Events\Default Work Unit\objects\object_star
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: object_teleporter
+      guid: 88c165e793f4c34ca48a66841331e944
+      id: 1788850567
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 7085a10ffcf2e146b2ad1be673cded2c
+      - ElementName: objects
+        ObjectType: 4
+        guid: 1a370261056aab4ab553fd3c7f3c0b8a
+      - ElementName: object_teleporter
+        ObjectType: 4
+        guid: 88c165e793f4c34ca48a66841331e944
+      Path: Events\Default Work Unit\objects\object_teleporter
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: objects
+      guid: 1a370261056aab4ab553fd3c7f3c0b8a
+      id: 1695690031
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 7085a10ffcf2e146b2ad1be673cded2c
+      - ElementName: objects
+        ObjectType: 4
+        guid: 1a370261056aab4ab553fd3c7f3c0b8a
+      Path: Events\Default Work Unit\objects
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: objects_key
+      guid: ebafdbe6e8be44468dd3128ce2728a9e
+      id: 3982861455
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 7085a10ffcf2e146b2ad1be673cded2c
+      - ElementName: objects
+        ObjectType: 4
+        guid: 1a370261056aab4ab553fd3c7f3c0b8a
+      - ElementName: objects_key
+        ObjectType: 4
+        guid: ebafdbe6e8be44468dd3128ce2728a9e
+      Path: Events\Default Work Unit\objects\objects_key
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: player
+      guid: 75ca56b3d03d604fb4f67e5d157fa65f
+      id: 1069431850
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 7085a10ffcf2e146b2ad1be673cded2c
+      - ElementName: player
+        ObjectType: 4
+        guid: 75ca56b3d03d604fb4f67e5d157fa65f
+      Path: Events\Default Work Unit\player
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
+    - name: ui
+      guid: 0badb645707ea0439e7d5b5457ec31ec
+      id: 1551306167
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 7085a10ffcf2e146b2ad1be673cded2c
+      - ElementName: ui
+        ObjectType: 4
+        guid: 0badb645707ea0439e7d5b5457ec31ec
+      Path: Events\Default Work Unit\ui
+      maxAttenuation: 0
+      maxDuration: -1
+      minDuration: -1
   RtpcWwu:
   - PhysicalPath: Game Parameters\Default Work Unit.wwu
     PathAndIcons:
@@ -94,8 +1341,22 @@ MonoBehaviour:
     ParentPath: Game Parameters\Default Work Unit
     guid: 4180516c168760458fb317cb382f31bf
     GuidInternal: 
-    m_lastTime: -8584805416531736547
-    List: []
+    m_lastTime: -8584782916976347775
+    List:
+    - name: rtpc_cursor_speed
+      guid: ed89160b0938014f9d0c9df9a5a87de6
+      id: 1726513593
+      PathAndIcons:
+      - ElementName: Game Parameters
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 4180516c168760458fb317cb382f31bf
+      - ElementName: rtpc_cursor_speed
+        ObjectType: 13
+        guid: ed89160b0938014f9d0c9df9a5a87de6
+      Path: Game Parameters\Default Work Unit\rtpc_cursor_speed
   StateWwu:
   - PhysicalPath: States\Default Work Unit.wwu
     PathAndIcons:
@@ -108,7 +1369,7 @@ MonoBehaviour:
     ParentPath: States\Default Work Unit
     guid: b91df4c6af57ec4fb7242fb2e2b6a18e
     GuidInternal: 
-    m_lastTime: -8584805416531886406
+    m_lastTime: -8584788342793600902
     List: []
   SwitchWwu:
   - PhysicalPath: Switches\Default Work Unit.wwu
@@ -122,7 +1383,7 @@ MonoBehaviour:
     ParentPath: Switches\Default Work Unit
     guid: 6e9a2d9401e17f4fa8d85dd056815175
     GuidInternal: 
-    m_lastTime: -8584805416532245400
+    m_lastTime: -8584788342793590889
     List: []
   TriggerWwu:
   - PhysicalPath: Triggers\Default Work Unit.wwu
@@ -136,7 +1397,7 @@ MonoBehaviour:
     ParentPath: Triggers\Default Work Unit
     guid: 0a96054a04e5aa4e885b754579035e0a
     GuidInternal: 
-    m_lastTime: -8584805416530993660
+    m_lastTime: -8584788342793590889
     List: []
   ExpandedFileSystemItemIds: 
   ExpandedWaapiItemIds: 

@@ -1,6 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WwiseDocument Type="WorkUnit" ID="{0FA18570-F2FC-46E1-B2AD-1BE673CDED2C}" SchemaVersion="119">
 	<Events>
-		<WorkUnit Name="Default Work Unit" ID="{0FA18570-F2FC-46E1-B2AD-1BE673CDED2C}" PersistMode="Standalone"/>
+		<WorkUnit Name="Default Work Unit" ID="{0FA18570-F2FC-46E1-B2AD-1BE673CDED2C}" PersistMode="Standalone">
+			<ChildrenList>
+				<Folder Name="player" ID="{B356CA75-3DD0-4F60-B4F6-7E5D157FA65F}" ShortID="791021358">
+					<ChildrenList>
+						<Event Name="evt_player_respawn_play" ID="{51A390B9-F585-4BCD-BC5B-E8A8E06D3FBC}"/>
+						<Event Name="evt_player_jump_play" ID="{CD5BDBB8-53AC-4FCF-8F74-221F40E25AB0}"/>
+						<Event Name="evt_player_dash_play" ID="{0BBF13BC-1338-4376-97B7-0C551D6934C9}"/>
+						<Event Name="evt_player_take_damage_play" ID="{94C5F8B0-FA2F-4961-888D-4C89254C0BF4}"/>
+						<Event Name="evt_player_float_play" ID="{EC064DF3-7A59-4C68-BE12-E12ADE1D68DA}"/>
+						<Event Name="evt_player_float_stop" ID="{69DB8C7E-1150-4642-B8F3-065F152DDF93}"/>
+						<Event Name="evt_player_gravity_up_play" ID="{E428F3F4-D008-4E12-A9B6-552A013D299D}"/>
+						<Event Name="evt_player_gravity_down_play" ID="{E882AE47-6800-4D25-AC1A-EDFE5364E045}"/>
+						<Event Name="evt_player_grapple_shoot_play" ID="{2BA7D397-92F6-45C2-AC13-8E9E1CE653FE}"/>
+						<Event Name="evt_player_grapple_fly_play" ID="{A4B41611-4CF9-4470-BBC7-E9AD21193742}"/>
+						<Event Name="evt_player_grapple_hit_play" ID="{3F9F562A-5B5C-4BF5-8889-4B10AE4C2D02}"/>
+						<Event Name="evt_player_flying_around_play" ID="{2DB411FB-7D00-4599-8959-4A9D55D2A61C}"/>
+						<Event Name="evt_player_flying_around_stop" ID="{A405FFE2-FF97-4363-9455-8955F3E48784}"/>
+						<Event Name="evt_player_stick_play" ID="{AD555DB2-A258-4CD2-A538-FBC83B4081EA}"/>
+						<Event Name="evt_player_unstick_play" ID="{EA7B97F3-DB5A-4AE7-8073-59694E2E3A93}"/>
+					</ChildrenList>
+				</Folder>
+				<Folder Name="music" ID="{E8694508-04A9-41D9-B0C1-07F4B3019F8C}" ShortID="915669305">
+					<ChildrenList>
+						<Event Name="evt_music_play" ID="{1C0AF441-0242-4A43-851C-CA55ADE67D18}"/>
+						<Event Name="evt_music_stop" ID="{060E22A5-636D-42AE-A9DE-7E7A582DE813}"/>
+						<Event Name="evt_music_theme_main_set" ID="{067B9CFE-ADBF-4541-A33F-D1CA6D9C5EAD}"/>
+						<Event Name="evt_music_theme_glide_set" ID="{EF9DAF81-B23B-4172-B872-F1FD53A9AEAC}"/>
+						<Event Name="evt_music_theme_dash_set" ID="{BF7A77CC-EC8D-47AD-B8F9-36CF60E23AD6}"/>
+						<Event Name="evt_music_theme_grapple_set" ID="{4BE9A85D-8C4C-4CB1-AF6D-E12FA3A60489}"/>
+						<Event Name="evt_music_theme_gravity_set" ID="{9B856653-B6E1-45E0-BFCB-E4BEE418A2E8}"/>
+					</ChildrenList>
+				</Folder>
+				<Folder Name="objects" ID="{6102371A-6A05-4AAB-B553-FD3C7F3C0B8A}" ShortID="191768346">
+					<ChildrenList>
+						<Event Name="evt_object_block_break_play" ID="{B7C10B02-F138-4BB5-AC65-A1A029E496B5}"/>
+						<Event Name="evt_object_bubble_shoot_play" ID="{517E1389-7203-4BD9-88B6-001903F84CFB}"/>
+						<Event Name="evt_object_mushroom_bounce_play" ID="{4E0714E7-16C5-44BD-825A-388600879220}"/>
+						<Event Name="evt_object_catapult_play" ID="{79A5C878-80CA-4ED3-BA2C-93AC19019657}"/>
+						<Folder Name="objects_key" ID="{E6DBAFEB-BEE8-4644-8DD3-128CE2728A9E}" ShortID="938828087">
+							<ChildrenList>
+								<Event Name="evt_object_key_amb_play" ID="{4AA0B1C0-D11E-4D5E-8A95-FFAE5914C83C}"/>
+								<Event Name="evt_object_key_amb_stop" ID="{B21D43D8-830B-493D-9F61-951D9B023804}"/>
+								<Event Name="evt_object_key_collect_play" ID="{99EFACC9-3B6B-4ABA-AD86-0AC8B4A36937}"/>
+								<Event Name="evt_object_key_use_play" ID="{0BAD35F6-9798-40C6-A631-CDF0A6B20D16}"/>
+							</ChildrenList>
+						</Folder>
+						<Folder Name="object_plant" ID="{8DF126CE-DC9C-4DDA-8312-30E153C2F1B6}" ShortID="650318135">
+							<ChildrenList>
+								<Event Name="evt_object_plant_bounce_play" ID="{C1076F90-EA27-46B0-A433-841ADD0E305E}"/>
+								<Event Name="evt_object_plant_grow_play" ID="{3BBDF60E-CE8D-47A8-90CF-15FD8304597A}"/>
+								<Event Name="evt_object_plant_hide_play" ID="{73C390F6-FD69-4AB1-A4C9-3E719AC9BFF4}"/>
+							</ChildrenList>
+						</Folder>
+						<Folder Name="object_star" ID="{6BCA566B-725F-4FDB-A028-3C5E23DF9FDE}" ShortID="978421856">
+							<ChildrenList>
+								<Event Name="evt_object_star_amb_play" ID="{4BA39B3C-F889-414B-80C1-5119E3983050}"/>
+								<Event Name="evt_object_star_amb_stop" ID="{3126F944-AE13-4BAF-BDD5-A4141DED4396}"/>
+								<Event Name="evt_object_star_collect_play" ID="{B9857E4D-8402-44BA-8920-571586D1FE6A}"/>
+							</ChildrenList>
+						</Folder>
+						<Folder Name="object_teleporter" ID="{E765C188-F493-4CC3-A48A-66841331E944}" ShortID="17304313">
+							<ChildrenList>
+								<Event Name="evt_object_teleport_play" ID="{EE3FED88-C8DB-4791-A17C-ABD68BCED8E5}"/>
+								<Event Name="evt_object_teleporter_amb_play" ID="{FEAB621F-D496-4637-AD7D-A267576A8DD9}"/>
+								<Event Name="evt_object_teleporter_amb_stop" ID="{32477E81-2548-451C-B987-D93424B21DD6}"/>
+							</ChildrenList>
+						</Folder>
+					</ChildrenList>
+				</Folder>
+				<Folder Name="ui" ID="{45B6AD0B-7E70-43A0-9E7D-5B5457EC31EC}" ShortID="676868741">
+					<ChildrenList>
+						<Event Name="evt_ui_select_float_play" ID="{7FF620CA-B004-423E-B3F8-6E608154DE56}"/>
+						<Event Name="evt_ui_select_dash_play" ID="{B233F77C-7937-498C-8D99-6C0C171729CA}"/>
+						<Event Name="evt_ui_select_grapple_play" ID="{03E9ED52-EE13-4D86-8771-01C358C733D4}"/>
+						<Event Name="evt_ui_select_gravity_play" ID="{CFBF3DEC-B0E1-4C13-8341-45F86198BA62}"/>
+						<Event Name="evt_ui_button_press_play" ID="{173885D2-0DF8-4387-B828-D54F1EFC75CF}"/>
+						<Event Name="evt_ui_button_game_start_new_play" ID="{F26B9870-D3C6-4DBC-99FD-A8FAC12C617B}"/>
+						<Event Name="evt_ui_button_game_continue_play" ID="{C61F1256-AAA2-4AF9-B3E3-FADD9E155A7B}"/>
+						<Event Name="evt_ui_button_menu_open_play" ID="{EBDE825C-7BA6-4470-8E00-4C8F005E5283}"/>
+						<Event Name="evt_ui_button_menu_close_play" ID="{5F03F1AA-70ED-4657-8172-FE04109B4FDC}"/>
+						<Event Name="evt_ui_button_settings_open_play" ID="{A99D524B-64F4-4492-B034-6720FAAE506E}"/>
+						<Event Name="evt_ui_button_settings_close_play" ID="{4214E3C4-BDDD-4F4E-8A0D-049CA0C99582}"/>
+						<Event Name="evt_ui_button_credits_open_play" ID="{1E7F56BF-B3E4-4040-A90C-5DA489BDBF47}"/>
+						<Event Name="evt_ui_cursor_move_play" ID="{C80CDCEF-35D7-41A9-99E3-292BDB8991D6}"/>
+						<Event Name="evt_ui_cursor_move_stop" ID="{2AEE5F1A-7069-4B3E-8604-FEAA821D7A50}"/>
+					</ChildrenList>
+				</Folder>
+			</ChildrenList>
+		</WorkUnit>
 	</Events>
 </WwiseDocument>

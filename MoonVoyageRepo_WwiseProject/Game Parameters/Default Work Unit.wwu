@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WwiseDocument Type="WorkUnit" ID="{6C518041-8716-4560-8FB3-17CB382F31BF}" SchemaVersion="119">
 	<GameParameters>
-		<WorkUnit Name="Default Work Unit" ID="{6C518041-8716-4560-8FB3-17CB382F31BF}" PersistMode="Standalone"/>
+		<WorkUnit Name="Default Work Unit" ID="{6C518041-8716-4560-8FB3-17CB382F31BF}" PersistMode="Standalone">
+			<ChildrenList>
+				<GameParameter Name="rtpc_cursor_speed" ID="{0B1689ED-3809-4F01-9D0C-9DF9A5A87DE6}">
+					<PropertyList>
+						<Property Name="InitialValue" Type="Real64" Value="0"/>
+					</PropertyList>
+				</GameParameter>
+			</ChildrenList>
+		</WorkUnit>
 	</GameParameters>
 </WwiseDocument>
