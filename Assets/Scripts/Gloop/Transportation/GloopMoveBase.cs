@@ -141,6 +141,7 @@ public class GloopMoveBase : MonoBehaviour
     private void Start()
     {
         GameManager.Instance.GravitySwitch.AddListener(MoveHitbox);
+        UnstickToSurfaceEvent.AddListener(Unstick);
     }
 
     public void MyUpdate()
@@ -306,11 +307,12 @@ public class GloopMoveBase : MonoBehaviour
         rb.constraints &= ~RigidbodyConstraints2D.FreezePositionX;
         rb.constraints &= ~RigidbodyConstraints2D.FreezePositionY;
         UnparentFromPlatform();
-        UnstickToSurfaceEvent?.Invoke();
+        //UnstickToSurfaceEvent?.Invoke();
     }
 
     public void UnparentFromPlatform()
     {
+        Debug.Log("Unparented");
         transform.SetParent(GloopMain.Instance.transform);
         transform.eulerAngles = Vector3.zero;
         transform.localScale = Vector3.one;

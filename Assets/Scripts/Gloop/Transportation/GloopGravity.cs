@@ -8,6 +8,11 @@ public class GloopGravity : GloopMove
     [SerializeField]
     AnimMethods spriteRotator;
 
+    private void Start()
+    {
+        GameManager.Instance.GravitySwitch.AddListener(GravitySwitch);
+    }
+
     public override void AddMode()
     {
         MySoundtrack.volume = SoundtrackVolume;
@@ -18,24 +23,19 @@ public class GloopGravity : GloopMove
     public override void MyUpdate()
     {
         MyBase.MyUpdate();
-        if (!(MyBase.InputLocked > 0 || MyBase.PauseLocked > 0))
-        {
-            GravitySwitch();
-        }
     }
 
     private void GravitySwitch()
     {
-        if ((Input.GetKeyDown(KeyCode.Mouse0)) /*&& (MyBase.GroundedAmount > 0 || MyBase.JumpGracePeriod > 0)*/)
+        MyBase.rb.gravityScale *= -1;
+        spriteRotator.ChangeGravity();
+        if (MyBase.rb.gravityScale > 0)
         {
-
-            //transform.eulerAngles += new Vector3(0, 0, 180);
-            //GloopMain.Instance.AimAnchor.eulerAngles -= new Vector3(0, 0, 180);
-            //MyBase.GloopAnim.SetBool("Flying", true);
-
-            //Vector4 tmp = ModeColor * (Mathf.Lerp(0.3f, 1, Mathf.Clamp(currentFlightTime, 0f, maxFlightTime) / maxFlightTime));
-            //tmp.w = ModeColor.a;
-            //ModeSprite.color = tmp;
+            //WwisePlay PlChangeGravityDown
+        }
+        else
+        {
+            //WwisePlay PlChangeGravityUp
         }
     }
 
@@ -86,16 +86,6 @@ public class GloopGravity : GloopMove
         if (context.started)
         {
             GameManager.Instance.GravitySwitch?.Invoke();
-            MyBase.rb.gravityScale *= -1;
-            spriteRotator.ChangeGravity();
-            if (MyBase.rb.gravityScale > 0)
-            {
-                //WwisePlay PlChangeGravityDown
-            }
-            else
-            {
-                //WwisePlay PlChangeGravityUp
-            }
         }
     }
 }

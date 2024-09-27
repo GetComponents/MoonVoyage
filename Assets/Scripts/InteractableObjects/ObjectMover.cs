@@ -25,6 +25,8 @@ public class ObjectMover : MonoBehaviour
     float currentTimer;
     [SerializeField]
     GameObject dot;
+    [SerializeField]
+    float slowDownTime, baseMoveSpeed;
 
     private void Awake()
     {
@@ -144,7 +146,7 @@ public class ObjectMover : MonoBehaviour
                 StartMovingSoundLoop();
             }
         }
-        if (movement != EMovementType.PROJECTILE)
+        if (movement != EMovementType.PROJECTILE  && movement != EMovementType.SLOWDOWN)
             destinationCompletion += Time.deltaTime * MovementSpeed;
         if (destinationCompletion >= 1)
         {
@@ -172,11 +174,26 @@ public class ObjectMover : MonoBehaviour
             case EMovementType.PROJECTILE:
                 rb.velocity = ProjectileDirection * MovementSpeed;
                 return;
+            case EMovementType.SLOWDOWN:
+                    return;
             default:
                 break;
 
         }
         transform.position = Vector3.Lerp(previousDestination, nextDestination, currentCompletion);
+    }
+
+    public void StartToSlowDown(Vector2 playerDir)
+    {
+        destinationCompletion = 0;
+        ProjectileDirection = playerDir;
+        //baseMoveSpeed = playerDir.sqrMagnitude;
+        rb = GetComponent<Rigidbody2D>();
+        rb.velocity = Vector2.zero;
+        rb.AddForce(playerDir * baseMoveSpeed);
+        movement = EMovementType.SLOWDOWN;
+        GloopMain.Instance.MyMovement.MyBase.rb.simulated = false;
+        GloopMain.Instance.MyMovement.MyBase.transform.position = transform.position;
     }
 
     private void NextPoint()
@@ -225,6 +242,16 @@ public class ObjectMover : MonoBehaviour
         //        break;
         //}
     }
+
+    //private void OnDestroy()
+    //{
+    //    if (movement == EMovementType.SLOWDOWN)
+    //    {
+    //        GloopMoveBase tmp = GloopMain.Instance.MyMovement.MyBase;
+    //        tmp.UnparentFromPlatform();
+    //        tmp.rb.simulated = true;
+    //    }
+    //}
 }
 
 public enum EMovementType
@@ -233,5 +260,6 @@ public enum EMovementType
     LINEAR,
     SINE,
     STOPAndGO,
-    PROJECTILE
+    PROJECTILE,
+    SLOWDOWN
 }

@@ -39,6 +39,7 @@ public class ObjectProperty : MonoBehaviour
     public UnityEvent InteractedWithPlayer, ExitInteractionWithPlayer;
     [SerializeField]
     GameObject interactionParticle;
+    bool playerInBubble;
 
     private void Start()
     {
@@ -143,6 +144,43 @@ public class ObjectProperty : MonoBehaviour
                     bounceAnim.SetBool("Bounce", true);
                 }
                 break;
+            case ObjectType.GRAVITYSWITCH:
+                GameManager.Instance.GravitySwitch?.Invoke();
+                //WwisePlay ObGravitySwitch
+                break;
+            case ObjectType.BUBBLE:
+                if (GloopMain.Instance.CurrentMode != EMode.DASH)
+                {
+                    obj.velocity *= LockDir;
+                    GloopMain.Instance.MyMovement.MyBase.AddForce(launchStrength * transform.up);
+                    if (bounceAnim != null)
+                    {
+                        bounceAnim.SetBool("Bounce", true);
+                    }
+                    break;
+                }
+                GloopDash tmp = (GloopDash)GloopMain.Instance.MyMovement;
+                if (tmp.IsDashing)
+                {
+                    //GetComponent<Bubble>().EncapsulatePlayer();
+                    GloopMain.Instance.MyMovement.MyBase.StickToSurface(transform);
+                    GloopMain.Instance.MyMovement.MyBase.transform.localPosition = Vector3.zero;
+                    GetComponent<ObjectMover>().StartToSlowDown(tmp.DashDir * tmp.DashStrength);
+                    GloopMain.Instance.MyMovement.MyBase.UnstickToSurfaceEvent.AddListener(PopBubble);
+                    destroyOnInteract = false;
+                    playerInBubble = true;
+                }
+                else
+                {
+                    obj.velocity *= LockDir;
+                    GloopMain.Instance.MyMovement.MyBase.AddForce(launchStrength * transform.up);
+                    if (bounceAnim != null)
+                    {
+                        bounceAnim.SetBool("Bounce", true);
+                    }
+                    break;
+                }
+                break;
             default:
                 break;
         }
@@ -240,6 +278,16 @@ public class ObjectProperty : MonoBehaviour
         }
     }
 
+    private void PopBubble()
+    {
+        //nWwisePlay ObPopBubble
+        Debug.Log("POP");
+        GloopMain.Instance.MyMovement.MyBase.UnparentFromPlatform();
+        //GloopMain.Instance.MyMovement.MyBase.UnstickToSurfaceEvent?.Invoke();
+        GloopMain.Instance.MyMovement.MyBase.rb.simulated = true;
+        Destroy(gameObject);
+    }
+
     private void Flip()
     {
         if (TryGetComponent<Rigidbody2D>(out Rigidbody2D rb))
@@ -271,6 +319,10 @@ public class ObjectProperty : MonoBehaviour
 
     private void EnterCollision(Collider2D collision)
     {
+        if (playerInBubble)
+        {
+            PopBubble();
+        }
         if (collision.gameObject.tag == "Player")
         {
             EnterCollisionWithObject(GloopMain.Instance.MyMovement.MyBase.rb);
@@ -300,7 +352,7 @@ public class ObjectProperty : MonoBehaviour
             {
                 GloopMain.Instance.MyMovement.MyBase.GroundExit();
             }
-            if (collision.transform.parent == transform)
+            if (collision.transform.parent == transform && !playerInBubble)
             {
                 GloopMain.Instance.MyMovement.MyBase.UnparentFromPlatform();
             }
@@ -318,5 +370,7 @@ public enum ObjectType
     COLLECTABLE,
     KEY,
     CATAPULT,
-    BOUNCEPLANT
+    BOUNCEPLANT,
+    GRAVITYSWITCH,
+    BUBBLE
 }

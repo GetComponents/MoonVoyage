@@ -28,8 +28,10 @@ public class GloopDash : GloopMove
     //[SerializeField]
     //float lowEnd, highEnd, lowEndAcc, highEndAcc, AirborneSpeed;
     //float airborneMul;
+    //[SerializeField]
+    public float DashStrength;
     [SerializeField]
-    float dashStrength, dashEndVelocity;
+    float dashEndVelocity;
     //[SerializeField]
     //Transform CursorSignifier;
     //[SerializeField]
@@ -83,7 +85,7 @@ public class GloopDash : GloopMove
         {
             if (IsDashing)
             {
-                MyBase.rb.velocity = Vector3.Normalize(DashDir) * dashStrength;
+                MyBase.rb.velocity = Vector3.Normalize(DashDir) * DashStrength;
             }
             if (rotateSprite.Rotate == true && IsDashing == false && MyBase.rb.velocity.y * rotateSprite.Gravity <= 0)
             {
@@ -118,7 +120,7 @@ public class GloopDash : GloopMove
             IsDashing = true;
             MyBase.rb.velocity = Vector3.zero;
             DashDir = GloopMain.Instance.firePoint.localPosition;
-            MyBase.rb.AddForce(Vector3.Normalize(DashDir) * dashStrength);
+            MyBase.rb.AddForce(Vector3.Normalize(DashDir) * DashStrength);
             //WwisePlay PlDash
             DashEvent?.Invoke();
             DashEndCor = StartCoroutine(DashEnd());
